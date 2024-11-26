@@ -1,0 +1,17 @@
+<script lang="ts">
+	export let customClass = '';
+</script>
+
+<svg
+	class={customClass}
+	fill="currentColor"
+	xmlns="http://www.w3.org/2000/svg"
+	width="1024"
+	height="1024"
+	viewBox="0 0 16 16"
+>
+	<path
+		fill="currentColor"
+		d="M0 0v16h16V0zm8.5 9.125V12.5h-1V9.125L4.766 4H5.9L8 7.938L10.1 4h1.134z"
+	/>
+</svg>
