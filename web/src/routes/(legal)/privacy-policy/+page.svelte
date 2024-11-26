@@ -1,5 +1,6 @@
 <script>
 	import { Seo } from '$lib/components/modules';
+	import { config } from '$lib/config-client';
 	const lastUpdated = new Date(2024, 11, 31).toLocaleDateString('en-US', {
 		year: 'numeric',
 		month: 'long',
@@ -7,7 +8,10 @@
 	}); // TODO: update last updated date
 </script>
 
-<Seo title="Privacy Policy" description="Imagine Privacy Policy" />
+<Seo
+	title={`Privacy Policy - ${config.appName}`}
+	description={`Privacy Policy for ${config.appName}`}
+/>
 
 <section class="mb-12 p-6">
 	<h2 class="text-2xl font-semibold mb-4 text-center">Privacy Policy 🔒</h2>

@@ -21,6 +21,11 @@
 		{ name: 'Privacy Policy', href: '/privacy-policy' },
 		{ name: 'Terms of Service', href: '/terms-of-service' }
 	];
+
+	const other = [
+		{ name: 'Changelog', href: '/changelog' },
+		{ name: 'Roadmap', href: '/roadmap' }
+	];
 </script>
 
 <footer class="bg-gray-100 dark:bg-gray-800 rounded-tl-3xl rounded-tr-3xl">
@@ -75,13 +80,16 @@
 			<div>
 				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Other</h3>
 				<ul class="mt-4 space-y-4">
-					<li>
-						<a
-							href="/changelog"
-							class="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-							>Changelog</a
-						>
-					</li>
+					{#each other as { name, href }}
+						<li>
+							<a
+								{href}
+								class="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+							>
+								{name}
+							</a>
+						</li>
+					{/each}
 				</ul>
 			</div>
 		</div>

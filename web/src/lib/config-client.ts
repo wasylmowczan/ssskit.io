@@ -10,6 +10,5 @@ export const config = {
 	showStickyCountdown: false, // TODO: Configure sticky countdown
 	stickyCountdownDate: '2024-12-31',
 	stickyCountdownText: 'Early-Bird',
-	// Stripe
-	stripePublicKey: env.PUBLIC_STRIPE_PUBLIC_KEY
+	comingSoonDate: '2025-01-01' // TODO: Configure coming soon date
 };

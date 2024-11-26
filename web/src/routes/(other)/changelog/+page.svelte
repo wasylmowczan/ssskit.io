@@ -1,12 +1,8 @@
 <script lang="ts">
 	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
 	import { Badge } from '$lib/components/ui/badge';
-	import FlameIcon from 'lucide-svelte/icons/flame';
-	import WrenchIcon from 'lucide-svelte/icons/wrench';
-	import BugIcon from 'lucide-svelte/icons/bug';
-	import FileTextIcon from 'lucide-svelte/icons/file-text';
-	import HammerIcon from 'lucide-svelte/icons/hammer';
 	import { Seo } from '$lib/components/modules';
+	import { config } from '$lib/config-client';
 
 	type LogType = 'New Feature' | 'Maintenance' | 'Bugs' | 'Start' | 'Improvement';
 
@@ -48,20 +44,20 @@
 		return 'Today';
 	}
 
-	const logTypeIcons: Record<LogType, typeof FlameIcon> = {
-		'New Feature': FlameIcon,
-		Maintenance: WrenchIcon,
-		Bugs: BugIcon,
-		Start: FileTextIcon,
-		Improvement: HammerIcon
+	const logTypeIcons: Record<LogType, string> = {
+		'New Feature': '🔥',
+		Maintenance: '🔧',
+		Bugs: '🐛',
+		Start: '📄',
+		Improvement: '🔨'
 	};
 
 	function getLogTypeIcon(type: LogType) {
-		return logTypeIcons[type] || FileTextIcon;
+		return logTypeIcons[type] || '📄';
 	}
 </script>
 
-<Seo title="Changelog" description="Imagine Changelog" />
+<Seo title={`Changelog - ${config.appName}`} description={`Changelog for ${config.appName}`} />
 
 <section class="mb-12 p-6">
 	<div class="container relative mx-auto overflow-hidden py-8 h-full max-w-3xl">
@@ -86,7 +82,7 @@
 					{#each entry.logs as log}
 						<div class="mb-4">
 							<h3 class="mb-2 flex items-center gap-2 text-lg font-semibold">
-								<svelte:component this={getLogTypeIcon(log.type)} class="h-5 w-5" />
+								{getLogTypeIcon(log.type)}
 								{log.type}
 							</h3>
 							<ul class="list-inside list-disc pl-4">

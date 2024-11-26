@@ -8,7 +8,10 @@
 	}); // TODO: update last updated date
 </script>
 
-<Seo title="Terms of Service" description="Imagine Terms of Service" />
+<Seo
+	title={`Terms of Service - ${config.appName}`}
+	description={`Terms of Service for ${config.appName}`}
+/>
 
 <section class="mb-12 p-6">
 	<h2 class="text-2xl font-semibold mb-4 text-center">Terms & Conditions 📜</h2>

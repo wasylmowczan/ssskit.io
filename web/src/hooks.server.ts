@@ -1,7 +1,8 @@
-import type { Handle } from '@sveltejs/kit';
+import type { ActionResult, Handle } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
 import { config } from '$lib/config-client';
 import type { User } from '$lib/types';
+import { env } from '$env/dynamic/private';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.pb = new PocketBase(config.pbUrl);
