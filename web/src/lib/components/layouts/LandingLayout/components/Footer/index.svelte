@@ -25,7 +25,7 @@
 
 <footer class="bg-gray-100 dark:bg-gray-800 rounded-tl-3xl rounded-tr-3xl">
 	<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 pb-24">
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 			<!-- 1 column -->
 			<div class="space-y-8">
 				<Logo />
@@ -69,6 +69,19 @@
 							</a>
 						</li>
 					{/each}
+				</ul>
+			</div>
+			<!-- 4 column -->
+			<div>
+				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Other</h3>
+				<ul class="mt-4 space-y-4">
+					<li>
+						<a
+							href="/changelog"
+							class="text-base text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+							>Changelog</a
+						>
+					</li>
 				</ul>
 			</div>
 		</div>
