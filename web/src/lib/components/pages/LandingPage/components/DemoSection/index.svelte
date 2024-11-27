@@ -1,5 +1,8 @@
 <script>
 	import { SectionContainer } from '..';
+	import heroImage from '$lib/assets/hero.svg';
+	import heroImageDark from '$lib/assets/hero-dark.svg';
+	import { mode } from 'mode-watcher';
 </script>
 
 <SectionContainer title="Demo" id="demo" subtitle="See it in action">
@@ -12,7 +15,7 @@
 					controls
 					class="w-full h-full object-cover"
 					preload="metadata"
-					poster="/seo-image.png"
+					poster={$mode === 'dark' ? heroImageDark : heroImage}
 				>
 					<!-- Replace image poster -->
 					<source src="/video/text-to-image.webm" type="video/webm" />

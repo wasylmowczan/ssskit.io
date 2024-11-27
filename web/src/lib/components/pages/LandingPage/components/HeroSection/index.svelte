@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
 	import heroImage from '$lib/assets/hero.svg';
+	import heroImageDark from '$lib/assets/hero-dark.svg';
 	import { SectionContainer } from '..';
+	import { mode } from 'mode-watcher';
 </script>
 
 <SectionContainer
@@ -30,12 +32,17 @@
 		</div>
 	</div>
 	<div class="flex justify-center items-center w-full">
-		<img src={heroImage} alt="App mockup" class="h-auto rounded-lg p-8" />
-	</div>
-	<div class="absolute bottom-0 left-0 right-0 flex justify-center items-end mb-8">
-		<p class="text-4xl bounce">👇</p>
-	</div>
-</SectionContainer>
+		{#if $mode === 'dark'}
+			<img src={heroImageDark} alt="App mockup" class="h-auto rounded-lg p-8" />
+		{:else}
+			<img src={heroImage} alt="App mockup" class="h-auto rounded-lg p-8" />
+		{/if}
+
+		<div class="absolute bottom-0 left-0 right-0 flex justify-center items-end mb-8">
+			<p class="text-4xl bounce">👇</p>
+		</div>
+	</div></SectionContainer
+>
 
 <style>
 	@keyframes bounce {
