@@ -18,6 +18,18 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-03',
+			logs: [
+				{
+					type: 'New Feature',
+					items: [
+						'Added possibility to download app brand assets by right-clicking on the logo.',
+						'Added initial version of i18n support for the app.'
+					]
+				}
+			]
+		},
+		{
 			date: '2024-11-26',
 			logs: [
 				{

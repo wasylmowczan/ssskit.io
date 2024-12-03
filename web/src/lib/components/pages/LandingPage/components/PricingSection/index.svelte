@@ -31,8 +31,8 @@
 				{ text: m.LP_Pricing_Description_2(), icon: BadgePlus },
 				{ text: m.LP_Pricing_Description_PersonalUse(), icon: Signature }
 			],
-			ctaText: m.LP_Pricing_Action(),
-			ctaLink: i18n.route('/register')
+			ctaText: 'Get Started',
+			ctaLink: i18n.route('/login')
 		},
 		{
 			name: 'Pro',
@@ -48,8 +48,8 @@
 				{ text: m.LP_Pricing_Description_CommercialUse(), icon: Signature }
 			],
 			highlighted: true,
-			ctaText: m.LP_Pricing_Action(),
-			ctaLink: i18n.route('/register')
+			ctaText: 'Get Started',
+			ctaLink: i18n.route('/login')
 		},
 		{
 			name: 'Premium',
@@ -65,7 +65,7 @@
 				{ text: m.LP_Pricing_Description_CommercialUse(), icon: Signature }
 			],
 			ctaText: m.LP_Pricing_Action(),
-			ctaLink: i18n.route('/register')
+			ctaLink: i18n.route('/login')
 		}
 	];
 </script>
