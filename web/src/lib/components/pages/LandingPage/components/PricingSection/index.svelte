@@ -32,7 +32,7 @@
 				{ text: 'Personal use', icon: Signature }
 			],
 			ctaText: 'Get Started',
-			ctaLink: '/register'
+			ctaLink: '/login'
 		},
 		{
 			name: 'Pro',
@@ -49,7 +49,7 @@
 			],
 			highlighted: true,
 			ctaText: 'Get Started',
-			ctaLink: '/register'
+			ctaLink: '/login'
 		},
 		{
 			name: 'Premium',
@@ -65,7 +65,7 @@
 				{ text: 'Commercial use', icon: Signature }
 			],
 			ctaText: 'Get Started',
-			ctaLink: '/register'
+			ctaLink: '/login'
 		}
 	];
 </script>
