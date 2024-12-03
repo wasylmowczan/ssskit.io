@@ -12,6 +12,7 @@
 	import CardContent from '$lib/components/ui/card/card-content.svelte';
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	let loading = false;
 
@@ -23,11 +24,9 @@
 		onResult: ({ result }) => {
 			loading = false;
 			if (result.type === 'success') {
-				toast.success(
-					'If an account exists for the provided email, password reset instructions have been sent. Please check your inbox and spam folder.'
-				);
+				toast.success(m.ForgotPassword_Toast_Success());
 			} else {
-				toast.error('Failed to send password reset instructions.');
+				toast.error(m.ForgotPassword_Toast_Failed());
 			}
 		}
 	});
@@ -37,7 +36,7 @@
 
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
-		<CardTitle class="text-2xl">Forgot Password</CardTitle>
+		<CardTitle class="text-2xl">{m.ForgotPassword_Title()}</CardTitle>
 	</CardHeader>
 	<CardContent>
 		<form action="?/forgotPassword" method="POST" use:enhance>
@@ -45,17 +44,17 @@
 				<div class="grid gap-2">
 					<FormField {form} name="email">
 						<FormControl let:attrs>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>{m.ForgotPassword_Email()}</FormLabel>
 							<Input {...attrs} bind:value={$formData.email} type="email" />
 						</FormControl>
 						<FormFieldErrors />
 					</FormField>
 				</div>
-				<Button disabled={loading} type="submit" class="w-full">Send Email</Button>
+				<Button disabled={loading} type="submit" class="w-full">{m.ForgotPassword_SendEmail()}</Button>
 			</div>
-			<div class="mt-4 text-sm text-muted-foreground">Go back to:</div>
+			<div class="mt-4 text-sm text-muted-foreground">{m.ForgotPassword_GoBackTo()}</div>
 			<div>
-				<a href="/login" class="hover:underline">Login</a>
+				<a href="/login" class="underline">{m.Login_Title()}</a>
 			</div>
 		</form>
 	</CardContent>

@@ -14,6 +14,7 @@
 	import CardFooter from '$lib/components/ui/card/card-footer.svelte';
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	export let data;
 
@@ -29,7 +30,7 @@
 			if (result.type === 'success') {
 				toast.success('Please check your email to verify your new email address');
 			} else {
-				toast.error('Failed to update email');
+				toast.error(m.App_Toast_Email_Failed());
 			}
 		}
 	});
@@ -40,12 +41,12 @@
 <Card>
 	<form action="?/updateEmail" method="POST" use:enhance>
 		<CardHeader>
-			<CardTitle>Change Email</CardTitle>
+			<CardTitle>{m.App_Settings_ChangeEmail()}</CardTitle>
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="email">
 				<FormControl let:attrs>
-					<FormLabel>Email</FormLabel>
+					<FormLabel>{m.App_Settings_Email()}</FormLabel>
 					<Input
 						{...attrs}
 						autofocus
@@ -54,7 +55,7 @@
 						disabled={loading}
 					/>
 				</FormControl>
-				<FormFieldErrors />
+				<FormFieldErrors errorClasses={m.App_PB_Email_Error()} />
 			</FormField>
 		</CardContent>
 		<CardFooter class="border-t px-6 py-4">
@@ -62,7 +63,7 @@
 				{#if loading}
 					<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
-				Save
+				{m.App_Settings_Save()}
 			</Button>
 		</CardFooter>
 	</form>

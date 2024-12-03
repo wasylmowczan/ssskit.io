@@ -1,8 +1,8 @@
-import type { ActionResult, Handle } from '@sveltejs/kit';
+import { i18n } from '$lib/i18n';
+import type { Handle } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
 import { config } from '$lib/config-client';
 import type { User } from '$lib/types';
-import { env } from '$env/dynamic/private';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.pb = new PocketBase(config.pbUrl);
@@ -26,5 +26,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			sameSite: 'lax'
 		})
 	);
+
+	i18n.handle();
 	return response;
 };

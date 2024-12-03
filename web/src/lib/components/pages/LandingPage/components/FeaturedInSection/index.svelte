@@ -6,6 +6,7 @@
 	import LogoProductHunt from './logos/producthunt.svelte';
 	import LogoX from './logos/x.svelte';
 	import LogoBlueSky from './logos/bluesky.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	const logos = [
 		{ src: LogoProductHunt, alt: 'Product Hunt', url: 'https://www.producthunt.com/' },
@@ -15,8 +16,8 @@
 		{ src: LogoBlueSky, alt: 'BlueSky', url: 'https://bsky.social/' }
 	];
 
-	const title = 'Featured In';
-	const subtitle = 'Trusted and recognized by leading media outlets';
+	const title = m.LP_FeaturedIn_Title();
+	const subtitle = m.LP_FeaturedIn_Subtitle();
 </script>
 
 <SectionContainer {title} {subtitle} id="seen-in" contentClass="max-w-6xl pb-12">

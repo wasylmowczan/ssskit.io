@@ -16,35 +16,31 @@
 	import { page } from '$app/stores';
 	import HomeIcon from '$lib/components/icons/common/home.svelte';
 	import SettingsIcon from '$lib/components/icons/common/settings.svelte';
-	import {
-		Card,
-		CardHeader,
-		CardTitle,
-		CardDescription,
-		CardContent
-	} from '$lib/components/ui/card';
 	import { Separator } from '$lib/components/ui/separator';
 	import { config } from '$lib/config-client.js';
 
-	import { ThemeSwitcher } from '$lib/components/modules';
+	import { LanguageSwitcher, ThemeSwitcher } from '$lib/components/modules';
 	import Logo from '$lib/components/layouts/LandingLayout/components/Logo.svelte';
+	import * as m from '$lib/paraglide/messages.js';
+	import { languageTag } from '$lib/paraglide/runtime.js';
+	import { i18n } from '$lib/i18n.js';
 
 	export let data;
 
 	async function logout() {
 		await fetch('/api/logout');
-		goto('/login');
+		goto(`/${languageTag()}`);
 	}
 
 	const navigation = [
 		{
-			title: 'Images',
-			href: '/images',
+			title: m.App_Images(),
+			href: i18n.route(`${languageTag()}/images`),
 			icon: HomeIcon
 		},
 		{
-			title: 'Settings',
-			href: '/settings',
+			title: m.App_Settings(),
+			href: i18n.route(`${languageTag()}/settings/avatar`),
 			icon: SettingsIcon
 		}
 	];
@@ -70,7 +66,7 @@
 							class={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
 						>
 							{#if icon}
-								<svelte:component this={icon} class="h-4 w-4" />
+								<svelte:component this={icon} size={20} />
 							{/if}
 							{title}
 						</a>
@@ -99,28 +95,12 @@
 								class={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-foreground'}`}
 							>
 								{#if icon}
-									<svelte:component this={icon} class="h-5 w-5" />
+									<svelte:component this={icon} size={20} />
 								{/if}
 								{title}
 							</a>
 						{/each}
 					</nav>
-					<div class="mt-auto">
-						<Card>
-							<CardHeader>
-								<CardTitle>Upgrade to Pro</CardTitle>
-								<CardDescription>Build faster, launch sooner, and grow bigger!</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<Button
-									href="https://boilerbrew.xyz/#pricing"
-									target="_blank"
-									size="sm"
-									class="w-full">Upgrade</Button
-								>
-							</CardContent>
-						</Card>
-					</div>
 				</SheetContent>
 			</Sheet>
 			<div class="w-full flex-1" />
@@ -147,15 +127,16 @@
 					</DropdownMenuLabel>
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
-						<a href="/settings" class="block">
-							<DropdownMenuItem>Settings</DropdownMenuItem>
+						<a href={navigation[1].href} class="block">
+							<DropdownMenuItem>{m.App_Settings()}</DropdownMenuItem>
 						</a>
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem on:click={logout}>Log out</DropdownMenuItem>
+					<DropdownMenuItem on:click={logout}>{m.App_LogOut()}</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 			<ThemeSwitcher />
+			<LanguageSwitcher />
 		</header>
 		<main class="p-8" style="height: calc(100vh - 60px)">
 			<slot />

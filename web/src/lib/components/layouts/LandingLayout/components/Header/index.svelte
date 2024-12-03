@@ -3,7 +3,9 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
 	import { ThemeSwitcher } from '$lib/components/modules/index';
+	import { LanguageSwitcher } from '$lib/components/modules';
 	import Logo from '../Logo.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	export let menuItems: {
 		name: string;
@@ -47,7 +49,8 @@
 		{/each}
 	</nav>
 	<div class="flex items-center gap-4 md:gap-2 lg:gap-4">
-		<Button href="/register">Get Started</Button>
+		<Button href="/login">{m.LP_Header_GetStarted()}</Button>
 		<ThemeSwitcher />
+		<LanguageSwitcher />
 	</div>
 </header>

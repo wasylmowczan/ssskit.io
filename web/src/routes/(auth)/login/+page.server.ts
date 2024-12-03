@@ -3,6 +3,7 @@ import { LoginUserSchema } from '$lib/schemas';
 import { superValidate, setError } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ClientResponseError } from 'pocketbase';
+import { languageTag } from '$lib/paraglide/runtime.js';
 
 export const actions: Actions = {
 	login: async ({ request, locals }) => {
@@ -14,7 +15,7 @@ export const actions: Actions = {
 		}
 
 		try {
-			await locals.pb.collection('users').authWithPassword(form.data.login, form.data.password);
+			await locals.pb.collection('users').authWithPassword(form.data.login, form.data.password, {});
 
 			if (!locals.pb?.authStore?.model?.verified) {
 				locals.pb.authStore.clear();

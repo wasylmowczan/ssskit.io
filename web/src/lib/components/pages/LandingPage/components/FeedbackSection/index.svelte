@@ -3,9 +3,10 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { faker } from '@faker-js/faker';
+	import * as m from '$lib/paraglide/messages.js';
 
-	const title = 'What Our Users Say';
-	const subtitle = 'Real Talk from Real Users';
+	const title = m.LP_Feedback_Title();
+	const subtitle = m.LP_Feedback_Subtitle();
 
 	const testimonials = [
 		{
@@ -53,9 +54,9 @@
 	];
 
 	const stats = [
-		{ value: '10,000+', label: 'Active Users' },
-		{ value: '1M+', label: 'Images Generated' },
-		{ value: '4.8/5', label: 'Score on TrustPilot' }
+		{ value: '10,000+', label: m.LP_Feedback_ActiveUsers() },
+		{ value: '1M+', label: m.LP_Feedback_ImagesGenerated() },
+		{ value: '4.8/5', label: m.LP_Feedback_Score() }
 	];
 </script>
 

@@ -14,6 +14,7 @@
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import CardFooter from '$lib/components/ui/card/card-footer.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	export let data;
 
@@ -27,9 +28,9 @@
 		onResult: ({ result }) => {
 			loading = false;
 			if (result.type === 'success') {
-				toast.success('Password updated');
+				toast.success(m.App_Toast_Password_Success());
 			} else {
-				toast.error('Failed to update password');
+				toast.error(m.App_Toast_Password_Failed());
 			}
 		}
 	});
@@ -40,12 +41,13 @@
 <Card>
 	<form action="?/updatePassword" method="POST" use:enhance>
 		<CardHeader>
-			<CardTitle>Change Password</CardTitle>
+			<CardTitle>{m.App_Settings_ChangePassword()}</CardTitle>
+			<!-- TODO: Add warning message thet user would be logged out after changing password -->
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="oldPassword">
 				<FormControl let:attrs>
-					<FormLabel>Old Password</FormLabel>
+					<FormLabel>{m.App_Settings_OldPassword()}</FormLabel>
 					<Input
 						autofocus
 						{...attrs}
@@ -58,14 +60,14 @@
 			</FormField>
 			<FormField {form} name="password">
 				<FormControl let:attrs>
-					<FormLabel>Password</FormLabel>
+					<FormLabel>{m.App_Settings_NewPassword()}</FormLabel>
 					<Input {...attrs} bind:value={$formData.password} type="password" disabled={loading} />
 				</FormControl>
 				<FormFieldErrors />
 			</FormField>
 			<FormField {form} name="passwordConfirm">
 				<FormControl let:attrs>
-					<FormLabel>Confirm New Password</FormLabel>
+					<FormLabel>{m.App_Settings_ConfirmNewPassword()}</FormLabel>
 					<Input
 						{...attrs}
 						bind:value={$formData.passwordConfirm}
@@ -81,7 +83,7 @@
 				{#if loading}
 					<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
-				Save
+				{m.App_Settings_Save()}
 			</Button>
 		</CardFooter>
 	</form>

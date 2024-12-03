@@ -4,6 +4,7 @@ import { redirect, type Actions, error, fail } from '@sveltejs/kit';
 import { setError, superValidate, withFiles } from 'sveltekit-superforms/server';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
+import * as m from '$lib/paraglide/messages.js';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
@@ -34,7 +35,7 @@ export const actions: Actions = {
 			if (err instanceof ClientResponseError) {
 				// eslint-disable-next-line no-console
 				console.error('PocketBase error:', err);
-				setError(form, 'avatar', 'Error updating avatar. Please try again.');
+				setError(form, 'avatar', m.App_Settings_Avatar_Error());
 			} else {
 				// eslint-disable-next-line no-console
 				console.error('Unexpected error:', err);

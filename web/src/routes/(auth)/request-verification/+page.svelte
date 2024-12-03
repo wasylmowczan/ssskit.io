@@ -12,6 +12,7 @@
 	import CardContent from '$lib/components/ui/card/card-content.svelte';
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	let loading = false;
 
@@ -23,11 +24,9 @@
 		onResult: ({ result }) => {
 			loading = false;
 			if (result.type === 'success') {
-				toast.success(
-					'If an account exists for the provided email and is not yet verified, a verification email has been sent. Please check your inbox and spam folder.'
-				);
+				toast.success(m.RequestVerification_Toast_Success());
 			} else {
-				toast.error('Failed to send verification email.');
+				toast.error(m.RequestVerification_Toast_Failed());
 			}
 		}
 	});
@@ -37,7 +36,7 @@
 
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
-		<CardTitle class="text-2xl">Request Verification</CardTitle>
+		<CardTitle class="text-2xl">{m.RequestVerification_Title()}</CardTitle>
 	</CardHeader>
 	<CardContent>
 		<form action="?/verifyEmail" method="POST" use:enhance>
@@ -51,11 +50,11 @@
 						<FormFieldErrors />
 					</FormField>
 				</div>
-				<Button disabled={loading} type="submit" class="w-full">Send Email</Button>
+				<Button disabled={loading} type="submit" class="w-full">{m.RequestVerification_SendEmail()}</Button>
 			</div>
-			<div class="mt-4 text-sm text-muted-foreground">Go back to:</div>
+			<div class="mt-4 text-sm text-muted-foreground">{m.RequestVerification_GoBackTo()}</div>
 			<div>
-				<a href="/login" class="hover:underline">Login</a>
+				<a href="/login" class="underline">{m.Login_Title()}</a>
 			</div>
 		</form>
 	</CardContent>

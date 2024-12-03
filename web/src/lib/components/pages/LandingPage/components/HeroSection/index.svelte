@@ -4,6 +4,7 @@
 	import heroImageDark from '$lib/assets/hero-dark.svg';
 	import { SectionContainer } from '..';
 	import { mode } from 'mode-watcher';
+	import * as m from '$lib/paraglide/messages.js';
 </script>
 
 <SectionContainer
@@ -13,9 +14,12 @@
 >
 	<div class="flex flex-col items-center text-center gap-8 lg:items-start lg:text-start">
 		<h1 class="text-4xl font-extrabold tracking-tight md:text-7xl">
-			Imagine AI<br />
+			{m.LP_Hero_Title()}
+			<br />
 			<span class="relative inline-block">
-				<span class="text-white relative z-10 whitespace-nowrap rounded-sm">Art Generator App</span>
+				<span class="text-white relative z-10 whitespace-nowrap rounded-sm">
+					{m.LP_Hero_Subtitle()}
+				</span>
 				<span
 					class="absolute inset-y-0 -left-3 -right-3 bg-primary transform -skew-y-1 rounded-sm"
 					style="z-index: 0;"
@@ -23,12 +27,11 @@
 			</span>
 		</h1>
 		<p class="text-lg text-muted-foreground md:text-xl">
-			Create AI Art and turn your imaginations into reality with Imagine's AI Art Generator and
-			produce stunning visuals to cover up your artistic thoughts.
+			{m.LP_Hero_Description()}
 		</p>
 		<div class="flex gap-4 justify-center lg:justify-start">
-			<Button href="#pricing" size="lg">Create ✨</Button>
-			<Button href="#features" variant="outline" size="lg">Learn More</Button>
+			<Button href="#pricing" size="lg">{m.LP_Hero_GetStarted()}</Button>
+			<Button href="#features" variant="outline" size="lg">{m.LP_Hero_LearnMore()}</Button>
 		</div>
 	</div>
 	<div class="flex justify-center items-center w-full">

@@ -1,32 +1,34 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
-	import { Trash, Lock, User, Mail, Images, CircleDollarSign } from 'lucide-svelte';
-
+	import { Trash, Lock, User, Mail, Images } from 'lucide-svelte';
+	import * as m from '$lib/paraglide/messages.js';
+	import { languageTag } from '$lib/paraglide/runtime';
+	import { i18n } from '$lib/i18n';
 	const navigation = [
 		{
-			title: 'Avatar',
-			href: '/settings/avatar',
+			title: m.App_Settings_Avatar(),
+			href: i18n.route('/settings/avatar'),
 			icon: Images
 		},
 		{
-			title: 'Email',
-			href: '/settings/email',
+			title: m.App_Settings_Email(),
+			href: i18n.route('/settings/email'),
 			icon: Mail
 		},
 		{
-			title: 'Username',
-			href: '/settings/username',
+			title: m.App_Settings_Username(),
+			href: i18n.route('/settings/username'),
 			icon: User
 		},
 		{
-			title: 'Password',
-			href: '/settings/password',
+			title: m.App_Settings_Password(),
+			href: i18n.route('/settings/password'),
 			icon: Lock
 		},
 		{
-			title: 'Delete Account',
-			href: '/settings/delete-account',
+			title: m.App_Settings_DeleteAccount(),
+			href: i18n.route('/settings/delete-account'),
 			icon: Trash
 		}
 	];

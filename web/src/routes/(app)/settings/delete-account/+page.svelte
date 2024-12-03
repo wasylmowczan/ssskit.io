@@ -14,6 +14,7 @@
 	import CardFooter from '$lib/components/ui/card/card-footer.svelte';
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	let loading = false;
 
@@ -25,9 +26,9 @@
 		onResult: ({ result }) => {
 			loading = false;
 			if (result.type === 'redirect') {
-				toast.success('Account deleted');
+				toast.success(m.App_Toast_DeleteAccount_Success());
 			} else {
-				toast.error('Failed to delete Account!');
+				toast.error(m.App_Toast_DeleteAccount_Failed());
 			}
 		}
 	});
@@ -38,12 +39,12 @@
 <Card>
 	<form action="?/deleteAccount" method="POST" use:enhance>
 		<CardHeader>
-			<CardTitle>Delete Account</CardTitle>
+			<CardTitle>{m.App_Settings_DeleteAccount()}</CardTitle>
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="word">
 				<FormControl let:attrs>
-					<FormLabel>Type DELETE</FormLabel>
+					<FormLabel>{m.App_Settings_TypeDelete()}</FormLabel>
 					<Input {...attrs} autofocus bind:value={$formData.word} disabled={loading} />
 				</FormControl>
 				<FormFieldErrors />
@@ -58,7 +59,7 @@
 				{#if loading}
 					<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
-				Delete Account
+				{m.App_Settings_Delete()}
 			</Button>
 		</CardFooter>
 	</form>

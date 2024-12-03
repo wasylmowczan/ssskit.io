@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Footer, Header } from './components';
+	import * as m from '$lib/paraglide/messages.js';
 
 	const menuItems = [
-		{ name: 'Demo', href: '/#demo' },
-		{ name: 'Features', href: '/#features' },
-		{ name: 'Pricing', href: '/#pricing' },
-		{ name: 'FAQ', href: '/#faq' }
+		{ name: m.LP_Header_Home(), href: '/' },
+		{ name: m.LP_Header_Demo(), href: '/#demo' },
+		{ name: m.LP_Header_Features(), href: '/#features' },
+		{ name: m.LP_Header_Pricing(), href: '/#pricing' },
+		{ name: m.LP_Header_FAQ(), href: '/#faq' }
 	];
 </script>
 

@@ -13,6 +13,7 @@
 	import CardFooter from '$lib/components/ui/card/card-footer.svelte';
 	import { UpdateAvatarSchema } from '$lib/schemas.js';
 	import { config } from '$lib/config-client.js';
+	import * as m from '$lib/paraglide/messages.js';
 
 	export let data;
 
@@ -28,9 +29,9 @@
 		onResult({ result }) {
 			loading = false;
 			if (result.type === 'success') {
-				toast.success('Avatar updated');
+				toast.success(m.App_Toast_Avatar_Updated());
 			} else {
-				toast.error('Failed to update avatar');
+				toast.error(m.App_Toast_Avatar_Failed());
 			}
 		}
 	});
@@ -72,7 +73,7 @@
 <Card>
 	<form method="POST" action="?/updateAvatar" use:enhance enctype="multipart/form-data">
 		<CardHeader>
-			<CardTitle>Change Avatar</CardTitle>
+			<CardTitle>{m.App_Settings_Avatar()}</CardTitle>
 		</CardHeader>
 		<CardContent>
 			<div class="w-32 h-32 mx-auto mb-8">
@@ -94,7 +95,8 @@
 							class="w-full gap-2"
 							on:click={() => document.getElementById('upload')?.click()}
 						>
-							<Camera /> Change
+							<Camera />
+							{m.App_Settings_Change()}
 						</Button>
 						<input
 							on:change={handleFileChange}
@@ -111,7 +113,8 @@
 					<FormField {form} name="avatar" class="w-full">
 						<FormControl>
 							<Button variant="outline" class="w-full gap-2" on:click={deleteAvatar}>
-								<Trash /> Delete
+								<Trash />
+								{m.App_Settings_Delete()}
 							</Button>
 						</FormControl>
 						<FormFieldErrors />
@@ -124,7 +127,7 @@
 				{#if loading}
 					<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
-				Save
+				{m.App_Settings_Save()}
 			</Button>
 		</CardFooter>
 	</form>

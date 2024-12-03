@@ -15,6 +15,7 @@
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import CardFooter from '$lib/components/ui/card/card-footer.svelte';
 	import type { PageData } from './$types';
+	import * as m from '$lib/paraglide/messages.js';
 
 	export let data: PageData;
 	let loading = false;
@@ -28,9 +29,9 @@
 		onResult: async ({ result }) => {
 			loading = false;
 			if (result.type === 'success') {
-				toast.success('Username updated');
+				toast.success(m.App_Toast_Username_Success());
 			} else {
-				toast.error('Failed to update username');
+				toast.error(m.App_Toast_Username_Failed());
 			}
 		}
 	});
@@ -41,12 +42,12 @@
 <Card>
 	<form action="?/updateUsername" method="POST" use:enhance>
 		<CardHeader>
-			<CardTitle>Change Username</CardTitle>
+			<CardTitle>{m.App_Settings_ChangeUsername()}</CardTitle>
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="username">
 				<FormControl let:attrs>
-					<FormLabel>Username</FormLabel>
+					<FormLabel>{m.App_Settings_Username()}</FormLabel>
 					<Input autofocus {...attrs} bind:value={$formData.username} />
 				</FormControl>
 				<FormFieldErrors />
@@ -57,7 +58,7 @@
 				{#if loading}
 					<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
 				{/if}
-				Save
+				{m.App_Settings_Save()}
 			</Button>
 		</CardFooter>
 	</form>

@@ -12,6 +12,10 @@
 	import CardContent from '$lib/components/ui/card/card-content.svelte';
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
+	import * as m from '$lib/paraglide/messages.js';
+	import { i18n } from '$lib/i18n.js';
+	import { languageTag } from '$lib/paraglide/runtime.js';
+
 
 	let loading = false;
 	let showVerificationPrompt = false;
@@ -24,14 +28,14 @@
 		onResult: ({ result }) => {
 			loading = false;
 			if (result.type === 'success') {
-				toast.success('Logged in successfully.');
+				toast.success(m.Login_Toast_Success());
 			}
 
 			if (result.type === 'failure') {
 				if (result.data?.form?.errors?.login[0] === 'Please verify your email address.') {
 					showVerificationPrompt = true;
 				}
-				toast.error('Failed to login.');
+				toast.error(m.Login_Toast_Failed());
 			}
 		}
 	});
@@ -41,21 +45,22 @@
 
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
-		<CardTitle class="text-2xl">Login</CardTitle>
+		<CardTitle class="text-2xl">{m.Login_Title()}</CardTitle>
 	</CardHeader>
 	<CardContent>
-		<form action="?/login" method="POST" use:enhance>
+		<form action="?/login" lang={languageTag()} method="POST" use:enhance>
 			<div class="grid gap-4">
 				<div class="grid gap-2">
 					<FormField {form} name="login">
 						<FormControl let:attrs>
-							<FormLabel>Username or Email</FormLabel>
+							<FormLabel>{m.Login_Email()}</FormLabel>
 							<Input {...attrs} bind:value={$formData.login} />
 						</FormControl>
 						<FormFieldErrors />
 						{#if showVerificationPrompt}
 							<div class="text-sm mt-2 text-muted-foreground">
-								<a href="/request-verification" class="hover:underline">Resend verification email</a
+								<a href="/request-verification" class="hover:underline"
+									>{m.Login_ResendVerificationEmail()}</a
 								>
 							</div>
 						{/if}
@@ -64,21 +69,21 @@
 				<div class="grid gap-2">
 					<FormField {form} name="password">
 						<FormControl let:attrs>
-							<FormLabel>Password</FormLabel>
+							<FormLabel>{m.Login_Password()}</FormLabel>
 							<Input {...attrs} bind:value={$formData.password} type="password" />
 						</FormControl>
 						<FormFieldErrors />
 						<div class="flex flex-col">
 							<a href="/forgot-password" class="text-sm text-muted-foreground underline"
-								>Forgot your password?</a
+								>{m.Login_ForgotPassword()}</a
 							>
 						</div>
 					</FormField>
 				</div>
-				<Button disabled={loading} type="submit" class="w-full">Login</Button>
+				<Button disabled={loading} type="submit" class="w-full">{m.Login_Login()}</Button>
 			</div>
 			<div class="mt-4 text-sm text-center">
-				Don't have an account? <a href="/register" class="underline">Register</a>
+				{m.Login_DontHaveAccount()} <a href={i18n.route('register')} class="underline">{m.Login_Register()}</a>
 			</div>
 		</form>
 	</CardContent>

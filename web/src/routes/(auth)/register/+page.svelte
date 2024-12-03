@@ -12,6 +12,7 @@
 	import CardContent from '$lib/components/ui/card/card-content.svelte';
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	let loading = false;
 
@@ -23,11 +24,9 @@
 		onResult: ({ result }) => {
 			loading = false;
 			if (result.type === 'redirect') {
-				toast.success(
-					'Account created successfully. Please check your email for a verification link.'
-				);
+				toast.success(m.Register_Toast_Success());
 			} else {
-				toast.error('Failed to register.');
+				toast.error(m.Register_Toast_Failed());
 			}
 		}
 	});
@@ -37,7 +36,7 @@
 
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
-		<CardTitle class="text-2xl">Register</CardTitle>
+		<CardTitle class="text-2xl">{m.Register_Title()}</CardTitle>
 	</CardHeader>
 	<CardContent>
 		<form action="?/register" method="POST" use:enhance>
@@ -45,7 +44,7 @@
 				<div class="grid gap-2">
 					<FormField {form} name="email">
 						<FormControl let:attrs>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>{m.Register_Email()}</FormLabel>
 							<Input {...attrs} bind:value={$formData.email} type="email" />
 						</FormControl>
 						<FormFieldErrors />
@@ -54,7 +53,7 @@
 				<div class="grid gap-2">
 					<FormField {form} name="password">
 						<FormControl let:attrs>
-							<FormLabel>Password</FormLabel>
+							<FormLabel>{m.Register_Password()}</FormLabel>
 							<Input {...attrs} bind:value={$formData.password} type="password" />
 						</FormControl>
 						<FormFieldErrors />
@@ -63,16 +62,16 @@
 				<div class="grid gap-2">
 					<FormField {form} name="passwordConfirm">
 						<FormControl let:attrs>
-							<FormLabel>Confirm Password</FormLabel>
+							<FormLabel>{m.Register_ConfirmPassword()}</FormLabel>
 							<Input {...attrs} bind:value={$formData.passwordConfirm} type="password" />
 						</FormControl>
 						<FormFieldErrors />
 					</FormField>
 				</div>
-				<Button disabled={loading} type="submit" class="w-full">Create an account</Button>
+				<Button disabled={loading} type="submit" class="w-full">{m.Register_CreateAccount()}</Button>
 			</div>
 			<div class="mt-4 text-sm text-center">
-				Already have an account? <a href="/login" class="underline">Login</a>
+				{m.Register_AlreadyHaveAccount()} <a href="/login" class="underline">{m.Login_Title()}</a>
 			</div>
 		</form>
 	</CardContent>

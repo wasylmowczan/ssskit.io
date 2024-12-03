@@ -3,6 +3,8 @@ import { RegisterUserSchema } from '$lib/schemas';
 import { setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ClientResponseError } from 'pocketbase';
+import { languageTag } from '$lib/paraglide/runtime';
+import { i18n } from '$lib/i18n';
 
 export const actions: Actions = {
 	register: async ({ locals, request }) => {
@@ -32,6 +34,6 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		redirect(303, '/login');
+		redirect(303, i18n.route(`${languageTag()}/login`));
 	}
 };

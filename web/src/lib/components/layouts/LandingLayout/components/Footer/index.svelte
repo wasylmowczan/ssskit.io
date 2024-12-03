@@ -2,6 +2,7 @@
 	import XIcon from '$lib/components/icons/brands/X.svelte';
 	import InstagramIcon from '$lib/components/icons/brands/Instagram.svelte';
 	import Butterfly from '$lib/components/icons/brands/Butterfly.svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	import { config } from '$lib/config-client';
 	import Logo from '../Logo.svelte';
@@ -18,13 +19,13 @@
 	];
 
 	const legal = [
-		{ name: 'Privacy Policy', href: '/privacy-policy' },
-		{ name: 'Terms of Service', href: '/terms-of-service' }
+		{ name: m.LP_Footer_PrivacyPolicy(), href: '/privacy-policy' },
+		{ name: m.LP_Footer_TermsOfService(), href: '/terms-of-service' }
 	];
 
 	const other = [
-		{ name: 'Changelog', href: '/changelog' },
-		{ name: 'Roadmap', href: '/roadmap' }
+		{ name: m.LP_Footer_Changelog(), href: '/changelog' },
+		{ name: m.LP_Footer_Roadmap(), href: '/roadmap' }
 	];
 </script>
 

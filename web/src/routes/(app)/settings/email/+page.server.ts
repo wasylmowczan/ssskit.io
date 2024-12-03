@@ -4,12 +4,13 @@ import { setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
+import * as m from '$lib/paraglide/messages.js';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
 		redirect(303, '/login');
 	}
-
+	
 	return {
 		form: await superValidate(locals.user, zod(UpdateEmailSchema))
 	};
@@ -32,7 +33,7 @@ export const actions: Actions = {
 				// eslint-disable-next-line no-console
 				console.error('PB error: ', err);
 				if (err.response?.data?.newEmail) {
-					return setError(form, 'email', err.response?.data?.newEmail.message);
+					return setError(form, 'email', m.App_PB_Email_Error());
 				}
 			} else {
 				// eslint-disable-next-line no-console

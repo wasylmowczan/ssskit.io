@@ -1,3 +1,5 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import * as m from '$lib/paraglide/messages.js';
 </script>
+
+<div></div>

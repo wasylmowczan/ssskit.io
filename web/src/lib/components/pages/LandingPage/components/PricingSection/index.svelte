@@ -13,68 +13,68 @@
 	} from 'lucide-svelte';
 	import { SectionContainer } from '..';
 	import Switch from '$lib/components/ui/switch/switch.svelte';
-
+	import * as m from '$lib/paraglide/messages.js';
+	import { i18n } from '$lib/i18n';
 	let isAnnual = false;
 
-	const title = 'Pricing Plans';
-	const subtitle =
-		'Choose the perfect plan for your needs. Start with Free and upgrade to Pro as you grow.';
+	const title = m.LP_Pricing_Title();
+	const subtitle = m.LP_Pricing_Subtitle();
 
 	$: pricingTiers = [
 		{
 			name: 'Free',
-			description: 'Free Forever',
+			description: m.LP_Pricing_Free_Description(),
 			monthlyPrice: 0,
-			billingPeriod: 'forever',
+			billingPeriod: m.LP_Pricing_Forever(),
 			features: [
-				{ text: 'Create up to 5 Images', icon: Target },
-				{ text: 'Early access to new models & features', icon: BadgePlus },
-				{ text: 'Personal use', icon: Signature }
+				{ text: m.LP_Pricing_Description_1({ value: 5 }), icon: Target },
+				{ text: m.LP_Pricing_Description_2(), icon: BadgePlus },
+				{ text: m.LP_Pricing_Description_PersonalUse(), icon: Signature }
 			],
-			ctaText: 'Get Started',
-			ctaLink: '/register'
+			ctaText: m.LP_Pricing_Action(),
+			ctaLink: i18n.route('/register')
 		},
 		{
 			name: 'Pro',
-			description: 'Higher limits for demanding artists.',
+			description: m.LP_Pricing_Pro_Description(),
 			monthlyPrice: 79,
 			monthlyPriceDiscounted: 39,
 			annualPrice: 474,
 			annualPriceDiscounted: 234,
-			billingPeriod: isAnnual ? 'year' : 'month',
+			billingPeriod: isAnnual ? m.LP_Pricing_Year() : m.LP_Pricing_Month(),
 			features: [
-				{ text: 'Create up to 50 Images', icon: Target },
-				{ text: 'Early access to new models & features', icon: BadgePlus },
-				{ text: 'Commercial use', icon: Signature }
+				{ text: m.LP_Pricing_Description_1({ value: 50 }), icon: Target },
+				{ text: m.LP_Pricing_Description_2(), icon: BadgePlus },
+				{ text: m.LP_Pricing_Description_CommercialUse(), icon: Signature }
 			],
 			highlighted: true,
-			ctaText: 'Get Started',
-			ctaLink: '/register'
+			ctaText: m.LP_Pricing_Action(),
+			ctaLink: i18n.route('/register')
 		},
 		{
 			name: 'Premium',
-			description: 'Best for those looking to sell their creations.',
+			description: m.LP_Pricing_Premium_Description(),
 			monthlyPrice: 99,
 			monthlyPriceDiscounted: 49,
 			annualPrice: 594,
 			annualPriceDiscounted: 294,
-			billingPeriod: isAnnual ? 'year' : 'month',
+			billingPeriod: isAnnual ? m.LP_Pricing_Year() : m.LP_Pricing_Month(),
 			features: [
-				{ text: 'Unlimited Images', icon: Infinity },
-				{ text: 'Early access to new models & features', icon: BadgePlus },
-				{ text: 'Commercial use', icon: Signature }
+				{ text: m.LP_Pricing_Unlimited(), icon: Infinity },
+				{ text: m.LP_Pricing_Description_2(), icon: BadgePlus },
+				{ text: m.LP_Pricing_Description_CommercialUse(), icon: Signature }
 			],
-			ctaText: 'Get Started',
-			ctaLink: '/register'
+			ctaText: m.LP_Pricing_Action(),
+			ctaLink: i18n.route('/register')
 		}
 	];
 </script>
 
 <SectionContainer {title} {subtitle} id="pricing">
 	<p class="font-bold w-full flex justify-center gap-2 items-center">
-		Monthly
+		{m.LP_Pricing_Month()}
 		<Switch includeInput bind:checked={isAnnual} />
-		Annually
+		{m.LP_Pricing_Year()}
 	</p>
 	<div class="mt-12 space-y-4 sm:space-y-0 sm:grid md:grid-cols-3 sm:gap-6 lg:max-w-7xl lg:mx-auto">
 		{#each pricingTiers as tier}
@@ -87,7 +87,7 @@
 					<div class="flex gap-2">
 						<h3 class="text-2xl font-semibold leading-6">{tier.name}</h3>
 						{#if tier.highlighted}
-							<Badge class="ml-2">Recommended</Badge>
+							<Badge class="ml-2">{m.LP_Pricing_Recommended()}</Badge>
 						{/if}
 					</div>
 					<p class="mt-4 text-muted-foreground">{tier.description}</p>
@@ -109,7 +109,7 @@
 					</Button>
 				</div>
 				<div class="flex-1 pt-6 pb-8 px-6">
-					<h4 class="text-sm font-medium">What's included:</h4>
+					<h4 class="text-sm font-medium">{m.LP_Pricing_Includes()}</h4>
 					<ul class="mt-6 space-y-4">
 						{#each tier.features as feature}
 							<li class="flex items-start space-x-3">

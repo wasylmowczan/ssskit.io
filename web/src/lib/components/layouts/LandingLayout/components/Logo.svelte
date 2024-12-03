@@ -17,18 +17,14 @@
 			'[&_*]:mt-[-1px] [&_*]:leading-[0.85]'
 		)}
 	>
-		<a href="/">
-			<span>AI</span>
-		</a>
+		<span>AI</span>
 	</div>
-	<a href="/">
-		<span class="text-lg font-bold">{config.appName}</span>
-	</a>
+	<span class="text-lg font-bold">{config.appName}</span>
 </div>
 
 <!-- If you want to use logo as image, uncomment the following code and comment the previous code -->
-
-<!-- <a href="/" class="flex items-center gap-2">
+<!-- 
+<a href="/" class="flex items-center gap-2">
 	{#if $mode === 'dark'}
 		<img src="/logo.svg" alt="Logo" class="w-8 h-8" style="filter: invert(100%);" />
 	{:else}

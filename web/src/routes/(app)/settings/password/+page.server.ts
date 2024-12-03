@@ -4,11 +4,13 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { setError, superValidate } from 'sveltekit-superforms';
 import { ClientResponseError } from 'pocketbase';
 import type { PageServerLoad } from './$types';
+import { languageTag } from '$lib/paraglide/runtime.js';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
 		redirect(303, '/login');
 	}
+	console.log(languageTag);
 
 	return {
 		form: await superValidate(zod(UpdatePasswordSchema))

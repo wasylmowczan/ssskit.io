@@ -1,58 +1,57 @@
 <script lang="ts">
 	import { Card } from '$lib/components/ui/card';
 	import { SectionContainer } from '..';
+	import * as m from '$lib/paraglide/messages.js';
+
+	const title = m.LP_Features_Title();
+	const subtitle = m.LP_Features_Subtitle();
+	const description = m.LP_Features_Description();
 
 	let features = [
 		{
 			video: 'video/text-to-image.webm',
-			title: 'Text to Image',
-			description:
-				'Ignite your creative spark with Imagine AI Image Generator. Describe your vision with words, and watch the powerful tool translate them into captivating artwork. Catalyze a flurry of ideas and conquer creative roadblocks.'
+			title: m.LP_Features_TextToImage(),
+			description: m.LP_Features_TextToImage_Description()
 		},
 		{
 			video: 'video/realtime-text.webm',
-			title: 'Real Time Generation',
-			description:
-				'Witness your ideas blended with Imagine AI Image Generator as Real-Time Generation lets you sketch and see your creation come to life before your eyes. Refine as you go for a seamless experience.'
+			title: m.LP_Features_RealTimeGeneration(),
+			description: m.LP_Features_RealTimeGeneration_Description()
 		},
 		{
 			video: 'video/text-to-video.webm',
-			title: 'AI Video Generator',
-			description:
-				'Ditch the filming crew as Imagine AI Art Creates HD Videos Instantly. Convert scripts or ideas into stunning 4K videos with just a few clicks. Forget time consuming filming, editing, and acting as the AI does it all in seconds.'
+			title: m.LP_Features_AIVideoGenerator(),
+			description: m.LP_Features_AIVideoGenerator_Description()
 		},
 		{
 			video: 'video/canvas.webm',
-			title: 'Ideate',
-			description:
-				'Imagine AI Image Generator brings you Ideate that empowers you to paint with an intelligent brush. Simply describe elements, watch them appear instantly, and refine your artwork for an intuitive creative experience.'
+			title: m.LP_Features_Ideate(),
+			description: m.LP_Features_Ideate_Description()
 		},
 		{
 			video: 'video/enhance-video.webm',
-			title: 'Creative Upscaler',
-			description:
-				'From Blurry to Beautiful: Imagine AI Image Generator Creative Upscaler. The image enhancement tool instantly transforms them into crisp, high-definition masterpieces. Imagine AI Art Generator makes it fast and easy.'
+			title: m.LP_Features_CreativeUpscaler(),
+			description: m.LP_Features_CreativeUpscaler_Description()
 		},
 		{
 			video: 'video/character.webm',
-			title: 'Character Creator',
-			description:
-				'Maintain uniformity in your storytelling with Character Consistency, which ensures all generated images consistently reflect your characters. Experience seamless and coherent visual narratives effortlessly.'
+			title: m.LP_Features_CharacterCreator(),
+			description: m.LP_Features_CharacterCreator_Description()
 		}
 	];
+
 </script>
 
-<SectionContainer title="Features" id="features">
+<SectionContainer {title}  id="features">
 	<div class="mx-auto max-w-6xl px-4 py-8">
 		<!-- Header Section -->
 		<div class="mb-8">
 			<div class="text-sm font-semibold text-blue-600">Our AI Tools Suite</div>
 			<h1 class="mt-2 text-3xl font-bold tracking-tight lg:text-4xl">
-				A complete AI tools suite with all the features you need.
+				{subtitle}
 			</h1>
 			<p class="mt-4 text-lg text-muted-foreground">
-				Imagine is packed with amazing features that enable you to better understand your website
-				traffic.
+				{description}
 			</p>
 		</div>
 		<!-- Features Section -->
