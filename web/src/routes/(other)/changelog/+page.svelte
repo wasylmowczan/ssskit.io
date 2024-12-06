@@ -18,6 +18,15 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-06',
+			logs: [
+				{
+					type: 'New Feature',
+					items: ['Added View Transitions to the app to improve the theme switching experience.']
+				}
+			]
+		},
+		{
 			date: '2024-12-03',
 			logs: [
 				{

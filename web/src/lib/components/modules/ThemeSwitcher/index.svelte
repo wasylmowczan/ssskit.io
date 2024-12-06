@@ -2,9 +2,18 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Moon, Sun } from 'lucide-svelte';
 	import { toggleMode } from 'mode-watcher';
+
+	// Wrap the theme toggle in a View Transition
+	function handleToggleMode() {
+		if (document.startViewTransition) {
+			document.startViewTransition(() => toggleMode());
+		} else {
+			toggleMode(); // Fallback for unsupported browsers
+		}
+	}
 </script>
 
-<Button on:click={toggleMode} variant="outline" size="icon">
+<Button on:click={handleToggleMode} variant="outline" size="icon">
 	<Sun
 		class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 	/>
