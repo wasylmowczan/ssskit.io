@@ -3,9 +3,15 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { i18n } from '$lib/i18n';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
+	import { config } from '$lib/config-client';
+	import { ComingSoonPage } from '$lib/components/pages';
 </script>
 
-<ParaglideJS {i18n}>
-	<Toaster richColors />
-	<slot />
-</ParaglideJS>
+{#if config.showComingSoon}
+	<ComingSoonPage />
+{:else}
+	<ParaglideJS {i18n}>
+		<Toaster richColors />
+		<slot />
+	</ParaglideJS>
+{/if}

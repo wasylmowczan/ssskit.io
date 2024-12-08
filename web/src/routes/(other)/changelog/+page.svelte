@@ -18,6 +18,15 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-08',
+			logs: [
+				{
+					type: 'New Feature',
+					items: ['Added Coming Soon page to the app.']
+				}
+			]
+		},
+		{
 			date: '2024-12-06',
 			logs: [
 				{
