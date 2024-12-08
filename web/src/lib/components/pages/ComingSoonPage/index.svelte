@@ -8,6 +8,7 @@
 	import { Confetti } from 'svelte-confetti';
 	import { config } from '$lib/config-client';
 	import { ToggleConfetti } from './ToggleConfetti';
+	import { ThemeSwitcher } from '$lib/components/modules';
 
 	let timeLeft: { [key: string]: number } = {};
 	let timer: NodeJS.Timeout;
@@ -91,6 +92,9 @@
 					<span class="sr-only">{name}</span>
 				</a>
 			{/each}
+		</div>
+		<div class="mt-8">
+			<ThemeSwitcher />
 		</div>
 	</div>
 </div>
