@@ -13,6 +13,8 @@
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import * as m from '$lib/paraglide/messages.js';
+	import { Seo } from '$lib/components/modules';
+	import { config } from '$lib/config-client';
 
 	let loading = false;
 
@@ -34,6 +36,12 @@
 	const { form: formData, enhance } = form;
 </script>
 
+<Seo
+	title={`Request Verification - ${config.appName}`}
+	description={`Request Verification for ${config.appName}`}
+	keywords="request verification, request verification to ai image generator"
+/>
+
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
 		<CardTitle class="text-2xl">{m.RequestVerification_Title()}</CardTitle>
@@ -50,7 +58,9 @@
 						<FormFieldErrors />
 					</FormField>
 				</div>
-				<Button disabled={loading} type="submit" class="w-full">{m.RequestVerification_SendEmail()}</Button>
+				<Button disabled={loading} type="submit" class="w-full"
+					>{m.RequestVerification_SendEmail()}</Button
+				>
 			</div>
 			<div class="mt-4 text-sm text-muted-foreground">{m.RequestVerification_GoBackTo()}</div>
 			<div>

@@ -13,6 +13,8 @@
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import * as m from '$lib/paraglide/messages.js';
+	import { Seo } from '$lib/components/modules';
+	import { config } from '$lib/config-client';
 
 	let loading = false;
 
@@ -34,6 +36,12 @@
 	const { form: formData, enhance } = form;
 </script>
 
+<Seo
+	title={`Forgot Password - ${config.appName}`}
+	description={`Forgot Password for ${config.appName}`}
+	keywords="forgot password, forgot password for ai image generator"
+/>
+
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
 		<CardTitle class="text-2xl">{m.ForgotPassword_Title()}</CardTitle>
@@ -50,10 +58,14 @@
 						<FormFieldErrors />
 					</FormField>
 				</div>
-				<Button disabled={loading} type="submit" class="w-full">{m.ForgotPassword_SendEmail()}</Button>
+				<Button disabled={loading} type="submit" class="w-full"
+					>{m.ForgotPassword_SendEmail()}</Button
+				>
 			</div>
-			<div class="mt-4 text-sm text-muted-foreground">{m.ForgotPassword_GoBackTo()}</div>
-			<div>
+			<div class="mt-4 text-sm text-muted-foreground text-center">
+				{m.ForgotPassword_GoBackTo()}
+			</div>
+			<div class="text-center">
 				<a href="/login" class="underline">{m.Login_Title()}</a>
 			</div>
 		</form>

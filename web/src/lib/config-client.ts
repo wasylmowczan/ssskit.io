@@ -10,6 +10,6 @@ export const config = {
 	showStickyCountdown: false, // TODO: Configure sticky countdown
 	stickyCountdownDate: '2024-12-31',
 	stickyCountdownText: 'Early-Bird',
-	showComingSoon: true,
+	showComingSoon: false,
 	comingSoonDate: '2026-01-01' // TODO: Configure coming soon date
 };

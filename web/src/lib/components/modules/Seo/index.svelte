@@ -3,17 +3,9 @@
 	import { browser } from '$app/environment';
 	import { config } from '$lib/config-client';
 
-	// export let title = 'Default Title';
-	// export let description = 'Default description of your app';
-	// export let keywords = 'svelte, sveltekit, app';
-	// export let image = '/default-image.jpg';
-	// export let isProtected = false;
-
-	export let title = 'SSSKit - SvelteKit SaaS Starter Kit';
-	export let description =
-		'SSSKit is a SvelteKit SaaS Starter Kit that helps you launch your SaaS product faster.';
-	export let keywords =
-		'svelte, sveltekit, app, boilerplate, saas, startup, template, indiehackers, maker';
+	export let title = `${config.appName} - create stunning AI images`;
+	export let description = `${config.appName} is a platform that allows you to create stunning AI images.`;
+	export let keywords = 'ai, image, ai image, ai image generator, ai image creator';
 	export let image = '/seo-image.png'; // TODO: change seo image
 	export let isProtected = false;
 

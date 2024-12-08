@@ -119,7 +119,11 @@
 	}
 </script>
 
-<Seo title={`Roadmap - ${config.appName}`} description={`Roadmap for ${config.appName}`} />
+<Seo
+	title={`Roadmap - ${config.appName}`}
+	description={`Roadmap for ${config.appName}`}
+	keywords="roadmap, roadmap for ai image generator"
+/>
 <div class="w-full">
 	<div class="flex justify-between items-center mb-6">
 		<h1 class="text-2xl font-bold">Roadmap</h1>

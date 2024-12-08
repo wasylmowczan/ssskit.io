@@ -11,6 +11,7 @@
 <Seo
 	title={`Terms of Service - ${config.appName}`}
 	description={`Terms of Service for ${config.appName}`}
+	keywords="terms, of, service, terms of service, terms of service for ai image generator"
 />
 
 <section class="mb-12 p-6">

@@ -11,6 +11,7 @@
 <Seo
 	title={`Privacy Policy - ${config.appName}`}
 	description={`Privacy Policy for ${config.appName}`}
+	keywords="privacy, policy, privacy policy, privacy policy for ai image generator"
 />
 
 <section class="mb-12 p-6">

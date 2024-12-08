@@ -5,9 +5,11 @@
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { config } from '$lib/config-client';
 	import { ComingSoonPage } from '$lib/components/pages';
+	import { Seo } from '$lib/components/modules';
 </script>
 
 {#if config.showComingSoon}
+	<Seo />
 	<ComingSoonPage />
 {:else}
 	<ParaglideJS {i18n}>

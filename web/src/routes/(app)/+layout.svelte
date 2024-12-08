@@ -18,7 +18,7 @@
 	import SettingsIcon from '$lib/components/icons/common/settings.svelte';
 	import { Separator } from '$lib/components/ui/separator';
 	import { config } from '$lib/config-client.js';
-
+	import { Seo } from '$lib/components/modules';
 	import { LanguageSwitcher, ThemeSwitcher } from '$lib/components/modules';
 	import Logo from '$lib/components/layouts/LandingLayout/components/Logo.svelte';
 	import * as m from '$lib/paraglide/messages.js';
@@ -51,6 +51,12 @@
 		? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
 		: null;
 </script>
+
+<Seo
+	title={`${config.appName} - create stunning AI images`}
+	description={`${config.appName} is a platform that allows you to create stunning AI images.`}
+	keywords="ai image, ai image generator, ai image creator"
+/>
 
 <div class="flex min-h-screen">
 	<div class="hidden flex-none md:block md:w-[280px] bg-muted/40 border-r">

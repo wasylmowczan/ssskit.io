@@ -4,6 +4,7 @@
 	import X from '$lib/components/icons/brands/X.svelte';
 	import Bluesky from '$lib/components/icons/brands/Butterfly.svelte';
 	import * as HoverCard from '$lib/components/ui/hover-card';
+	import demoImage from '$lib/assets/demo.png';
 
 	import { Confetti } from 'svelte-confetti';
 	import { config } from '$lib/config-client';
@@ -51,13 +52,14 @@
 			We are working hard to bring you something
 			<span class="font-bold text-blue-500">
 				<HoverCard.Root>
-					<HoverCard.Trigger>amazing</HoverCard.Trigger>
+					<HoverCard.Trigger>amazing.</HoverCard.Trigger>
 					<HoverCard.Content>
 						<!-- svelte-ignore a11y-img-redundant-alt -->
-						<img src="/logo.svg" alt="Amazing Image" />
+						<img src={demoImage} alt="Demo Image" />
 					</HoverCard.Content>
 				</HoverCard.Root>
-			</span>. Stay tuned and celebrate with us!
+			</span>
+			Stay tuned and celebrate with us!
 			<ToggleConfetti toggleOnce relative={false}>
 				<button slot="label" class="text-lg font-bold pt-6"> Click to Celebrate 🥳 </button>
 

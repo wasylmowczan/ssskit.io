@@ -15,7 +15,8 @@
 	import * as m from '$lib/paraglide/messages.js';
 	import { i18n } from '$lib/i18n.js';
 	import { languageTag } from '$lib/paraglide/runtime.js';
-
+	import { Seo } from '$lib/components/modules';
+	import { config } from '$lib/config-client';
 
 	let loading = false;
 	let showVerificationPrompt = false;
@@ -42,6 +43,12 @@
 
 	const { form: formData, enhance } = form;
 </script>
+
+<Seo
+	title={`Login - ${config.appName}`}
+	description={`Login to ${config.appName}`}
+	keywords="login, login for ai image generator"
+/>
 
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
@@ -83,7 +90,8 @@
 				<Button disabled={loading} type="submit" class="w-full">{m.Login_Login()}</Button>
 			</div>
 			<div class="mt-4 text-sm text-center">
-				{m.Login_DontHaveAccount()} <a href={i18n.route('register')} class="underline">{m.Login_Register()}</a>
+				{m.Login_DontHaveAccount()}
+				<a href={i18n.route('register')} class="underline">{m.Login_Register()}</a>
 			</div>
 		</form>
 	</CardContent>

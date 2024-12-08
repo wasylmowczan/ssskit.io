@@ -22,7 +22,10 @@
 			logs: [
 				{
 					type: 'New Feature',
-					items: ['Added Coming Soon page to the app.']
+					items: [
+						'Added Coming Soon page to the app.',
+						'Added sitemap.xml to the app to improve SEO.'
+					]
 				}
 			]
 		},
@@ -87,7 +90,11 @@
 	}
 </script>
 
-<Seo title={`Changelog - ${config.appName}`} description={`Changelog for ${config.appName}`} />
+<Seo
+	title={`Changelog - ${config.appName}`}
+	description={`Changelog for ${config.appName}`}
+	keywords="changelog, changelog for ai image generator"
+/>
 
 <section class="mb-12 p-6">
 	<div class="container relative mx-auto overflow-hidden py-8 h-full max-w-3xl">

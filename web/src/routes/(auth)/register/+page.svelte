@@ -13,6 +13,8 @@
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import * as m from '$lib/paraglide/messages.js';
+	import { Seo } from '$lib/components/modules';
+	import { config } from '$lib/config-client';
 
 	let loading = false;
 
@@ -33,6 +35,12 @@
 
 	const { form: formData, enhance } = form;
 </script>
+
+<Seo
+	title={`Register - ${config.appName}`}
+	description={`Register to ${config.appName}`}
+	keywords="register, register to ai image generator"
+/>
 
 <Card class="mx-auto max-w-sm w-full">
 	<CardHeader>
@@ -68,7 +76,8 @@
 						<FormFieldErrors />
 					</FormField>
 				</div>
-				<Button disabled={loading} type="submit" class="w-full">{m.Register_CreateAccount()}</Button>
+				<Button disabled={loading} type="submit" class="w-full">{m.Register_CreateAccount()}</Button
+				>
 			</div>
 			<div class="mt-4 text-sm text-center">
 				{m.Register_AlreadyHaveAccount()} <a href="/login" class="underline">{m.Login_Title()}</a>
