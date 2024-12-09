@@ -1,7 +1,7 @@
 <script lang="ts">
 	import XIcon from '$lib/components/icons/brands/X.svelte';
 	import InstagramIcon from '$lib/components/icons/brands/Instagram.svelte';
-	import Butterfly from '$lib/components/icons/brands/Butterfly.svelte';
+	import BlueSkyIcon from '$lib/components/icons/brands/BlueSky.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 
 	import { config } from '$lib/config-client';
@@ -14,7 +14,7 @@
 
 	let socialLinks = [
 		{ name: 'X', href: 'https://x.com', icon: XIcon },
-		{ name: 'BlueSky', href: 'https://bsky.social', icon: Butterfly },
+		{ name: 'BlueSky', href: 'https://bsky.app/profile/imagin.ai', icon: BlueSkyIcon },
 		{ name: 'Instagram', href: 'https://instagram.com', icon: InstagramIcon }
 	];
 
@@ -25,7 +25,8 @@
 
 	const other = [
 		{ name: m.LP_Footer_Changelog(), href: '/changelog' },
-		{ name: m.LP_Footer_Roadmap(), href: '/roadmap' }
+		{ name: m.LP_Footer_Roadmap(), href: '/roadmap' },
+		{ name: m.LP_Footer_Contact(), href: '/contact' }
 	];
 </script>
 

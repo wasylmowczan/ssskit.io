@@ -11,6 +11,7 @@
 
 <SectionContainer {title} {subtitle} id="demo">
 	<div class="w-full max-w-3xl mx-auto">
+		<!-- svelte-ignore a11y-media-has-caption -->
 		<div
 			class="overflow-hidden rounded-lg shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] hover:shadow-[0_2px_15px_-3px_rgba(0,0,0,0.15)] transition-shadow duration-300"
 		>

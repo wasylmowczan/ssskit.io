@@ -2,7 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import Instagram from '$lib/components/icons/brands/Instagram.svelte';
 	import X from '$lib/components/icons/brands/X.svelte';
-	import Bluesky from '$lib/components/icons/brands/Butterfly.svelte';
+	import Bluesky from '$lib/components/icons/brands/BlueSky.svelte';
 	import * as HoverCard from '$lib/components/ui/hover-card';
 	import demoImage from '$lib/assets/demo.png';
 

@@ -17,7 +17,7 @@
 		"@internationalized/date": "^3.5.2",
 		"@stripe/stripe-js": "^4.3.0",
 		"@sveltejs/kit": "^2.5.21",
-		"clsx": "^2.1.0",
+		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.18",
 		"embla-carousel-svelte": "^8.0.0",
 		"faker": "^6.6.6",
@@ -30,7 +30,7 @@
 		"svelte-motion": "^0.12.2",
 		"svelte-sonner": "^0.3.21",
 		"sveltekit-superforms": "^2.12.2",
-		"tailwind-merge": "^2.2.2",
+		"tailwind-merge": "^2.5.5",
 		"tailwind-variants": "^0.2.1",
 		"zod": "^3.22.4"
 	},
