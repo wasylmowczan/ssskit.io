@@ -1,6 +1,6 @@
 <script>
 	export let color = 'currentColor';
-	export let size = 20;
+	export let size = 24;
 	export let strokeWidth = 2;
 	export let isHovered = false;
 	export let classes = '';

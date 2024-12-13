@@ -16,10 +16,12 @@
 	import { page } from '$app/stores';
 	import HomeIcon from '$lib/components/icons/common/home.svelte';
 	import SettingsIcon from '$lib/components/icons/common/settings.svelte';
+	import GridIcon from '$lib/components/icons/common/grid.svelte';
 	import { Separator } from '$lib/components/ui/separator';
 	import { config } from '$lib/config-client.js';
 	import { Seo } from '$lib/components/modules';
 	import { LanguageSwitcher, ThemeSwitcher } from '$lib/components/modules';
+	import AltAvatar from '$lib/assets/alt-avatar.svg';
 	import Logo from '$lib/components/layouts/LandingLayout/components/Logo.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { languageTag } from '$lib/paraglide/runtime.js';
@@ -39,6 +41,11 @@
 			icon: HomeIcon
 		},
 		{
+			title: 'Gallery',
+			href: '/gallery',
+			icon: GridIcon
+		},
+		{
 			title: m.App_Settings(),
 			href: i18n.route(`${languageTag()}/settings/avatar`),
 			icon: SettingsIcon
@@ -49,7 +56,7 @@
 
 	$: currentAvatarUrl = data.user?.avatar
 		? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
-		: null;
+		: AltAvatar;
 </script>
 
 <Seo
@@ -72,7 +79,7 @@
 							class={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
 						>
 							{#if icon}
-								<svelte:component this={icon} size={20} />
+								<svelte:component this={icon} />
 							{/if}
 							{title}
 						</a>
@@ -83,7 +90,9 @@
 		</div>
 	</div>
 	<div class="flex-1 overflow-x-auto">
-		<header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+		<header
+			class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 lg:sticky lg:top-0"
+		>
 			<Sheet bind:open={menuOpen}>
 				<SheetTrigger asChild let:builder>
 					<Button variant="outline" size="icon" class="shrink-0 md:hidden" builders={[builder]}>

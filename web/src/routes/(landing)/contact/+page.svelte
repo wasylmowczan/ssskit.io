@@ -77,48 +77,46 @@
 </script>
 
 <div class="min-h-screen py-12 flex items-center justify-center">
-	<div class="w-full rounded-lg overflow-hidden">
-		<div class="grid md:grid-cols-2">
-			<div class="p-8 md:p-12 flex flex-col justify-center">
-				<div class="max-w-md mx-auto space-y-8">
-					<div class="space-y-2 text-center">
-						<h1 class="text-3xl font-bold">Contact Us</h1>
-						<p class="text-gray-500 dark:text-gray-400">
-							Please reach out to us and we will get back to you at the speed of light.
-						</p>
+	<div class="grid md:grid-cols-2">
+		<div class="p-8 md:p-12 flex flex-col">
+			<div class="max-w-md mx-auto space-y-8 text-center">
+				<div class="space-y-2">
+					<h1 class="text-3xl font-bold">Contact Us</h1>
+					<p class="text-gray-500 dark:text-gray-400">
+						Please reach out to us and we will get back to you at the speed of light.
+					</p>
+				</div>
+				<div class="space-y-8 pt-8">
+					<div class="space-y-2">
+						<h2 class="text-gray-400">Email</h2>
+						<p>{email}</p>
 					</div>
-					<div class="space-y-8 pt-8 text-center">
-						<div class="space-y-2">
-							<h2 class="text-gray-400">Email</h2>
-							<p>{email}</p>
-						</div>
 
-						<div class="space-y-2">
-							<h2 class="text-gray-400">Phone</h2>
-							<p>{phone}</p>
-						</div>
+					<div class="space-y-2">
+						<h2 class="text-gray-400">Phone</h2>
+						<p>{phone}</p>
+					</div>
 
-						<div class="space-y-2">
-							<h2 class="text-gray-400">Support</h2>
-							<p>{supportEmail}</p>
-						</div>
+					<div class="space-y-2">
+						<h2 class="text-gray-400">Support</h2>
+						<p>{supportEmail}</p>
 					</div>
-					<div class="flex justify-center gap-4">
-						{#each socialMediaLinks as { platform, url, icon }}
-							<a href={url} target="_blank" rel="noopener noreferrer">
-								<svelte:component this={icon} customClass="w-6 h-6" />
-								<span class="sr-only">{platform}</span>
-							</a>
-						{/each}
-					</div>
+				</div>
+				<div class="flex justify-center gap-4">
+					{#each socialMediaLinks as { platform, url, icon }}
+						<a href={url} target="_blank" rel="noopener noreferrer">
+							<svelte:component this={icon} customClass="w-6 h-6" />
+							<span class="sr-only">{platform}</span>
+						</a>
+					{/each}
 				</div>
 			</div>
-			<div class="relative p-12 flex flex-col items-center justify-center">
-				<AnimatedTooltip items={people} />
-				<div class="text-center pt-8">
-					<h2 class="text-2xl font-bold">Every voice matters</h2>
-					<p class="text-gray-500 dark:text-gray-400">We hear our clients, we hear our users.</p>
-				</div>
+		</div>
+		<div class="relative p-12 flex flex-col items-center justify-center">
+			<AnimatedTooltip items={people} />
+			<div class="text-center pt-8">
+				<h2 class="text-2xl font-bold">Every voice matters</h2>
+				<p class="text-gray-500 dark:text-gray-400">We hear our clients, we hear our users.</p>
 			</div>
 		</div>
 	</div>

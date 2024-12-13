@@ -1,43 +1,47 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
-	import { Trash, Lock, User, Mail, Images } from 'lucide-svelte';
 	import * as m from '$lib/paraglide/messages.js';
-	import { languageTag } from '$lib/paraglide/runtime';
 	import { i18n } from '$lib/i18n';
+	import BookImageIcon from '$lib/components/icons/common/book-image.svelte';
+	import MailCheckIcon from '$lib/components/icons/common/mail-check.svelte';
+	import UserRoundPenIcon from '$lib/components/icons/common/user-round-pen.svelte';
+	import KeyboardIcon from '$lib/components/icons/common/keyboard.svelte';
+	import TrashIcon from '$lib/components/icons/common/trash-2.svelte';
+
 	const navigation = [
 		{
 			title: m.App_Settings_Avatar(),
 			href: i18n.route('/settings/avatar'),
-			icon: Images
+			icon: BookImageIcon
 		},
 		{
 			title: m.App_Settings_Email(),
 			href: i18n.route('/settings/email'),
-			icon: Mail
+			icon: MailCheckIcon
 		},
 		{
 			title: m.App_Settings_Username(),
 			href: i18n.route('/settings/username'),
-			icon: User
+			icon: UserRoundPenIcon
 		},
 		{
 			title: m.App_Settings_Password(),
 			href: i18n.route('/settings/password'),
-			icon: Lock
+			icon: KeyboardIcon
 		},
 		{
 			title: m.App_Settings_DeleteAccount(),
 			href: i18n.route('/settings/delete-account'),
-			icon: Trash
+			icon: TrashIcon
 		}
 	];
 </script>
 
 <div
-	class="mx-auto grid w-full items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]"
+	class="mx-auto grid w-full items-start gap-12 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]"
 >
-	<nav class="grid items-start text-sm font-medium">
+	<nav class="grid items-start text-sm font-medium gap-4">
 		{#each navigation as { title, href, icon }}
 			{@const isActive = $page.url.pathname === href}
 
@@ -50,7 +54,7 @@
 			>
 				{#if icon}
 					{@const Icon = icon}
-					<Icon class="h-4 w-4" />
+					<Icon />
 				{/if}
 				{title}
 			</a>

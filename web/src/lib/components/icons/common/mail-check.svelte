@@ -9,11 +9,11 @@
 		isHovered = true;
 		setTimeout(() => {
 			isHovered = false;
-		}, 800);
+		}, 500);
 	}
 </script>
 
-<div class={classes} aria-label="home" role="img" on:mouseenter={handleMouseEnter}>
+<div class={classes} aria-label="mail-check" role="img" on:mouseenter={handleMouseEnter}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width={size}
@@ -24,40 +24,36 @@
 		stroke-width={strokeWidth}
 		stroke-linecap="round"
 		stroke-linejoin="round"
-		class="home-icon"
+		class="mail-check-icon"
 		class:animate={isHovered}
 	>
-		<path
-			d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-		/>
-		<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" class="door" />
+		<path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8" />
+		<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+		<path d="m16 19 2 2 4-4" class="check-path" />
 	</svg>
 </div>
 
 <style>
-	.home-icon {
+	.mail-check-icon {
 		overflow: visible;
 	}
-
-	.door {
-		stroke-dasharray: 22;
+	.check-path {
+		stroke-dasharray: 9;
 		stroke-dashoffset: 0;
 		transition:
-			stroke-dashoffset 0.3s ease,
-			opacity 0.3s ease;
+			stroke-dashoffset 0.125s ease-out,
+			opacity 0.125s ease-out;
 	}
-
-	.home-icon.animate .door {
-		animation: doorAnimation 0.6s ease-out forwards;
+	.mail-check-icon.animate .check-path {
+		animation: checkAnimation 0.5s ease-out backwards;
 	}
-
-	@keyframes doorAnimation {
+	@keyframes checkAnimation {
 		0% {
-			stroke-dashoffset: 22;
+			stroke-dashoffset: 9;
 			opacity: 0;
 		}
-		15% {
-			stroke-dashoffset: 22;
+		33% {
+			stroke-dashoffset: 9;
 			opacity: 0;
 		}
 		100% {

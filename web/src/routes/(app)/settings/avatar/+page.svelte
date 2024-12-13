@@ -4,7 +4,8 @@
 	import { FormControl, FormField } from '$lib/components/ui/form';
 	import { fileProxy, superForm } from 'sveltekit-superforms';
 	import { toast } from 'svelte-sonner';
-	import { Camera, CircleUser, LoaderCircle, Trash } from 'lucide-svelte';
+	import { Camera, LoaderCircle, Trash } from 'lucide-svelte';
+	import AltAvatar from '$lib/assets/alt-avatar.svg';
 	import { zod } from 'sveltekit-superforms/adapters';
 	import CardHeader from '$lib/components/ui/card/card-header.svelte';
 	import CardTitle from '$lib/components/ui/card/card-title.svelte';
@@ -37,6 +38,7 @@
 	});
 
 	const file = fileProxy(form, 'avatar');
+
 	const { form: formData, enhance } = form;
 
 	$: currentAvatarUrl = data.user?.avatar
@@ -84,7 +86,7 @@
 						class="w-full h-full object-cover rounded-full"
 					/>
 				{:else}
-					<CircleUser class="h-full w-full text-current" />
+					<img src={AltAvatar} alt="avatar" />
 				{/if}
 			</div>
 			<div class="flex gap-2">

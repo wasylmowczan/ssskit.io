@@ -18,6 +18,18 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-13',
+			logs: [
+				{
+					type: 'New Feature',
+					items: [
+						'Added functionality to generate AI images from text prompts.',
+						'Refactored user settings pages. '
+					]
+				}
+			]
+		},
+		{
 			date: '2024-12-10',
 			logs: [
 				{
