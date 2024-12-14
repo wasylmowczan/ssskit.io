@@ -17,6 +17,7 @@
 	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { Seo } from '$lib/components/modules';
 	import { config } from '$lib/config-client';
+	import { EyeOff, Eye } from 'lucide-svelte';
 
 	let loading = false;
 	let showVerificationPrompt = false;
@@ -40,6 +41,12 @@
 			}
 		}
 	});
+
+	let showPassword = false;
+
+	function togglePasswordVisibility() {
+		showPassword = !showPassword;
+	}
 
 	const { form: formData, enhance } = form;
 </script>
@@ -77,13 +84,35 @@
 					<FormField {form} name="password">
 						<FormControl let:attrs>
 							<FormLabel>{m.Login_Password()}</FormLabel>
-							<Input {...attrs} bind:value={$formData.password} type="password" />
+							<div class="relative">
+								<Input
+									{...attrs}
+									bind:value={$formData.password}
+									type={showPassword ? 'text' : 'password'}
+								/>
+								<Button
+									type="button"
+									variant="ghost"
+									size="icon"
+									class="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+									on:click={togglePasswordVisibility}
+								>
+									{#if showPassword}
+										<EyeOff class="h-4 w-4" />
+									{:else}
+										<Eye class="h-4 w-4" />
+									{/if}
+									<span class="sr-only">
+										{showPassword ? 'Hide password' : 'Show password'}
+									</span>
+								</Button>
+							</div>
 						</FormControl>
 						<FormFieldErrors />
 						<div class="flex flex-col">
-							<a href="/forgot-password" class="text-sm text-muted-foreground underline"
-								>{m.Login_ForgotPassword()}</a
-							>
+							<a href="/forgot-password" class="text-sm text-muted-foreground underline">
+								{m.Login_ForgotPassword()}
+							</a>
 						</div>
 					</FormField>
 				</div>

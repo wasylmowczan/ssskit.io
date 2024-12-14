@@ -36,7 +36,7 @@
 			<!-- 1 column -->
 			<div class="space-y-8">
 				<Logo />
-				<p class="text-gray-500 dark:text-gray-400 text-base">Unlock Your Creative Vision</p>
+				<p class="text-gray-500 dark:text-gray-400 text-base">{m.LP_Footer_Slogan()}</p>
 				<div class="flex space-x-6">
 					{#each socialLinks as { name, href, icon }}
 						<a {href} class="text-gray-400 hover:text-gray-500" target="_blank">
@@ -48,7 +48,9 @@
 			</div>
 			<!-- 2 column -->
 			<div>
-				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Product</h3>
+				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+					{m.LP_Footer_Product()}
+				</h3>
 				<ul class="mt-4 space-y-4">
 					{#each menuItems as { name, href }}
 						<li>
@@ -64,7 +66,9 @@
 			</div>
 			<!-- 3 column -->
 			<div>
-				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+					{m.LP_Footer_Legal()}
+				</h3>
 				<ul class="mt-4 space-y-4">
 					{#each legal as { name, href }}
 						<li>
@@ -80,7 +84,9 @@
 			</div>
 			<!-- 4 column -->
 			<div>
-				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Other</h3>
+				<h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+					{m.LP_Footer_Other()}
+				</h3>
 				<ul class="mt-4 space-y-4">
 					{#each other as { name, href }}
 						<li>
@@ -100,7 +106,7 @@
 	<div class="mb-8 border-t border-gray-200 pt-8">
 		<p class="text-base text-gray-400 text-center">
 			&copy; {new Date().getFullYear()}
-			{config.appName}. All rights reserved.
+			{config.appName}. {m.LP_Footer_Rights()}
 		</p>
 	</div>
 </footer>

@@ -2,6 +2,7 @@
 	import { config } from '$lib/config-client';
 	import { Download } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
+	import * as HoverCard from '$lib/components/ui/hover-card';
 	import { onMount } from 'svelte';
 
 	export let data;
@@ -29,11 +30,12 @@
 	{#each urls as url, index}
 		<div class="flex flex-col p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow">
 			<div class="mb-2 flex flex-col items-center justify-center">
-				<p class="text-neutral-500 text-lg max-w-sm mt-2 dark:text-neutral-300 truncate">
-					"{prompts[index]}"
-				</p>
+				<HoverCard.Root>
+					<HoverCard.Trigger class="max-w-full truncate">"{prompts[index]}"</HoverCard.Trigger>
+					<HoverCard.Content>"{prompts[index]}"</HoverCard.Content>
+				</HoverCard.Root>
 			</div>
-			<img src={url} alt={prompts[index]} class="w-full aspect-square rounded-lg" />
+			<img src={url} alt={prompts[index]} class="w-full aspect-auto rounded-lg shadow-xl" />
 			<div class="mt-2 flex items-center justify-center">
 				<Button
 					variant="outline"

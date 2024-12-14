@@ -5,6 +5,6 @@ import { languageTag } from '$lib/paraglide/runtime';
 
 export const load: LayoutServerLoad = ({ locals }) => {
 	if (locals.pb.authStore.isValid) {
-		redirect(303, i18n.route(`${languageTag()}/images`));
+		redirect(303, i18n.route(`${languageTag()}/dashboard`));
 	}
 };

@@ -2,6 +2,7 @@
 	import { TextGenerateEffect } from '$lib/components/aceternityui/TextGenerateEffect';
 	import { CardBody, CardContainer, CardItem } from '$lib/components/aceternityui/ThreeDCardEffect';
 	import { Button } from '$lib/components/ui/button';
+	import * as HoverCard from '$lib/components/ui/hover-card';
 	import { Input } from '$lib/components/ui/input';
 	import ToggleConfetti from '$lib/components/modules/Confetti/ToggleConfetti.svelte';
 	import { Confetti } from 'svelte-confetti';
@@ -12,13 +13,14 @@
 	import { writable } from 'svelte/store';
 	import { Jumper } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
-	const words = `Generate images with your prompt`;
+	const words = m.App_Dashboard_Title();
 	const cards = [
 		{
 			image:
 				'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto.format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-			prompt: '"Forest with a river"'
+			prompt: m.App_Dashboard_Example_Prompt()
 		}
 	];
 
@@ -27,11 +29,15 @@
 	let lastGeneratedImages: string | any[] = [];
 
 	async function fetchImages() {
-		const images = await data.images;
-		lastGeneratedImages = images.slice(0, 3).map((image) => ({
-			url: `${config.pbUrl}/api/files/images/${image.id}/${image.image}?thumb=100x300f`,
-			prompt: image.prompt
-		}));
+		const images = (await data.images) || [];
+		try {
+			lastGeneratedImages = images.slice(0, 3).map((image) => ({
+				url: `${config.pbUrl}/api/files/images/${image.id}/${image.image}?thumb=100x300f`,
+				prompt: image.prompt
+			}));
+		} catch (error) {
+			console.error('Error processing images:', error);
+		}
 	}
 
 	const loading = writable(false);
@@ -49,7 +55,7 @@
 	}
 
 	onMount(() => {
-		fetchImages();
+		fetchImages().catch((error) => console.error('Error fetching images:', error));
 	});
 </script>
 
@@ -68,18 +74,18 @@
 							translateZ="50"
 							className="text-xl font-bold text-neutral-600 dark:text-white text-center justify-center"
 						>
-							Try this prompt to get started
+							{m.App_Dashboard_Example_Title()}
 						</CardItem>
 						<CardItem
 							{isMouseEntered}
 							translateZ="60"
 							className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
 						>
-							Forest with many trees and green grass
+							{card.prompt}
 						</CardItem>
 						<CardItem {isMouseEntered} translateZ="100" className="w-full mt-4">
 							<img
-								src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+								src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto.format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 								height="1000"
 								width="1000"
 								class="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
@@ -90,9 +96,9 @@
 							<CardItem
 								{isMouseEntered}
 								translateZ={20}
-								className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+								className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white flex items-center gap-2"
 							>
-								Try now →
+								{m.App_Dashboard_Example_Button()}
 							</CardItem>
 						</div>
 					</CardBody>
@@ -102,6 +108,7 @@
 
 		<div class="col-span-3 flex flex-col items-center">
 			<form
+				id="userInput"
 				class="flex flex-col md:flex-row gap-4 w-full md:w-1/2"
 				method="POST"
 				action="?/new"
@@ -116,12 +123,12 @@
 					bind:value={userInput}
 					name="prompt"
 					type="text"
-					placeholder="e.g. A cat in a hat"
+					placeholder={m.App_Dashboard_Input_Placeholder()}
 					class="flex-1 shadow-lg"
 				/>
 				<ToggleConfetti>
 					<Button size="lg" class="text-lg shadow-lg" slot="label" type="submit"
-						>Generate <span class="ml-4">→</span></Button
+						>{m.App_Dashboard_Generate()} <span class="ml-4">→</span></Button
 					>
 					<Confetti
 						y={[-0.8, 0.8]}
@@ -140,20 +147,23 @@
 					<Jumper size="60" color="#080808" unit="px" duration="1s" />
 				</div>
 			{:else if lastGeneratedImages.length > 0}
-				<h2 class="text-2xl font-bold mb-4 pt-20">Last generated Images:</h2>
-				<div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 pb-4">
+				<h2 class="text-2xl font-bold mb-4 pt-20">{m.App_Dashboard_Images_Title()}</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
 					{#each lastGeneratedImages as { url, prompt }}
-						<div class="mt-4">
-							<p class="text-neutral-500 text-lg max-w-sm mt-2 dark:text-neutral-300 truncate">
-								"{prompt}"
-							</p>
+						<div class="mb-2 flex flex-col items-center justify-center max-w-sm">
+							<HoverCard.Root>
+								<HoverCard.Trigger class="w-1/2 truncate">"{prompt}"</HoverCard.Trigger>
+								<HoverCard.Content>"{prompt}"</HoverCard.Content>
+							</HoverCard.Root>
 							<img
 								src={url}
-								class="h-96 w-full rounded-xl object-cover shadow-xl"
+								class="w-1/2 aspect-auto rounded-xl object-cover shadow-xl"
 								alt="Last Generated Image: {prompt}"
 							/>
 							<div class="flex flex-row justify-center items-center gap-12 pt-2">
-								<a href={url} download target="_blank"><Eye class="text-neutral-500" /></a>
+								<a href={url} download target="_blank"
+									><Eye class="text-neutral-500 hover:text-black" /></a
+								>
 								<a
 									href={url.replace('?thumb=100x300f', '?download=1')}
 									download={prompt + '.png'}

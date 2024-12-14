@@ -34,17 +34,20 @@
 		goto(`/${languageTag()}`);
 	}
 
-	const navigation = [
+	const topNavigation = [
 		{
-			title: m.App_Images(),
-			href: i18n.route(`${languageTag()}/images`),
+			title: m.App_Dashboard(),
+			href: i18n.route(`${languageTag()}/dashboard`),
 			icon: HomeIcon
 		},
 		{
-			title: 'Gallery',
-			href: '/gallery',
+			title: m.App_Gallery(),
+			href: i18n.route(`${languageTag()}/gallery`),
 			icon: GridIcon
-		},
+		}
+	];
+
+	const bottomNavigation = [
 		{
 			title: m.App_Settings(),
 			href: i18n.route(`${languageTag()}/settings/avatar`),
@@ -73,7 +76,7 @@
 			</div>
 			<div class="flex-1">
 				<nav class="grid items-start px-2 gap-2 text-sm font-medium lg:px-4">
-					{#each navigation as { title, href, icon }}
+					{#each topNavigation as { title, href, icon }}
 						<a
 							{href}
 							class={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
@@ -87,6 +90,21 @@
 				</nav>
 			</div>
 			<!-- Side down menu -->
+			<div class="flex flex-col pb-4">
+				<nav class="grid items-end px-2 gap-2 text-sm font-medium lg:px-4">
+					{#each bottomNavigation as { title, href, icon }}
+						<a
+							{href}
+							class={`flex items-end gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
+						>
+							{#if icon}
+								<svelte:component this={icon} />
+							{/if}
+							{title}
+						</a>
+					{/each}
+				</nav>
+			</div>
 		</div>
 	</div>
 	<div class="flex-1 overflow-x-auto">
@@ -103,7 +121,7 @@
 					<nav class="grid gap-2 text-lg font-medium">
 						<Logo />
 						<Separator />
-						{#each navigation as { title, href, icon }}
+						{#each topNavigation as { title, href, icon }}
 							<a
 								on:click={() => (menuOpen = false)}
 								{href}
@@ -116,6 +134,21 @@
 							</a>
 						{/each}
 					</nav>
+					<Separator />
+					<div class="mt-auto">
+						{#each bottomNavigation as { title, href, icon }}
+							<a
+								{href}
+								class={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-foreground'}`}
+								on:click={() => (menuOpen = false)}
+							>
+								{#if icon}
+									<svelte:component this={icon} size={20} />
+								{/if}
+								{title}
+							</a>
+						{/each}
+					</div>
 				</SheetContent>
 			</Sheet>
 			<div class="w-full flex-1" />
@@ -142,7 +175,7 @@
 					</DropdownMenuLabel>
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
-						<a href={navigation[1].href} class="block">
+						<a href={bottomNavigation[0].href} class="block">
 							<DropdownMenuItem>{m.App_Settings()}</DropdownMenuItem>
 						</a>
 					</DropdownMenuGroup>

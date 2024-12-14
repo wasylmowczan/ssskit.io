@@ -3,8 +3,20 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { Seo } from '$lib/components/modules';
 	import { config } from '$lib/config-client';
+	import * as m from '$lib/paraglide/messages.js';
 
-	type LogType = 'New Feature' | 'Maintenance' | 'Bugs' | 'Start' | 'Improvement';
+	enum LogType {
+		// @ts-ignore
+		NewFeature = m.LP_Changelog_NewFeature(),
+		// @ts-ignore
+		Maintenance = m.LP_Changelog_Maintenance(),
+		// @ts-ignore
+		Bugs = m.LP_Changelog_Bugs(),
+		// @ts-ignore
+		Start = m.LP_Changelog_Start(),
+		// @ts-ignore
+		Improvement = m.LP_Changelog_Improvement()
+	}
 
 	interface Log {
 		type: LogType;
@@ -18,10 +30,27 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-14',
+			logs: [
+				{
+					type: LogType.Improvement,
+					items: ['Refactored Roadmap page.', 'Added Dashboard page as default page.']
+				},
+				{
+					type: LogType.NewFeature,
+					items: ['Added Gallery page.']
+				},
+				{
+					type: LogType.Maintenance,
+					items: ['Added rest of translations.']
+				}
+			]
+		},
+		{
 			date: '2024-12-13',
 			logs: [
 				{
-					type: 'New Feature',
+					type: LogType.NewFeature,
 					items: [
 						'Added functionality to generate AI images from text prompts.',
 						'Refactored user settings pages. '
@@ -33,7 +62,7 @@
 			date: '2024-12-10',
 			logs: [
 				{
-					type: 'New Feature',
+					type: LogType.NewFeature,
 					items: ['Added Contact page to the app.']
 				}
 			]
@@ -42,7 +71,7 @@
 			date: '2024-12-08',
 			logs: [
 				{
-					type: 'New Feature',
+					type: LogType.NewFeature,
 					items: [
 						'Added Coming Soon page to the app.',
 						'Added sitemap.xml to the app to improve SEO.'
@@ -54,7 +83,7 @@
 			date: '2024-12-06',
 			logs: [
 				{
-					type: 'New Feature',
+					type: LogType.NewFeature,
 					items: ['Added View Transitions to the app to improve the theme switching experience.']
 				}
 			]
@@ -63,7 +92,7 @@
 			date: '2024-12-03',
 			logs: [
 				{
-					type: 'New Feature',
+					type: LogType.NewFeature,
 					items: [
 						'Added possibility to download app brand assets by right-clicking on the logo.',
 						'Added initial version of i18n support for the app.'
@@ -75,7 +104,7 @@
 			date: '2024-11-26',
 			logs: [
 				{
-					type: 'New Feature',
+					type: LogType.NewFeature,
 					items: [
 						'Initial release of the starter kit with PocketBase backend, landing page, user authentication.'
 					]
@@ -92,18 +121,20 @@
 		const diffMonths = Math.floor(diffDays / 30);
 		const diffYears = Math.floor(diffDays / 365);
 
-		if (diffYears > 0) return `${diffYears} year${diffYears > 1 ? 's' : ''} ago`;
-		if (diffMonths > 0) return `${diffMonths} month${diffMonths > 1 ? 's' : ''} ago`;
-		if (diffDays > 0) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
-		return 'Today';
+		if (diffYears > 0)
+			return `${diffYears} year${diffYears > 1 ? 's' : ''} ${m.LP_Changelog_Ago()}`;
+		if (diffMonths > 0)
+			return `${diffMonths} month${diffMonths > 1 ? 's' : ''} ${m.LP_Changelog_Ago()}`;
+		if (diffDays > 0) return `${diffDays} day${diffDays > 1 ? 's' : ''} ${m.LP_Changelog_Ago()}`;
+		return m.LP_Changelog_Today();
 	}
 
 	const logTypeIcons: Record<LogType, string> = {
-		'New Feature': '🔥',
-		Maintenance: '🔧',
-		Bugs: '🐛',
-		Start: '📄',
-		Improvement: '🔨'
+		[LogType.NewFeature]: '🔥',
+		[LogType.Maintenance]: '🔧',
+		[LogType.Bugs]: '🐛',
+		[LogType.Start]: '📄',
+		[LogType.Improvement]: '🔨'
 	};
 
 	function getLogTypeIcon(type: LogType) {
@@ -119,15 +150,15 @@
 
 <section class="mb-12 p-6">
 	<div class="container relative mx-auto overflow-hidden py-8 h-full max-w-3xl">
-		<h1 class="mb-8 text-3xl font-bold text-center">Changelog</h1>
+		<h1 class="mb-8 text-3xl font-bold text-center">{m.LP_Changelog_Title()}</h1>
 		{#each changelog as entry}
 			<Card class="mb-8 border border-gray-700/70 bg-background">
 				<CardHeader>
 					<CardTitle class="flex items-center gap-2">
 						<Badge variant="outline">
-							{new Date(entry.date).toLocaleDateString('en-US', {
+							{new Date(entry.date).toLocaleDateString('pl-PL', {
 								year: 'numeric',
-								month: 'long',
+								month: 'numeric',
 								day: 'numeric'
 							})}
 						</Badge>

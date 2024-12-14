@@ -76,7 +76,7 @@
 	];
 </script>
 
-<div class="min-h-screen py-12 flex items-center justify-center">
+<div class="py-12 flex items-center justify-center">
 	<div class="grid md:grid-cols-2">
 		<div class="p-8 md:p-12 flex flex-col">
 			<div class="max-w-md mx-auto space-y-8 text-center">

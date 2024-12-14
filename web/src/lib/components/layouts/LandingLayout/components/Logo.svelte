@@ -3,10 +3,12 @@
 	import { cn } from '$lib/utils';
 	import { mode } from 'mode-watcher';
 	import MediaKit from './MediaKit.svelte';
+	import { i18n } from '$lib/i18n';
+	import { languageTag } from '$lib/paraglide/runtime';
 </script>
 
 <!-- If you want to use logo as text, uncomment the following code and comment the previous code -->
-<!-- <MediaKit>
+<MediaKit>
 	<div class="flex items-center gap-4">
 		<div
 			role="img"
@@ -20,24 +22,24 @@
 				'[&_*]:mt-[-1px] [&_*]:leading-[0.85]'
 			)}
 		>
-			<a href="/">
+			<a href={i18n.route(`${languageTag()}/dashboard`)}>
 				<span>AI</span>
 			</a>
 		</div>
-		<a href="/">
+		<a href={i18n.route(`${languageTag()}/dashboard`)}>
 			<span class="text-lg font-bold">{config.appName}</span>
 		</a>
 	</div>
-</MediaKit> -->
+</MediaKit>
 
 <!-- If you want to use logo as image, uncomment the following code and comment the previous code -->
 
-<MediaKit>
-	<a href="/" class="flex items-center gap-2">
+<!-- <MediaKit>
+	<a href={i18n.route(`${languageTag()}/dashboard`)} class="flex items-center gap-2">
 		{#if $mode === 'dark'}
 			<img src="/logo.svg" alt="Logo" class="w-32 h-24" style="filter: invert(100%);" />
 		{:else}
 			<img src="/logo.svg" alt="Logo" class="w-32 h-24" />
 		{/if}
 	</a>
-</MediaKit>
+</MediaKit> -->

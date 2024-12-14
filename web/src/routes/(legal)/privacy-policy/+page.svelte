@@ -1,9 +1,11 @@
 <script>
 	import { Seo } from '$lib/components/modules';
 	import { config } from '$lib/config-client';
+	import * as m from '$lib/paraglide/messages.js';
+
 	const lastUpdated = new Date(2024, 11, 31).toLocaleDateString('en-US', {
 		year: 'numeric',
-		month: 'long',
+		month: 'numeric',
 		day: 'numeric'
 	}); // TODO: update last updated date
 </script>
@@ -15,72 +17,59 @@
 />
 
 <section class="mb-12 p-6">
-	<h2 class="text-2xl font-semibold mb-4 text-center">Privacy Policy 🔒</h2>
+	<h2 class="text-2xl font-semibold mb-4 text-center">{m.LP_PP_Title()}</h2>
 	<div class="space-y-4">
 		<div>
-			<h3 class="text-xl font-medium">Information Collection</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_InformationCollection()}</h3>
 			<p class="text-muted-foreground">
-				We collect information you provide directly to us, such as when you create an account,
-				generate images using our AI model, or contact us for support. This may include your name,
-				email address, and the content of your image generation requests.
+				{m.LP_PP_InformationCollection_Description()}
 			</p>
 		</div>
 		<div>
-			<h3 class="text-xl font-medium">Use of Information</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_InformationUse()}</h3>
 			<p class="text-muted-foreground">
-				We use the information we collect to provide, maintain, and improve our services, including:
+				{m.LP_PP_InformationUse_Description()}
 			</p>
 			<ul class="list-disc list-inside mt-2">
-				We use the information we collect for various purposes, including to process and generate
-				images, improve our AI model, communicate with you, and enhance your overall experience.
+				{m.LP_PP_InformationUse_Description()}
 			</ul>
 		</div>
 		<div>
-			<h3 class="text-xl font-medium">Information Sharing</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_InformationSharing()}</h3>
 			<p class="text-muted-foreground">
-				We do not sell or share your personal information with third parties except as described in
-				this policy or with your consent. We may share anonymized, aggregated data for analytical
-				purposes.
+				{m.LP_PP_InformationSharing_Description()}
 			</p>
 		</div>
 		<div>
-			<h3 class="text-xl font-medium">Data Security</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_InformationSecurity()}</h3>
 			<p class="text-muted-foreground">
-				We implement reasonable security measures to protect the security of your personal
-				information, including the encryption of sensitive data and regular security audits.
+				{m.LP_PP_InformationSecurity_Description()}
 			</p>
 		</div>
 		<div>
-			<h3 class="text-xl font-medium">Your Rights</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_YourRights()}</h3>
 			<p class="text-muted-foreground">
-				Depending on your location, you may have certain rights regarding your personal information,
-				such as the right to access, correct, or delete your data. You can exercise these rights by
-				contacting us through our support channels.
+				{m.LP_PP_YourRights_Description()}
 			</p>
 		</div>
 		<div>
-			<h3 class="text-xl font-medium">Cookies</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_Cookies()}</h3>
 			<p class="text-muted-foreground">
-				We use cookies and similar tracking technologies to track activity on our service and hold
-				certain information. You can control cookies through your browser settings.
+				{m.LP_PP_Cookies_Description()}
 			</p>
 		</div>
 		<div>
-			<h3 class="text-xl font-medium">Third-Party Services</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_ThirdPartyServices()}</h3>
 			<p class="text-muted-foreground">
-				We may employ third-party companies and individuals to facilitate our service, including for
-				hosting, analytics, and AI model training. These third parties have access to your personal
-				information only to perform specific tasks on our behalf and are obligated not to disclose
-				or use it for any other purpose.
+				{m.LP_PP_ThirdPartyServices_Description()}
 			</p>
 		</div>
 		<div>
-			<h3 class="text-xl font-medium">Changes to This Policy</h3>
+			<h3 class="text-xl font-medium">{m.LP_PP_Changes()}</h3>
 			<p class="text-muted-foreground">
-				We may update this privacy policy from time to time. We will notify you of any changes by
-				posting the new privacy policy on this page and updating the "Last updated" date.
+				{m.LP_PP_Changes_Description()}
 			</p>
 		</div>
 	</div>
-	<p class="mt-4 text-sm text-muted-foreground font-bold">Last updated: {lastUpdated}</p>
+	<p class="mt-4 text-sm text-muted-foreground font-bold">{m.LP_LastUpdated()}: {lastUpdated}</p>
 </section>

@@ -23,7 +23,7 @@ export const load = async ({ locals }) => {
 
 export const actions: Actions = {
 	new: async ({ request, locals }) => {
-		// call the Stability AI endpoint and generate the imag
+		// call the Stability AI endpoint and generate the image
 		const formData = await request.formData();
 		const prompt = formData.get('prompt');
 
@@ -51,8 +51,8 @@ export const actions: Actions = {
 				cfg_scale: 10,
 				clip_guidance_preset: 'FAST_BLUE',
 				sampler: 'DDIM',
-				height: 1024,
-				width: 1024,
+				height: 1216,
+				width: 832,
 				steps: 50,
 				samples: 1
 			})

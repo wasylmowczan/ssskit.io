@@ -2,6 +2,7 @@
 	import { ArrowLeft } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { LandingLayout } from '$lib/components/layouts';
+	import * as m from '$lib/paraglide/messages.js';
 </script>
 
 <LandingLayout>
@@ -12,7 +13,7 @@
 				<div class="mb-6">
 					<Button variant="secondary" href="/" class="flex items-center">
 						<ArrowLeft class="mr-2 h-4 w-4" />
-						Back to Home
+						{m.LP_BackToHome()}
 					</Button>
 				</div>
 			</div>
