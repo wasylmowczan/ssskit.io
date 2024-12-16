@@ -1,11 +1,15 @@
 import { config } from '$lib/config-server';
+import { promptSchema } from '$lib/schemas';
 import { error, redirect, type Actions } from '@sveltejs/kit';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
+import type { PageServerLoad } from './$types';
 
 import PocketBase from 'pocketbase';
 
 const pb = new PocketBase(config.pocketbaseUrl);
 
-export const load = async ({ locals }) => {
+export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/login');
 	}
@@ -17,7 +21,8 @@ export const load = async ({ locals }) => {
 		})) || [];
 
 	return {
-		images
+		images,
+		form: await superValidate(zod(promptSchema))
 	};
 };
 

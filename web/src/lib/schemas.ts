@@ -79,3 +79,7 @@ export const DeleteUserSchema = z.object({
 export const emailSchema = z.object({
 	email: z.string().email('Invalid email address')
 });
+
+export const promptSchema = z.object({
+	prompt: z.string().min(3, { message: 'Prompt must be at least 3 characters' })
+});

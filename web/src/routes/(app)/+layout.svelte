@@ -114,13 +114,11 @@
 			class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 lg:sticky lg:top-0"
 		>
 			<Sheet bind:open={menuOpen}>
-				<SheetTrigger asChild >
-					{#snippet children({ builder })}
-										<Button variant="outline" size="icon" class="shrink-0 md:hidden" builders={[builder]}>
-							<Menu class="h-5 w-5" />
-						</Button>
-														{/snippet}
-								</SheetTrigger>
+				<SheetTrigger asChild>
+					<Button variant="outline" size="icon" class="shrink-0 md:hidden" on:click={() => (menuOpen = true)}>
+						<Menu class="h-5 w-5" />
+					</Button>
+				</SheetTrigger>
 				<SheetContent side="left" class="flex flex-col">
 					<nav class="grid gap-2 text-lg font-medium">
 						<Logo />
@@ -160,20 +158,18 @@
 			<div class="w-full flex-1"></div>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild >
-					{#snippet children({ builder })}
-										<Button builders={[builder]} variant="secondary" size="icon" class="rounded-full">
-							{#if currentAvatarUrl}
-								<img
-									src={currentAvatarUrl}
-									alt="Avatar"
-									class="w-full h-full object-cover rounded-full"
-								/>
-							{:else}
-								<CircleUser class="h-full w-full" />
-							{/if}
-						</Button>
-														{/snippet}
-								</DropdownMenuTrigger>
+					<Button variant="secondary" size="icon" class="rounded-full">
+						{#if currentAvatarUrl}
+							<img
+								src={currentAvatarUrl}
+								alt="Avatar"
+								class="w-full h-full object-cover rounded-full"
+							/>
+						{:else}
+							<CircleUser class="h-full w-full" />
+						{/if}
+					</Button>
+				</DropdownMenuTrigger>
 				<DropdownMenuContent class="w-56" align="end">
 					<DropdownMenuLabel class="font-normal">
 						<div class="flex flex-col space-y-1">

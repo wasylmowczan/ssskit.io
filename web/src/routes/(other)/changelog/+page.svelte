@@ -25,6 +25,19 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-16',
+			logs: [
+				{
+					type: LogType.Improvement,
+					items: [
+						'Migrated to Svelte from v4 to v5.',
+						'Migrated Shadcn-UI and with Formsnap to v5.',
+						'Updated Dashboard Page.'
+					]
+				}
+			]
+		},
+		{
 			date: '2024-12-14',
 			logs: [
 				{

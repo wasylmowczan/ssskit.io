@@ -18,6 +18,7 @@
 		"@sveltejs/kit": "^2.11.1",
 		"embla-carousel-svelte": "^8.0.0",
 		"faker": "^6.6.6",
+		"lucide": "^0.468.0",
 		"pocketbase": "^0.21.1",
 		"stripe": "^16.8.0",
 		"svelte": "^5.14.0",

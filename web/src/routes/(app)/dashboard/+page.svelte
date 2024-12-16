@@ -1,186 +1,91 @@
 <script lang="ts">
-	import { preventDefault } from 'svelte/legacy';
+	// import { Sparkles, Zap, Paw, Heart } from "lucide-svelte";
+	import { fade } from "svelte/transition";
+	import { Button } from "$lib/components/ui/button";
+	import { Input } from "$lib/components/ui/input";
+	import { Card, CardContent } from "$lib/components/ui/card";
+	import { FormControl, FormField } from '$lib/components/ui/form';
+	import FormLabel from '$lib/components/ui/form/form-label.svelte';
+	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
+	import { LoaderCircle } from 'lucide-svelte';
+	import { Label } from "$lib/components/ui/label";
+	import { Textarea } from "$lib/components/ui/textarea";
+	import { Select, SelectContent, SelectItem, SelectTrigger } from "$lib/components/ui/select";
+	import ExamplePrompts from "./ExamplePrompts.svelte";
+	import type { PageData } from './$types';
+	import { zod } from 'sveltekit-superforms/adapters';
+	import { promptSchema } from '$lib/schemas.js';
+	import { superForm } from 'sveltekit-superforms';
 
-	import { TextGenerateEffect } from '$lib/components/aceternityui/TextGenerateEffect';
-	import { CardBody, CardContainer, CardItem } from '$lib/components/aceternityui/ThreeDCardEffect';
-	import { Button } from '$lib/components/ui/button';
-	import * as HoverCard from '$lib/components/ui/hover-card';
-	import { Input } from '$lib/components/ui/input';
-	import ToggleConfetti from '$lib/components/modules/Confetti/ToggleConfetti.svelte';
-	import { Confetti } from 'svelte-confetti';
-	import { Download } from 'lucide-svelte';
-	import { Eye } from 'lucide-svelte';
-	import { enhance } from '$app/forms';
-	import { config } from '$lib/config-client.js';
-	import { writable } from 'svelte/store';
-	import { Jumper } from 'svelte-loading-spinners';
-	import { onMount } from 'svelte';
-	import * as m from '$lib/paraglide/messages.js';
+	let { data }: Props = $props();
 
-	const words = m.App_Dashboard_Title();
-	const cards = [
-		{
-			image:
-				'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto.format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-			prompt: m.App_Dashboard_Example_Prompt()
+	interface Props {
+		data: PageData;
+	}
+	
+	let loading = $state(false);
+
+	const form = superForm(data.form, {
+		validators: zod(promptSchema),
+		onSubmit: () => {
+			loading = true;
+		},
+		onResult: async ({ result }) => {
+			loading = false;
+			isGenerated = true;
 		}
+	});
+
+	// State to track if image was generated
+	let isGenerated = $state(false);
+	// Input values for the form
+	let prompt = $state("");
+
+	// Example prompts data
+	const prompts = [
+		{ text: "Cute Spiderman on a bike", color: "text-pink-100" },
+		{ text: "Cute ninja karate", color: "text-green-500" },
+		{ text: "Symmetrical Mandala art, diamonds design", color: "text-yellow-500" },
+		{ text: "Dinosaur riding a bike", color: "text-blue-500" },
 	];
 
-	let { data } = $props();
-
-	let lastGeneratedImages: string | any[] = $state([]);
-
-	async function fetchImages() {
-		const images = (await data.images) || [];
-		try {
-			lastGeneratedImages = images.slice(0, 3).map((image) => ({
-				url: `${config.pbUrl}/api/files/images/${image.id}/${image.image}?thumb=100x300f`,
-				prompt: image.prompt
-			}));
-		} catch (error) {
-			console.error('Error processing images:', error);
-		}
-	}
-
-	const loading = writable(false);
-	let userInput = $state('');
-	let isMouseEntered = $state(false);
-
-	function handleSubmit() {
-		loading.set(true);
-	}
-
-	function handleReset() {
-		loading.set(false);
-		userInput = '';
-		fetchImages();
-	}
-
-	onMount(() => {
-		fetchImages().catch((error) => console.error('Error fetching images:', error));
-	});
+	const { form: formData, enhance } = form;
 </script>
 
-<div class="grid grid-cols-3 gap-4">
-	<div class="col-span-3 text-center">
-		<TextGenerateEffect {words} />
-
-		<div class="col-span-3 flex flex-wrap justify-center md:flex-nowrap md:flex-row">
-			{#each cards as card}
-				<CardContainer bind:isMouseEntered className="inter-var">
-					<CardBody
-						className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  "
-					>
-						<CardItem
-							{isMouseEntered}
-							translateZ="50"
-							className="text-xl font-bold text-neutral-600 dark:text-white text-center justify-center"
-						>
-							{m.App_Dashboard_Example_Title()}
-						</CardItem>
-						<CardItem
-							{isMouseEntered}
-							translateZ="60"
-							className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-						>
-							{card.prompt}
-						</CardItem>
-						<CardItem {isMouseEntered} translateZ="100" className="w-full mt-4">
-							<img
-								src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto.format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-								height="1000"
-								width="1000"
-								class="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
-								alt="thumbnail"
-							/>
-						</CardItem>
-						<div class="mt-2 flex items-center justify-between">
-							<CardItem
-								{isMouseEntered}
-								translateZ={20}
-								className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white flex items-center gap-2"
-							>
-								{m.App_Dashboard_Example_Button()}
-							</CardItem>
-						</div>
-					</CardBody>
-				</CardContainer>
-			{/each}
+<main class="w-full bg-background text-foreground p-4 md:p-8">
+	<div class="max-w-4xl mx-auto space-y-8">
+		<!-- Header -->
+		<div class="text-center space-y-4">
+			<h1 class="text-3xl md:text-4xl font-bold">Generate personalised colouring page</h1>
+			<p class="text-muted-foreground">Try one of these prompts to get started</p>
 		</div>
 
-		<div class="col-span-3 flex flex-col items-center">
-			<form
-				id="userInput"
-				class="flex flex-col md:flex-row gap-4 w-full md:w-1/2"
-				method="POST"
-				action="?/new"
-				use:enhance
-				onsubmit={preventDefault(handleSubmit)}
-				onreset={preventDefault(() => {
-					handleReset();
-					window.location.reload();
-				})}
-			>
-				<Input
-					bind:value={userInput}
-					name="prompt"
-					type="text"
-					placeholder={m.App_Dashboard_Input_Placeholder()}
-					class="flex-1 shadow-lg"
-				/>
-				<ToggleConfetti>
-					{#snippet label()}
-										<Button size="lg" class="text-lg shadow-lg"  type="submit"
-							>{m.App_Dashboard_Generate()} <span class="ml-4">→</span></Button
-						>
-									{/snippet}
-					<Confetti
-						y={[-0.8, 0.8]}
-						x={[-0.8, 0.8]}
-						colorRange={[20, 80]}
-						amount={100}
-						fallDistance="0px"
-						duration={2000}
-						size={6}
-					/>
-				</ToggleConfetti>
-			</form>
-
-			{#if $loading}
-				<div class="flex justify-center items-center pt-20">
-					<Jumper size="60" color="#080808" unit="px" duration="1s" />
-				</div>
-			{:else if lastGeneratedImages.length > 0}
-				<h2 class="text-2xl font-bold mb-4 pt-20">{m.App_Dashboard_Images_Title()}</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
-					{#each lastGeneratedImages as { url, prompt }}
-						<div class="mb-2 flex flex-col items-center justify-center max-w-sm">
-							<HoverCard.Root>
-								<HoverCard.Trigger class="w-1/2 truncate">"{prompt}"</HoverCard.Trigger>
-								<HoverCard.Content>"{prompt}"</HoverCard.Content>
-							</HoverCard.Root>
-							<img
-								src={url}
-								class="w-1/2 aspect-auto rounded-xl object-cover shadow-xl"
-								alt="Last Generated Image: {prompt}"
-							/>
-							<div class="flex flex-row justify-center items-center gap-12 pt-2">
-								<a href={url} download target="_blank"
-									><Eye class="text-neutral-500 hover:text-black" /></a
-								>
-								<a
-									href={url.replace('?thumb=100x300f', '?download=1')}
-									download={prompt + '.png'}
-									target="_blank"
-									aria-label="Download image"
-								>
-									<Download class="text-neutral-500 hover:text-black" />
-								</a>
-							</div>
-						</div>
-					{/each}
-				</div>
-			{/if}
+		<!-- Example Prompts Section -->
+		<div transition:fade>
+			<ExamplePrompts {prompts} />
 		</div>
+
+		<!-- Generator Form -->
+		<Card>
+			<form class="space-y-6" method="POST" action="?/new" use:enhance>
+				<CardContent class="p-6">
+					<FormField {form} name="prompt">
+						<FormControl>
+							{#snippet children({ props })}
+								<FormLabel>Prompt</FormLabel>
+								<Input type="text" autofocus {...props} bind:value={$formData.prompt} placeholder="e.g. Spiderman on a bike" />
+							{/snippet}
+						</FormControl>
+						<FormFieldErrors />
+					</FormField>
+					<Button type="submit" class="w-full mt-2" disabled={loading}>
+						{#if loading}
+							<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
+						{/if}
+						Generate Image
+					</Button>
+			</CardContent>
+		</form>
+		</Card>
 	</div>
-</div>
+</main>
