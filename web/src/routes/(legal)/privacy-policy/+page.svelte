@@ -30,9 +30,6 @@
 			<p class="text-muted-foreground">
 				{m.LP_PP_InformationUse_Description()}
 			</p>
-			<ul class="list-disc list-inside mt-2">
-				{m.LP_PP_InformationUse_Description()}
-			</ul>
 		</div>
 		<div>
 			<h3 class="text-xl font-medium">{m.LP_PP_InformationSharing()}</h3>

@@ -50,12 +50,12 @@
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="username">
-				<FormControl >
-					{#snippet children({ attrs })}
-										<FormLabel>{m.App_Settings_Username()}</FormLabel>
-						<Input autofocus {...attrs} bind:value={$formData.username} />
-														{/snippet}
-								</FormControl>
+				<FormControl>
+					{#snippet children({ props })}
+						<FormLabel>{m.App_Settings_Username()}</FormLabel>
+						<Input autofocus {...props} bind:value={$formData.username} />
+					{/snippet}
+				</FormControl>
 				<FormFieldErrors />
 			</FormField>
 		</CardContent>

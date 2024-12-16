@@ -52,9 +52,9 @@
 				<div class="grid gap-2">
 					<FormField {form} name="email">
 						<FormControl >
-							{#snippet children({ attrs })}
+							{#snippet children({ props })}
 														<FormLabel>{m.Register_Email()}</FormLabel>
-								<Input {...attrs} bind:value={$formData.email} type="email" />
+								<Input {...props} bind:value={$formData.email} type="email" />
 																				{/snippet}
 												</FormControl>
 						<FormFieldErrors />
@@ -63,9 +63,9 @@
 				<div class="grid gap-2">
 					<FormField {form} name="password">
 						<FormControl >
-							{#snippet children({ attrs })}
+							{#snippet children({ props })}
 														<FormLabel>{m.Register_Password()}</FormLabel>
-								<Input {...attrs} bind:value={$formData.password} type="password" />
+								<Input {...props} bind:value={$formData.password} type="password" />
 																				{/snippet}
 												</FormControl>
 						<FormFieldErrors />
@@ -74,9 +74,9 @@
 				<div class="grid gap-2">
 					<FormField {form} name="passwordConfirm">
 						<FormControl >
-							{#snippet children({ attrs })}
+							{#snippet children({ props })}
 														<FormLabel>{m.Register_ConfirmPassword()}</FormLabel>
-								<Input {...attrs} bind:value={$formData.passwordConfirm} type="password" />
+								<Input {...props} bind:value={$formData.passwordConfirm} type="password" />
 																				{/snippet}
 												</FormControl>
 						<FormFieldErrors />

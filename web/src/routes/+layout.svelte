@@ -6,10 +6,12 @@
 	import { config } from '$lib/config-client';
 	import { ComingSoonPage } from '$lib/components/pages';
 	import { Seo } from '$lib/components/modules';
+	import { ModeWatcher } from 'mode-watcher';
 
 	let { children } = $props();
 </script>
 
+<ModeWatcher />
 {#if config.showComingSoon}
 	<Seo />
 	<ComingSoonPage />

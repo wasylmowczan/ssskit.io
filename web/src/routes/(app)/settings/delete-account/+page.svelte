@@ -43,19 +43,19 @@
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="word">
-				<FormControl >
-					{#snippet children({ attrs })}
-										<FormLabel>{m.App_Settings_TypeDelete()}</FormLabel>
-						<Input {...attrs} autofocus bind:value={$formData.word} disabled={loading} />
-														{/snippet}
-								</FormControl>
+				<FormControl>
+					{#snippet children({ props })}
+						<FormLabel>{m.App_Settings_TypeDelete()}</FormLabel>
+						<Input {...props} autofocus bind:value={$formData.word} disabled={loading} />
+					{/snippet}
+				</FormControl>
 				<FormFieldErrors />
 			</FormField>
 		</CardContent>
 		<CardFooter class="border-t px-6 py-4">
 			<Button
 				type="submit"
-				on:click={(e) => !confirm('Are you sure?') && e.preventDefault()}
+				onclick={(e) => !confirm('Are you sure?') && e.preventDefault()}
 				disabled={loading || $formData.word !== 'DELETE'}
 			>
 				{#if loading}

@@ -188,7 +188,7 @@
 						</a>
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem on:click={logout}>{m.App_LogOut()}</DropdownMenuItem>
+					<DropdownMenuItem onclick={logout}>{m.App_LogOut()}</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 			<ThemeSwitcher />

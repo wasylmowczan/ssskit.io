@@ -3,7 +3,6 @@ import { LoginUserSchema } from '$lib/schemas';
 import { superValidate, setError } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ClientResponseError } from 'pocketbase';
-import { languageTag } from '$lib/paraglide/runtime.js';
 
 export const actions: Actions = {
 	login: async ({ request, locals }) => {

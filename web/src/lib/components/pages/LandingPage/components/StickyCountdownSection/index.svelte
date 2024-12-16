@@ -43,7 +43,7 @@
 		<span>{minutes}m</span>
 		<span>{seconds}s</span>
 	</div>
-	<Button on:click={scrollToMainCTA} variant="ghost" size="sm" class="text-primary">
+	<Button onclick={scrollToMainCTA} variant="ghost" size="sm" class="text-primary">
 		{config.stickyCountdownText}
 		<ArrowRight class="w-4 h-4 ml-1" />
 	</Button>

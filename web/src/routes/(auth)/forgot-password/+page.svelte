@@ -52,9 +52,9 @@
 				<div class="grid gap-2">
 					<FormField {form} name="email">
 						<FormControl >
-							{#snippet children({ attrs })}
+							{#snippet children({ props })}
 														<FormLabel>{m.ForgotPassword_Email()}</FormLabel>
-								<Input {...attrs} bind:value={$formData.email} type="email" />
+								<Input {...props} bind:value={$formData.email} type="email" />
 																				{/snippet}
 												</FormControl>
 						<FormFieldErrors />

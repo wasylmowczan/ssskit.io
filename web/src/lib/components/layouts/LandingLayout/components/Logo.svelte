@@ -22,11 +22,11 @@
 				'[&_*]:mt-[-1px] [&_*]:leading-[0.85]'
 			)}
 		>
-			<a href={i18n.route(`${languageTag()}/dashboard`)}>
+			<a href={i18n.route(`${languageTag()}/`)}>
 				<span>AI</span>
 			</a>
 		</div>
-		<a href={i18n.route(`${languageTag()}/dashboard`)}>
+		<a href={i18n.route(`${languageTag()}/`)}>
 			<span class="text-lg font-bold">{config.appName}</span>
 		</a>
 	</div>

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
+	import { onMount, onDestroy } from 'svelte';
+	import { writable, get } from 'svelte/store';
 
 	import { Card } from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
@@ -22,6 +23,7 @@
 
 	let loading = $state(false);
 	let avatarPreview: string | null = $state(null);
+	let currentAvatarUrl: string | null = $state(null);
 
 	const form = superForm(data.form, {
 		dataType: 'json',
@@ -43,11 +45,25 @@
 
 	const { form: formData, enhance } = form;
 
-	let currentAvatarUrl;
-	run(() => {
-		currentAvatarUrl = data.user?.avatar
+	const avatarState = writable({
+		currentAvatarUrl: data.user?.avatar
 			? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
-			: null;
+			: null
+	});
+
+	function updateAvatar(url: string | null) {
+		avatarState.update((s) => {
+			s.currentAvatarUrl = url;
+			return s;
+		});
+	}
+
+	onMount(() => {
+		updateAvatar(
+			data.user?.avatar
+				? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
+				: null
+		);
 	});
 
 	function handleFileChange(event: Event) {
@@ -69,12 +85,19 @@
 
 	function deleteAvatar() {
 		avatarPreview = null;
-		currentAvatarUrl = null;
+		updateAvatar(null);
 		formData.update(($formData) => {
 			$formData['avatar'] = null;
 			return $formData;
 		});
 	}
+	const unsubscribe = avatarState.subscribe((value) => {
+		currentAvatarUrl = value.currentAvatarUrl;
+	});
+
+	onDestroy(() => {
+		unsubscribe();
+	});
 </script>
 
 <Card>
@@ -100,7 +123,7 @@
 						<Button
 							variant="outline"
 							class="w-full gap-2"
-							on:click={() => document.getElementById('upload')?.click()}
+							onclick={() => document.getElementById('upload')?.click()}
 						>
 							<Camera />
 							{m.App_Settings_Change()}
@@ -119,7 +142,7 @@
 				{#if avatarPreview || currentAvatarUrl}
 					<FormField {form} name="avatar" class="w-full">
 						<FormControl>
-							<Button variant="outline" class="w-full gap-2" on:click={deleteAvatar}>
+							<Button variant="outline" class="w-full gap-2" onclick={deleteAvatar}>
 								<Trash />
 								{m.App_Settings_Delete()}
 							</Button>

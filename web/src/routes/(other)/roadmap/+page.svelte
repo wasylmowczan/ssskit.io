@@ -4,18 +4,18 @@
 	import { writable } from 'svelte/store';
 	import * as m from '$lib/paraglide/messages.js';
 
-	enum Status {
-		Pending = 'pending',
-		Approved = 'approved',
-		InProgress = 'in-progress',
-		Done = 'done'
-	}
+	const Status = {
+		Pending: 'pending',
+		Approved: 'approved',
+		InProgress: 'in-progress',
+		Done: 'done'
+	} as const;
 
-	enum Tag {
-		Enhancement = 'enhancement',
-		BigFeature = 'big-feature',
-		Suggestions = 'suggestions'
-	}
+	const Tag = {
+		Enhancement: 'enhancement',
+		BigFeature: 'big-feature',
+		Suggestions: 'suggestions'
+	} as const;
 
 	interface RoadmapFeature {
 		title: string;

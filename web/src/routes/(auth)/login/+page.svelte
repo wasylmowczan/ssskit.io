@@ -67,11 +67,11 @@
 				<div class="grid gap-2">
 					<FormField {form} name="login">
 						<FormControl >
-							{#snippet children({ attrs })}
+							{#snippet children({ props })}
 														<FormLabel>{m.Login_Email()}</FormLabel>
-								<Input {...attrs} bind:value={$formData.login} />
-																				{/snippet}
-												</FormControl>
+								<Input {...props} bind:value={$formData.login} />
+							{/snippet}
+						</FormControl>
 						<FormFieldErrors />
 						{#if showVerificationPrompt}
 							<div class="text-sm mt-2 text-muted-foreground">
@@ -85,11 +85,11 @@
 				<div class="grid gap-2">
 					<FormField {form} name="password">
 						<FormControl >
-							{#snippet children({ attrs })}
+							{#snippet children({ props })}
 														<FormLabel>{m.Login_Password()}</FormLabel>
 								<div class="relative">
 									<Input
-										{...attrs}
+										{...props}
 										bind:value={$formData.password}
 										type={showPassword ? 'text' : 'password'}
 									/>
@@ -98,7 +98,7 @@
 										variant="ghost"
 										size="icon"
 										class="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-										on:click={togglePasswordVisibility}
+										onclick={togglePasswordVisibility}
 									>
 										{#if showPassword}
 											<EyeOff class="h-4 w-4" />

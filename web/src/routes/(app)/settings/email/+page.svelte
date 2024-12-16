@@ -45,18 +45,18 @@
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="email">
-				<FormControl >
-					{#snippet children({ attrs })}
-										<FormLabel>{m.App_Settings_Email()}</FormLabel>
+				<FormControl>
+					{#snippet children({ props })}
+						<FormLabel>{m.App_Settings_Email()}</FormLabel>
 						<Input
-							{...attrs}
+							{...props}
 							autofocus
 							bind:value={$formData.email}
 							type="email"
 							disabled={loading}
 						/>
-														{/snippet}
-								</FormControl>
+					{/snippet}
+				</FormControl>
 				<FormFieldErrors errorClasses={m.App_PB_Email_Error()} />
 			</FormField>
 		</CardContent>

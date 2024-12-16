@@ -5,18 +5,13 @@
 	import { config } from '$lib/config-client';
 	import * as m from '$lib/paraglide/messages.js';
 
-	enum LogType {
-		// @ts-ignore
-		NewFeature = m.LP_Changelog_NewFeature(),
-		// @ts-ignore
-		Maintenance = m.LP_Changelog_Maintenance(),
-		// @ts-ignore
-		Bugs = m.LP_Changelog_Bugs(),
-		// @ts-ignore
-		Start = m.LP_Changelog_Start(),
-		// @ts-ignore
-		Improvement = m.LP_Changelog_Improvement()
-	}
+	const LogType = {
+		NewFeature: m.LP_Changelog_NewFeature(),
+		Maintenance: m.LP_Changelog_Maintenance(),
+		Bugs: m.LP_Changelog_Bugs(),
+		Start: m.LP_Changelog_Start(),
+		Improvement: m.LP_Changelog_Improvement()
+	} as const;
 
 	interface Log {
 		type: LogType;

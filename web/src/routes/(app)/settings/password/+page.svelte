@@ -42,45 +42,45 @@
 	<form action="?/updatePassword" method="POST" use:enhance>
 		<CardHeader>
 			<CardTitle>{m.App_Settings_ChangePassword()}</CardTitle>
-			<!-- TODO: Add warning message thet user would be logged out after changing password -->
+			<!-- TODO: Add warning message that user would be logged out after changing password -->
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="oldPassword">
 				<FormControl >
-					{#snippet children({ attrs })}
-										<FormLabel>{m.App_Settings_OldPassword()}</FormLabel>
+					{#snippet children({ props })}
+						<FormLabel>{m.App_Settings_OldPassword()}</FormLabel>
 						<Input
 							autofocus
-							{...attrs}
+							{...props}
 							bind:value={$formData.oldPassword}
 							type="password"
 							disabled={loading}
 						/>
-														{/snippet}
-								</FormControl>
+					{/snippet}
+				</FormControl>
 				<FormFieldErrors />
 			</FormField>
 			<FormField {form} name="password">
 				<FormControl >
-					{#snippet children({ attrs })}
-										<FormLabel>{m.App_Settings_NewPassword()}</FormLabel>
-						<Input {...attrs} bind:value={$formData.password} type="password" disabled={loading} />
-														{/snippet}
-								</FormControl>
+					{#snippet children({ props })}
+						<FormLabel>{m.App_Settings_NewPassword()}</FormLabel>
+						<Input {...props} bind:value={$formData.password} type="password" disabled={loading} />
+					{/snippet}
+				</FormControl>
 				<FormFieldErrors />
 			</FormField>
 			<FormField {form} name="passwordConfirm">
-				<FormControl >
-					{#snippet children({ attrs })}
-										<FormLabel>{m.App_Settings_ConfirmNewPassword()}</FormLabel>
+				<FormControl>
+					{#snippet children({ props })}
+						<FormLabel>{m.App_Settings_ConfirmNewPassword()}</FormLabel>
 						<Input
-							{...attrs}
+							{...props}
 							bind:value={$formData.passwordConfirm}
 							type="password"
 							disabled={loading}
 						/>
-														{/snippet}
-								</FormControl>
+					{/snippet}
+				</FormControl>
 				<FormFieldErrors />
 			</FormField>
 		</CardContent>
