@@ -3,6 +3,7 @@
 	import { Download } from 'lucide-svelte';
 	import { Button } from '$lib/components/ui/button';
 	import * as HoverCard from '$lib/components/ui/hover-card';
+	import { ImagePlus } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
@@ -26,12 +27,19 @@
 	});
 </script>
 
+{#if urls.length === 0}
+	<div class="mb-2 flex flex-col items-center justify-center text-muted-foreground gap-4 pt-20">
+		<ImagePlus size={50} />
+		<p>No images yet</p>
+		<a href="/dashboard">Generate some images in the <span class="font-bold">Dashboard</span></a>
+	</div>
+{/if}
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 	{#each urls as url, index}
 		<div class="flex flex-col p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow">
 			<div class="mb-2 flex flex-col items-center justify-center">
 				<HoverCard.Root>
-					<HoverCard.Trigger class="max-w-full truncate">"{prompts[index]}"</HoverCard.Trigger>
+					<HoverCard.Trigger class="max-w-full truncate text-muted-foreground">{prompts[index]}</HoverCard.Trigger>
 					<HoverCard.Content>"{prompts[index]}"</HoverCard.Content>
 				</HoverCard.Root>
 			</div>
@@ -44,8 +52,8 @@
 					target="_blank"
 					aria-label="Download image"
 				>
-					<Download />
-					<span class="ml-2">PNG</span>
+					<Download color="#64748B" />
+					<span class="text-muted-foreground">PNG</span>
 				</Button>
 			</div>
 		</div>

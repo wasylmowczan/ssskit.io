@@ -15,7 +15,7 @@
 		</Select.Trigger>
 		<Select.Content>
 			{#each availableLanguageTags as lang}
-				<div class="p-2 text-center drop-shadow-sm">
+				<div class="p-2 text-center">
 					<a
 						href={currentPathWithoutLanguage}
 						hreflang={lang}

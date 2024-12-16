@@ -16,8 +16,8 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 	{#each prompts as prompt}
 		<Card class="cursor-pointer hover:bg-accent/50 transition-colors">
-			<CardContent class="p-4 space-y-2 text-center">
-				<div class="flex items-center gap-2">
+			<CardContent class="p-4 space-y-2">
+				<div class="flex items-center gap-2 text-muted-foreground text-center justify-center">
 					<svelte:component this={prompt.icon} class={prompt.color} size={14} />
 					<p class="font-medium">{prompt.text}</p>
 				</div>
