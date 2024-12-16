@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ComponentType } from "svelte";
-	import { Card, CardContent } from "$lib/components/ui/card";
+	import type { ComponentType } from 'svelte';
+	import { Card, CardContent } from '$lib/components/ui/card';
 
 	// Define props type
 	type Prompt = {

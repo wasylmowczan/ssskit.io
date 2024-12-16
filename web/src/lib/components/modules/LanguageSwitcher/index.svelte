@@ -2,29 +2,39 @@
 	import { availableLanguageTags, languageTag } from '$lib/paraglide/runtime';
 	import { i18n } from '$lib/i18n';
 	import { page } from '$app/stores';
-	import * as Select from '$lib/components/ui/select';
+	import * as Select from '$lib/components/ui/select/index.js';
 	import LanguageIcon from '$lib/components/icons/common/language.svelte';
+
+	const languages = availableLanguageTags.map((lang) => ({
+		value: lang,
+		label: lang.toUpperCase()
+	}));
+
+	let value = $state(languageTag());
+
+	const triggerContent = $derived(
+		languages.find((l) => l.value === value)?.label ?? 'Select a language'
+	);
 
 	let currentPathWithoutLanguage = $derived(i18n.route($page.url.pathname));
 </script>
 
-<div class="flex gap-2 items-center">
-	<Select.Root>
-		<Select.Trigger>
-			<LanguageIcon />
-		</Select.Trigger>
-		<Select.Content>
-			{#each availableLanguageTags as lang}
-				<div class="p-2 text-center">
-					<a
-						href={currentPathWithoutLanguage}
-						hreflang={lang}
-						aria-current={lang === languageTag() ? 'page' : undefined}
-					>
-						{lang.toUpperCase()}
-					</a>
-				</div>
+<Select.Root type="single" name="language" bind:value>
+	<Select.Trigger class="w-24">
+		<LanguageIcon />
+		{triggerContent}
+	</Select.Trigger>
+	<Select.Content>
+		<Select.Group>
+			{#each languages as lang}
+				<a
+					href={currentPathWithoutLanguage}
+					hreflang={lang.value}
+					aria-current={lang.value === languageTag() ? 'page' : undefined}
+				>
+					<Select.Item value={lang.value} label={lang.label}>{lang.label}</Select.Item>
+				</a>
 			{/each}
-		</Select.Content>
-	</Select.Root>
-</div>
+		</Select.Group>
+	</Select.Content>
+</Select.Root>

@@ -9,7 +9,7 @@
 
 	let {
 		color = 'currentColor',
-		size = 24,
+		size = 20,
 		strokeWidth = 2,
 		isHovered = $bindable(false),
 		classes = ''

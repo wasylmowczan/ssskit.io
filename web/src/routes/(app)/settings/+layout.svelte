@@ -44,7 +44,7 @@
 </script>
 
 <div
-	class="mx-auto grid w-full items-start gap-12 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]"
+	class="mx-auto grid w-full items-start gap-12 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr] px-12"
 >
 	<nav class="grid items-start text-sm font-medium gap-4">
 		{#each navigation as { title, href, icon }}

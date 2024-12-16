@@ -38,6 +38,7 @@
 			} else {
 				toast.error(m.App_Toast_Avatar_Failed());
 			}
+			location.reload();
 		}
 	});
 

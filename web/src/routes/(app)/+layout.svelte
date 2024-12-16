@@ -1,197 +1,83 @@
 <script lang="ts">
-	import CircleUser from 'lucide-svelte/icons/circle-user';
-	import Menu from 'lucide-svelte/icons/menu';
-	import { Button } from '$lib/components/ui/button';
-	import {
-		DropdownMenu,
-		DropdownMenuTrigger,
-		DropdownMenuContent,
-		DropdownMenuLabel,
-		DropdownMenuSeparator,
-		DropdownMenuGroup,
-		DropdownMenuItem
-	} from '$lib/components/ui/dropdown-menu';
-	import { Sheet, SheetTrigger, SheetContent } from '$lib/components/ui/sheet';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import HomeIcon from '$lib/components/icons/common/home.svelte';
-	import SettingsIcon from '$lib/components/icons/common/settings.svelte';
-	import GridIcon from '$lib/components/icons/common/grid.svelte';
-	import { Separator } from '$lib/components/ui/separator';
+	import AppSidebar from '$lib/components/app-sidebar.svelte';
+	import * as Sidebar from '$lib/components/ui/sidebar';
 	import { config } from '$lib/config-client.js';
-	import { Seo } from '$lib/components/modules';
-	import { LanguageSwitcher, ThemeSwitcher } from '$lib/components/modules';
 	import AltAvatar from '$lib/assets/alt-avatar.svg';
-	import Logo from '$lib/components/layouts/LandingLayout/components/Logo.svelte';
-	import * as m from '$lib/paraglide/messages.js';
+	import { i18n } from '$lib/i18n';
 	import { languageTag } from '$lib/paraglide/runtime.js';
-	import { i18n } from '$lib/i18n.js';
+	import HomeIcon from '$lib/components/icons/common/home.svelte';
+	import GridIcon from '$lib/components/icons/common/grid.svelte';
+	import LifeBuoy from 'lucide-svelte/icons/life-buoy';
+	import Send from 'lucide-svelte/icons/send';
+	import { ChartPie, Frame } from 'lucide-svelte';
+	import { ThemeSwitcher } from '$lib/components/modules';
 
-	let { data, children } = $props();
+	const { data, children } = $props();
+	let currentAvatarUrl = $derived(
+		data.user?.avatar
+			? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
+			: AltAvatar
+	);
 
-	async function logout() {
-		await fetch('/api/logout');
-		goto(`/${languageTag()}`);
-	}
-
-	const topNavigation = [
-		{
-			title: m.App_Dashboard(),
-			href: i18n.route(`${languageTag()}/dashboard`),
-			icon: HomeIcon
-		},
-		{
-			title: m.App_Gallery(),
-			href: i18n.route(`${languageTag()}/gallery`),
-			icon: GridIcon
+	let menu = {
+		navMain: [
+			{
+				title: 'Dashboard',
+				url: i18n.route(`${languageTag()}/dashboard`),
+				icon: HomeIcon,
+				isActive: true
+			},
+			{
+				title: 'Gallery',
+				url: i18n.route(`${languageTag()}/gallery`),
+				icon: GridIcon
+			}
+		],
+		navAdmin: [
+			{
+				name: 'Design Engineering',
+				url: '#',
+				icon: Frame
+			},
+			{
+				name: 'Sales & Marketing',
+				url: '#',
+				icon: ChartPie
+			},
+			{
+				name: 'Travel',
+				url: '#',
+				icon: Map
+			}
+		],
+		navSecondary: [
+			{
+				title: 'Support',
+				url: '#',
+				icon: LifeBuoy
+			},
+			{
+				title: 'Feedback',
+				url: '#',
+				icon: Send
+			}
+		],
+		user: {
+			name: data.user?.name || data.user?.username,
+			email: data.user?.email,
+			avatar: currentAvatarUrl
 		}
-	];
-
-	const bottomNavigation = [
-		{
-			title: m.App_Settings(),
-			href: i18n.route(`${languageTag()}/settings/avatar`),
-			icon: SettingsIcon
-		}
-	];
-
-	let menuOpen = $state(false);
-
-	let currentAvatarUrl = $derived(data.user?.avatar
-		? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
-		: AltAvatar);
+	};
 </script>
 
-<Seo
-	title={`${config.appName} - create stunning AI images`}
-	description={`${config.appName} is a platform that allows you to create stunning AI images.`}
-	keywords="ai image, ai image generator, ai image creator"
-/>
-
-<div class="flex min-h-screen">
-	<div class="hidden flex-none md:block md:w-[280px] bg-muted/40 border-r">
-		<div class="flex h-full max-h-screen flex-col gap-2">
-			<div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-				<Logo />
+<Sidebar.Provider>
+	<AppSidebar {menu} />
+	<Sidebar.Inset>
+		<header class="flex h-16 shrink-0 items-center gap-2">
+			<div class="flex items-center gap-2 px-4">
+				<Sidebar.Trigger class="-ml-1" />
 			</div>
-			<div class="flex-1">
-				<nav class="grid items-start px-2 gap-2 text-sm font-medium lg:px-4">
-					{#each topNavigation as { title, href, icon }}
-						<a
-							{href}
-							class={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
-						>
-							{#if icon}
-								{@const SvelteComponent = icon}
-								<SvelteComponent />
-							{/if}
-							{title}
-						</a>
-					{/each}
-				</nav>
-			</div>
-			<!-- Side down menu -->
-			<div class="flex flex-col pb-4">
-				<nav class="grid items-end px-2 gap-2 text-sm font-medium lg:px-4">
-					{#each bottomNavigation as { title, href, icon }}
-						<a
-							{href}
-							class={`flex items-end gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
-						>
-							{#if icon}
-								{@const SvelteComponent_1 = icon}
-								<SvelteComponent_1 />
-							{/if}
-							{title}
-						</a>
-					{/each}
-				</nav>
-			</div>
-		</div>
-	</div>
-	<div class="flex-1 overflow-x-auto">
-		<header
-			class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 lg:sticky lg:top-0"
-		>
-			<Sheet bind:open={menuOpen}>
-				<SheetTrigger asChild>
-					<Button variant="outline" size="icon" class="shrink-0 md:hidden" on:click={() => (menuOpen = true)}>
-						<Menu class="h-5 w-5" />
-					</Button>
-				</SheetTrigger>
-				<SheetContent side="left" class="flex flex-col">
-					<nav class="grid gap-2 text-lg font-medium">
-						<Logo />
-						<Separator />
-						{#each topNavigation as { title, href, icon }}
-							<a
-								onclick={() => (menuOpen = false)}
-								{href}
-								class={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-foreground'}`}
-							>
-								{#if icon}
-									{@const SvelteComponent_2 = icon}
-									<SvelteComponent_2 size={20} />
-								{/if}
-								{title}
-							</a>
-						{/each}
-					</nav>
-					<Separator />
-					<div class="mt-auto">
-						{#each bottomNavigation as { title, href, icon }}
-							<a
-								{href}
-								class={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-foreground'}`}
-								onclick={() => (menuOpen = false)}
-							>
-								{#if icon}
-									{@const SvelteComponent_3 = icon}
-									<SvelteComponent_3 size={20} />
-								{/if}
-								{title}
-							</a>
-						{/each}
-					</div>
-				</SheetContent>
-			</Sheet>
-			<div class="w-full flex-1"></div>
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild >
-					<Button variant="secondary" size="icon" class="rounded-full">
-						{#if currentAvatarUrl}
-							<img
-								src={currentAvatarUrl}
-								alt="Avatar"
-								class="w-full h-full object-cover rounded-full"
-							/>
-						{:else}
-							<CircleUser class="h-full w-full" />
-						{/if}
-					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent class="w-56" align="end">
-					<DropdownMenuLabel class="font-normal">
-						<div class="flex flex-col space-y-1">
-							<p class="text-sm font-medium leading-none">{data.user?.username}</p>
-							<p class="text-xs leading-none text-muted-foreground">{data.user?.email}</p>
-						</div>
-					</DropdownMenuLabel>
-					<DropdownMenuSeparator />
-					<DropdownMenuGroup>
-						<a href={bottomNavigation[0].href} class="block">
-							<DropdownMenuItem>{m.App_Settings()}</DropdownMenuItem>
-						</a>
-					</DropdownMenuGroup>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem onclick={logout}>{m.App_LogOut()}</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
-			<ThemeSwitcher />
-			<LanguageSwitcher />
 		</header>
-		<main class="p-8" style="height: calc(100vh - 60px)">
-			{@render children?.()}
-		</main>
-	</div>
-</div>
+		{@render children?.()}
+	</Sidebar.Inset>
+</Sidebar.Provider>

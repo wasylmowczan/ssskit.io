@@ -50,6 +50,7 @@ const config = {
 					foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
 				},
 				sidebar: {
+					// TODO: this is the place to define color for sidebar
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
 					primary: 'hsl(var(--sidebar-primary))',

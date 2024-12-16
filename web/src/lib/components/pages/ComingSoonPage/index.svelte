@@ -11,7 +11,7 @@
 	import { ToggleConfetti } from './ToggleConfetti';
 	import { ThemeSwitcher } from '$lib/components/modules';
 
-	let timeLeft: { [key: string]: number } = $state({});
+	let timeLeft = {};
 	let timer: NodeJS.Timeout;
 
 	const title = 'Coming Soon';
