@@ -17,8 +17,12 @@
 	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
 
-	export let data: PageData;
-	let loading = false;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
+	let loading = $state(false);
 
 	const form = superForm(data.form, {
 		validators: zod(UpdateUsernameSchema),
@@ -46,10 +50,12 @@
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="username">
-				<FormControl let:attrs>
-					<FormLabel>{m.App_Settings_Username()}</FormLabel>
-					<Input autofocus {...attrs} bind:value={$formData.username} />
-				</FormControl>
+				<FormControl >
+					{#snippet children({ attrs })}
+										<FormLabel>{m.App_Settings_Username()}</FormLabel>
+						<Input autofocus {...attrs} bind:value={$formData.username} />
+														{/snippet}
+								</FormControl>
 				<FormFieldErrors />
 			</FormField>
 		</CardContent>

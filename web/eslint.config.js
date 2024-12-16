@@ -20,7 +20,7 @@ export default [
 		}
 	},
 	{
-		files: ['**/*.{js,ts}'],
+		files: ['**/*.{js,ts,svelte}'],
 		rules: {
 			'no-unused-vars': 'off',
 			'no-console': 'warn',

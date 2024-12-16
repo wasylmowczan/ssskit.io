@@ -4,7 +4,7 @@
 	const duration = 2000;
 
 	// @ts-ignore
-	let things: any[] = [];
+	let things: any[] = $state([]);
 	let timeout: any;
 
 	// @ts-ignore
@@ -26,9 +26,9 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="box" on:click={moveConfetti}>
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<div class="box" onclick={moveConfetti}>
 	<span>Click in me</span>
 
 	{#each things as thing}

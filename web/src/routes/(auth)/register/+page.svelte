@@ -16,7 +16,7 @@
 	import { Seo } from '$lib/components/modules';
 	import { config } from '$lib/config-client';
 
-	let loading = false;
+	let loading = $state(false);
 
 	const form = superForm(defaultValues(zod(RegisterUserSchema)), {
 		validators: zod(RegisterUserSchema),
@@ -51,28 +51,34 @@
 			<div class="grid gap-4">
 				<div class="grid gap-2">
 					<FormField {form} name="email">
-						<FormControl let:attrs>
-							<FormLabel>{m.Register_Email()}</FormLabel>
-							<Input {...attrs} bind:value={$formData.email} type="email" />
-						</FormControl>
+						<FormControl >
+							{#snippet children({ attrs })}
+														<FormLabel>{m.Register_Email()}</FormLabel>
+								<Input {...attrs} bind:value={$formData.email} type="email" />
+																				{/snippet}
+												</FormControl>
 						<FormFieldErrors />
 					</FormField>
 				</div>
 				<div class="grid gap-2">
 					<FormField {form} name="password">
-						<FormControl let:attrs>
-							<FormLabel>{m.Register_Password()}</FormLabel>
-							<Input {...attrs} bind:value={$formData.password} type="password" />
-						</FormControl>
+						<FormControl >
+							{#snippet children({ attrs })}
+														<FormLabel>{m.Register_Password()}</FormLabel>
+								<Input {...attrs} bind:value={$formData.password} type="password" />
+																				{/snippet}
+												</FormControl>
 						<FormFieldErrors />
 					</FormField>
 				</div>
 				<div class="grid gap-2">
 					<FormField {form} name="passwordConfirm">
-						<FormControl let:attrs>
-							<FormLabel>{m.Register_ConfirmPassword()}</FormLabel>
-							<Input {...attrs} bind:value={$formData.passwordConfirm} type="password" />
-						</FormControl>
+						<FormControl >
+							{#snippet children({ attrs })}
+														<FormLabel>{m.Register_ConfirmPassword()}</FormLabel>
+								<Input {...attrs} bind:value={$formData.passwordConfirm} type="password" />
+																				{/snippet}
+												</FormControl>
 						<FormFieldErrors />
 					</FormField>
 				</div>

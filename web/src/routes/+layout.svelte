@@ -6,6 +6,8 @@
 	import { config } from '$lib/config-client';
 	import { ComingSoonPage } from '$lib/components/pages';
 	import { Seo } from '$lib/components/modules';
+
+	let { children } = $props();
 </script>
 
 {#if config.showComingSoon}
@@ -14,6 +16,6 @@
 {:else}
 	<ParaglideJS {i18n}>
 		<Toaster richColors />
-		<slot />
+		{@render children?.()}
 	</ParaglideJS>
 {/if}

@@ -7,10 +7,14 @@
 	import { config } from '$lib/config-client';
 	import Logo from '../Logo.svelte';
 
-	export let menuItems: {
+	interface Props {
+		menuItems: {
 		name: string;
 		href: string;
 	}[];
+	}
+
+	let { menuItems }: Props = $props();
 
 	let socialLinks = [
 		{ name: 'X', href: 'https://x.com', icon: XIcon },
@@ -39,9 +43,10 @@
 				<p class="text-gray-500 dark:text-gray-400 text-base">{m.LP_Footer_Slogan()}</p>
 				<div class="flex space-x-6">
 					{#each socialLinks as { name, href, icon }}
+						{@const SvelteComponent = icon}
 						<a {href} class="text-gray-400 hover:text-gray-500" target="_blank">
 							<span class="sr-only">{name}</span>
-							<svelte:component this={icon} customClass="w-6 h-6" />
+							<SvelteComponent customClass="w-6 h-6" />
 						</a>
 					{/each}
 				</div>

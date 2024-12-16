@@ -19,8 +19,8 @@
 	import { config } from '$lib/config-client';
 	import { EyeOff, Eye } from 'lucide-svelte';
 
-	let loading = false;
-	let showVerificationPrompt = false;
+	let loading = $state(false);
+	let showVerificationPrompt = $state(false);
 
 	const form = superForm(defaultValues(zod(LoginUserSchema)), {
 		validators: zod(LoginUserSchema),
@@ -42,7 +42,7 @@
 		}
 	});
 
-	let showPassword = false;
+	let showPassword = $state(false);
 
 	function togglePasswordVisibility() {
 		showPassword = !showPassword;
@@ -66,10 +66,12 @@
 			<div class="grid gap-4">
 				<div class="grid gap-2">
 					<FormField {form} name="login">
-						<FormControl let:attrs>
-							<FormLabel>{m.Login_Email()}</FormLabel>
-							<Input {...attrs} bind:value={$formData.login} />
-						</FormControl>
+						<FormControl >
+							{#snippet children({ attrs })}
+														<FormLabel>{m.Login_Email()}</FormLabel>
+								<Input {...attrs} bind:value={$formData.login} />
+																				{/snippet}
+												</FormControl>
 						<FormFieldErrors />
 						{#if showVerificationPrompt}
 							<div class="text-sm mt-2 text-muted-foreground">
@@ -82,32 +84,34 @@
 				</div>
 				<div class="grid gap-2">
 					<FormField {form} name="password">
-						<FormControl let:attrs>
-							<FormLabel>{m.Login_Password()}</FormLabel>
-							<div class="relative">
-								<Input
-									{...attrs}
-									bind:value={$formData.password}
-									type={showPassword ? 'text' : 'password'}
-								/>
-								<Button
-									type="button"
-									variant="ghost"
-									size="icon"
-									class="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-									on:click={togglePasswordVisibility}
-								>
-									{#if showPassword}
-										<EyeOff class="h-4 w-4" />
-									{:else}
-										<Eye class="h-4 w-4" />
-									{/if}
-									<span class="sr-only">
-										{showPassword ? 'Hide password' : 'Show password'}
-									</span>
-								</Button>
-							</div>
-						</FormControl>
+						<FormControl >
+							{#snippet children({ attrs })}
+														<FormLabel>{m.Login_Password()}</FormLabel>
+								<div class="relative">
+									<Input
+										{...attrs}
+										bind:value={$formData.password}
+										type={showPassword ? 'text' : 'password'}
+									/>
+									<Button
+										type="button"
+										variant="ghost"
+										size="icon"
+										class="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+										on:click={togglePasswordVisibility}
+									>
+										{#if showPassword}
+											<EyeOff class="h-4 w-4" />
+										{:else}
+											<Eye class="h-4 w-4" />
+										{/if}
+										<span class="sr-only">
+											{showPassword ? 'Hide password' : 'Show password'}
+										</span>
+									</Button>
+								</div>
+																				{/snippet}
+												</FormControl>
 						<FormFieldErrors />
 						<div class="flex flex-col">
 							<a href="/forgot-password" class="text-sm text-muted-foreground underline">

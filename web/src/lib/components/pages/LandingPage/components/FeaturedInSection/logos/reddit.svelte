@@ -1,5 +1,9 @@
 <script lang="ts">
-	export let customClass = '';
+	interface Props {
+		customClass?: string;
+	}
+
+	let { customClass = '' }: Props = $props();
 </script>
 
 <svg

@@ -27,7 +27,7 @@
 	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { i18n } from '$lib/i18n.js';
 
-	export let data;
+	let { data, children } = $props();
 
 	async function logout() {
 		await fetch('/api/logout');
@@ -55,11 +55,11 @@
 		}
 	];
 
-	let menuOpen = false;
+	let menuOpen = $state(false);
 
-	$: currentAvatarUrl = data.user?.avatar
+	let currentAvatarUrl = $derived(data.user?.avatar
 		? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
-		: AltAvatar;
+		: AltAvatar);
 </script>
 
 <Seo
@@ -82,7 +82,8 @@
 							class={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
 						>
 							{#if icon}
-								<svelte:component this={icon} />
+								{@const SvelteComponent = icon}
+								<SvelteComponent />
 							{/if}
 							{title}
 						</a>
@@ -98,7 +99,8 @@
 							class={`flex items-end gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-primary'}`}
 						>
 							{#if icon}
-								<svelte:component this={icon} />
+								{@const SvelteComponent_1 = icon}
+								<SvelteComponent_1 />
 							{/if}
 							{title}
 						</a>
@@ -112,23 +114,26 @@
 			class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 lg:sticky lg:top-0"
 		>
 			<Sheet bind:open={menuOpen}>
-				<SheetTrigger asChild let:builder>
-					<Button variant="outline" size="icon" class="shrink-0 md:hidden" builders={[builder]}>
-						<Menu class="h-5 w-5" />
-					</Button>
-				</SheetTrigger>
+				<SheetTrigger asChild >
+					{#snippet children({ builder })}
+										<Button variant="outline" size="icon" class="shrink-0 md:hidden" builders={[builder]}>
+							<Menu class="h-5 w-5" />
+						</Button>
+														{/snippet}
+								</SheetTrigger>
 				<SheetContent side="left" class="flex flex-col">
 					<nav class="grid gap-2 text-lg font-medium">
 						<Logo />
 						<Separator />
 						{#each topNavigation as { title, href, icon }}
 							<a
-								on:click={() => (menuOpen = false)}
+								onclick={() => (menuOpen = false)}
 								{href}
 								class={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-foreground'}`}
 							>
 								{#if icon}
-									<svelte:component this={icon} size={20} />
+									{@const SvelteComponent_2 = icon}
+									<SvelteComponent_2 size={20} />
 								{/if}
 								{title}
 							</a>
@@ -140,10 +145,11 @@
 							<a
 								{href}
 								class={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground ${$page.url.pathname.includes(href) ? 'bg-muted' : 'hover:text-foreground'}`}
-								on:click={() => (menuOpen = false)}
+								onclick={() => (menuOpen = false)}
 							>
 								{#if icon}
-									<svelte:component this={icon} size={20} />
+									{@const SvelteComponent_3 = icon}
+									<SvelteComponent_3 size={20} />
 								{/if}
 								{title}
 							</a>
@@ -151,21 +157,23 @@
 					</div>
 				</SheetContent>
 			</Sheet>
-			<div class="w-full flex-1" />
+			<div class="w-full flex-1"></div>
 			<DropdownMenu>
-				<DropdownMenuTrigger asChild let:builder>
-					<Button builders={[builder]} variant="secondary" size="icon" class="rounded-full">
-						{#if currentAvatarUrl}
-							<img
-								src={currentAvatarUrl}
-								alt="Avatar"
-								class="w-full h-full object-cover rounded-full"
-							/>
-						{:else}
-							<CircleUser class="h-full w-full" />
-						{/if}
-					</Button>
-				</DropdownMenuTrigger>
+				<DropdownMenuTrigger asChild >
+					{#snippet children({ builder })}
+										<Button builders={[builder]} variant="secondary" size="icon" class="rounded-full">
+							{#if currentAvatarUrl}
+								<img
+									src={currentAvatarUrl}
+									alt="Avatar"
+									class="w-full h-full object-cover rounded-full"
+								/>
+							{:else}
+								<CircleUser class="h-full w-full" />
+							{/if}
+						</Button>
+														{/snippet}
+								</DropdownMenuTrigger>
 				<DropdownMenuContent class="w-56" align="end">
 					<DropdownMenuLabel class="font-normal">
 						<div class="flex flex-col space-y-1">
@@ -187,7 +195,7 @@
 			<LanguageSwitcher />
 		</header>
 		<main class="p-8" style="height: calc(100vh - 60px)">
-			<slot />
+			{@render children?.()}
 		</main>
 	</div>
 </div>

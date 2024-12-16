@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { Footer, Header } from './components';
 	import * as m from '$lib/paraglide/messages.js';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const menuItems = [
 		{ name: m.LP_Header_Home(), href: '/' },
@@ -14,7 +19,7 @@
 <div class="flex min-h-screen w-full flex-col dotted-background">
 	<Header {menuItems} />
 	<main class="flex-1 flex flex-col">
-		<slot />
+		{@render children?.()}
 	</main>
 	<Footer {menuItems} />
 </div>

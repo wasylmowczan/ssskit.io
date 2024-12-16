@@ -1,11 +1,21 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 
-	export let className: string | undefined = undefined;
-	export let containerClassName: string | undefined = undefined;
-	export let isMouseEntered = false;
+	interface Props {
+		className?: string | undefined;
+		containerClassName?: string | undefined;
+		isMouseEntered?: boolean;
+		children?: import('svelte').Snippet;
+	}
 
-	let containerRef: HTMLDivElement;
+	let {
+		className = undefined,
+		containerClassName = undefined,
+		isMouseEntered = $bindable(false),
+		children
+	}: Props = $props();
+
+	let containerRef: HTMLDivElement = $state();
 
 	const handleMouseMove = (e: MouseEvent) => {
 		if (!containerRef) return;
@@ -31,18 +41,18 @@
 	class={cn('flex items-center justify-center py-10 ', containerClassName)}
 	style="perspective: 1000px;"
 >
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		bind:this={containerRef}
-		on:mouseenter={handleMouseEnter}
-		on:mousemove={handleMouseMove}
-		on:mouseleave={handleMouseLeave}
+		onmouseenter={handleMouseEnter}
+		onmousemove={handleMouseMove}
+		onmouseleave={handleMouseLeave}
 		class={cn(
 			'relative flex items-center justify-center transition-all duration-200 ease-linear',
 			className
 		)}
 		style="transform-style: preserve-3d;"
 	>
-		<slot />
+		{@render children?.()}
 	</div>
 </div>

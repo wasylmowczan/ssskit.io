@@ -5,7 +5,7 @@
 	import * as Select from '$lib/components/ui/select';
 	import LanguageIcon from '$lib/components/icons/common/language.svelte';
 
-	$: currentPathWithoutLanguage = i18n.route($page.url.pathname);
+	let currentPathWithoutLanguage = $derived(i18n.route($page.url.pathname));
 </script>
 
 <div class="flex gap-2 items-center">

@@ -2,7 +2,7 @@
 	let color = 'currentColor';
 	let size = 28;
 	let strokeWidth = 2;
-	let isHovered = false;
+	let isHovered = $state(false);
 	let classes = '';
 
 	function handleMouseEnter() {
@@ -14,7 +14,7 @@
 	}
 </script>
 
-<div class={classes} aria-label="arrow-down" role="img" on:mouseenter={handleMouseEnter}>
+<div class={classes} aria-label="arrow-down" role="img" onmouseenter={handleMouseEnter}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width={size}

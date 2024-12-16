@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { preventDefault } from 'svelte/legacy';
+
 	import { TextGenerateEffect } from '$lib/components/aceternityui/TextGenerateEffect';
 	import { CardBody, CardContainer, CardItem } from '$lib/components/aceternityui/ThreeDCardEffect';
 	import { Button } from '$lib/components/ui/button';
@@ -24,9 +26,9 @@
 		}
 	];
 
-	export let data;
+	let { data } = $props();
 
-	let lastGeneratedImages: string | any[] = [];
+	let lastGeneratedImages: string | any[] = $state([]);
 
 	async function fetchImages() {
 		const images = (await data.images) || [];
@@ -41,8 +43,8 @@
 	}
 
 	const loading = writable(false);
-	let userInput = '';
-	let isMouseEntered = false;
+	let userInput = $state('');
+	let isMouseEntered = $state(false);
 
 	function handleSubmit() {
 		loading.set(true);
@@ -113,11 +115,11 @@
 				method="POST"
 				action="?/new"
 				use:enhance
-				on:submit|preventDefault={handleSubmit}
-				on:reset|preventDefault={() => {
+				onsubmit={preventDefault(handleSubmit)}
+				onreset={preventDefault(() => {
 					handleReset();
 					window.location.reload();
-				}}
+				})}
 			>
 				<Input
 					bind:value={userInput}
@@ -127,9 +129,11 @@
 					class="flex-1 shadow-lg"
 				/>
 				<ToggleConfetti>
-					<Button size="lg" class="text-lg shadow-lg" slot="label" type="submit"
-						>{m.App_Dashboard_Generate()} <span class="ml-4">→</span></Button
-					>
+					{#snippet label()}
+										<Button size="lg" class="text-lg shadow-lg"  type="submit"
+							>{m.App_Dashboard_Generate()} <span class="ml-4">→</span></Button
+						>
+									{/snippet}
 					<Confetti
 						y={[-0.8, 0.8]}
 						x={[-0.8, 0.8]}

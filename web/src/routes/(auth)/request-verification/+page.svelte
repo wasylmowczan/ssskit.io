@@ -16,7 +16,7 @@
 	import { Seo } from '$lib/components/modules';
 	import { config } from '$lib/config-client';
 
-	let loading = false;
+	let loading = $state(false);
 
 	const form = superForm(defaultValues(zod(RequestVerificationSchema)), {
 		validators: zod(RequestVerificationSchema),
@@ -51,10 +51,12 @@
 			<div class="grid gap-4">
 				<div class="grid gap-2">
 					<FormField {form} name="email">
-						<FormControl let:attrs>
-							<FormLabel>Email</FormLabel>
-							<Input {...attrs} bind:value={$formData.email} type="email" />
-						</FormControl>
+						<FormControl >
+							{#snippet children({ attrs })}
+														<FormLabel>Email</FormLabel>
+								<Input {...attrs} bind:value={$formData.email} type="email" />
+																				{/snippet}
+												</FormControl>
 						<FormFieldErrors />
 					</FormField>
 				</div>

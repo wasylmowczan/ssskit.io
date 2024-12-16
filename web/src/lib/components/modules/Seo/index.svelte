@@ -1,18 +1,28 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import { config } from '$lib/config-client';
 
-	export let title = `${config.appName} - create stunning AI images`;
-	export let description = `${config.appName} is a platform that allows you to create stunning AI images.`;
-	export let keywords = 'ai, image, ai image, ai image generator, ai image creator';
-	export let image = '/seo-image.png'; // TODO: change seo image
-	export let isProtected = false;
+	interface Props {
+		title?: any;
+		description?: any;
+		keywords?: string;
+		image?: string; // TODO: change seo image
+		isProtected?: boolean;
+	}
 
-	$: baseUrl = config.baseUrl || (browser ? window.location.origin : 'https://example.com'); // TODO: change baseUrl
-	$: path = $page.url.pathname;
-	$: fullUrl = `${baseUrl}${path}`;
-	$: fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
+	let {
+		title = `${config.appName} - create stunning AI images`,
+		description = `${config.appName} is a platform that allows you to create stunning AI images.`,
+		keywords = 'ai, image, ai image, ai image generator, ai image creator',
+		image = '/seo-image.png',
+		isProtected = false
+	}: Props = $props();
+
+	let baseUrl = $derived(config.baseUrl || (browser ? window.location.origin : 'https://example.com')); // TODO: change baseUrl
+	let path = $derived($page.url.pathname);
+	let fullUrl = $derived(`${baseUrl}${path}`);
+	let fullImageUrl = $derived(image.startsWith('http') ? image : `${baseUrl}${image}`);
 </script>
 
 <svelte:head>

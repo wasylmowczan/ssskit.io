@@ -15,12 +15,12 @@
 	import Switch from '$lib/components/ui/switch/switch.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { i18n } from '$lib/i18n';
-	let isAnnual = false;
+	let isAnnual = $state(false);
 
 	const title = m.LP_Pricing_Title();
 	const subtitle = m.LP_Pricing_Subtitle();
 
-	$: pricingTiers = [
+	let pricingTiers = $derived([
 		{
 			name: 'Free',
 			description: m.LP_Pricing_Free_Description(),
@@ -67,7 +67,7 @@
 			ctaText: m.LP_Pricing_Action(),
 			ctaLink: i18n.route('/login')
 		}
-	];
+	]);
 </script>
 
 <SectionContainer {title} {subtitle} id="pricing">
@@ -113,8 +113,7 @@
 					<ul class="mt-6 space-y-4">
 						{#each tier.features as feature}
 							<li class="flex items-start space-x-3">
-								<svelte:component
-									this={feature.icon}
+								<feature.icon
 									class="flex-shrink-0 h-5 w-5 text-primary mt-0.5"
 								/>
 								<span class="text-base">{feature.text}</span>

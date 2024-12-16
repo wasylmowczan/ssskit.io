@@ -8,6 +8,11 @@
 	import UserRoundPenIcon from '$lib/components/icons/common/user-round-pen.svelte';
 	import KeyboardIcon from '$lib/components/icons/common/keyboard.svelte';
 	import TrashIcon from '$lib/components/icons/common/trash-2.svelte';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const navigation = [
 		{
@@ -61,6 +66,6 @@
 		{/each}
 	</nav>
 	<div class="grid gap-6">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>

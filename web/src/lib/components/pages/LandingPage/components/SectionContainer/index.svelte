@@ -1,13 +1,27 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 
-	export let id: string = '';
-	export let title: string = '';
-	export let subtitle: string = '';
-	export let titleClass: string = '';
-	export let subtitleClass: string = '';
-	export let sectionClass: string = '';
-	export let contentClass: string = '';
+	interface Props {
+		id?: string;
+		title?: string;
+		subtitle?: string;
+		titleClass?: string;
+		subtitleClass?: string;
+		sectionClass?: string;
+		contentClass?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let {
+		id = '',
+		title = '',
+		subtitle = '',
+		titleClass = '',
+		subtitleClass = '',
+		sectionClass = '',
+		contentClass = '',
+		children
+	}: Props = $props();
 </script>
 
 <section {id} class={cn('mx-auto w-full px-4 py-12 pt-20', sectionClass)}>
@@ -22,6 +36,6 @@
 				{subtitle}
 			</p>
 		{/if}
-		<slot />
+		{@render children?.()}
 	</div>
 </section>

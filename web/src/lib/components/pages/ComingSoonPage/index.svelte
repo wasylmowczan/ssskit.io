@@ -11,7 +11,7 @@
 	import { ToggleConfetti } from './ToggleConfetti';
 	import { ThemeSwitcher } from '$lib/components/modules';
 
-	let timeLeft: { [key: string]: number } = {};
+	let timeLeft: { [key: string]: number } = $state({});
 	let timer: NodeJS.Timeout;
 
 	const title = 'Coming Soon';
@@ -54,14 +54,16 @@
 				<HoverCard.Root>
 					<HoverCard.Trigger>amazing.</HoverCard.Trigger>
 					<HoverCard.Content>
-						<!-- svelte-ignore a11y-img-redundant-alt -->
+						<!-- svelte-ignore a11y_img_redundant_alt -->
 						<img src={demoImage} alt="Demo Image" />
 					</HoverCard.Content>
 				</HoverCard.Root>
 			</span>
 			Stay tuned and celebrate with us!
 			<ToggleConfetti toggleOnce relative={false}>
-				<button slot="label" class="text-lg font-bold pt-6"> Click to Celebrate 🥳 </button>
+				{#snippet label()}
+								<button  class="text-lg font-bold pt-6"> Click to Celebrate 🥳 </button>
+							{/snippet}
 
 				<div
 					style="position: fixed; top: -50px; left: 0; height: 100vh; width: 100vw; display: flex; justify-content: center; overflow: hidden;"
@@ -89,8 +91,9 @@
 
 		<div class="mt-8 flex justify-center space-x-6">
 			{#each socialLinks as { name, url, icon }}
+				{@const SvelteComponent = icon}
 				<a href={url} target="_blank" rel="noopener noreferrer">
-					<svelte:component this={icon} customClass="w-6 h-6" />
+					<SvelteComponent customClass="w-6 h-6" />
 					<span class="sr-only">{name}</span>
 				</a>
 			{/each}

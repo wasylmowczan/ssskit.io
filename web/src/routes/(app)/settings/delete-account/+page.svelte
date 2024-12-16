@@ -16,7 +16,7 @@
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 
-	let loading = false;
+	let loading = $state(false);
 
 	const form = superForm(defaultValues(zod(DeleteUserSchema)), {
 		validators: zod(DeleteUserSchema),
@@ -43,10 +43,12 @@
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="word">
-				<FormControl let:attrs>
-					<FormLabel>{m.App_Settings_TypeDelete()}</FormLabel>
-					<Input {...attrs} autofocus bind:value={$formData.word} disabled={loading} />
-				</FormControl>
+				<FormControl >
+					{#snippet children({ attrs })}
+										<FormLabel>{m.App_Settings_TypeDelete()}</FormLabel>
+						<Input {...attrs} autofocus bind:value={$formData.word} disabled={loading} />
+														{/snippet}
+								</FormControl>
 				<FormFieldErrors />
 			</FormField>
 		</CardContent>

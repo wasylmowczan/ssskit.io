@@ -1,10 +1,21 @@
-<script>
+<script lang="ts">
 	import { tick } from 'svelte';
 
-	export let toggleOnce = false;
-	export let relative = true;
+	interface Props {
+		toggleOnce?: boolean;
+		relative?: boolean;
+		label?: import('svelte').Snippet;
+		children?: import('svelte').Snippet;
+	}
 
-	let active = false;
+	let {
+		toggleOnce = false,
+		relative = true,
+		label,
+		children
+	}: Props = $props();
+
+	let active = $state(false);
 
 	async function click() {
 		if (toggleOnce) {
@@ -18,14 +29,14 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<span on:click={click} class:relative>
-	<slot name="label" />
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<span onclick={click} class:relative>
+	{@render label?.()}
 
 	{#if active}
 		<div class="confetti">
-			<slot />
+			{@render children?.()}
 		</div>
 	{/if}
 </span>

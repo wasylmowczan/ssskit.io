@@ -5,10 +5,10 @@
 	import * as HoverCard from '$lib/components/ui/hover-card';
 	import { onMount } from 'svelte';
 
-	export let data;
+	let { data } = $props();
 
-	let urls: any[] = [];
-	let prompts: any[] = [];
+	let urls: any[] = $state([]);
+	let prompts: any[] = $state([]);
 
 	async function fetchImages() {
 		let images = await data.images;

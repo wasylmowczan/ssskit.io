@@ -1,9 +1,19 @@
-<script>
-	export let color = 'currentColor';
-	export let size = 24;
-	export let strokeWidth = 2;
-	export let isHovered = false;
-	export let classes = '';
+<script lang="ts">
+	interface Props {
+		color?: string;
+		size?: number;
+		strokeWidth?: number;
+		isHovered?: boolean;
+		classes?: string;
+	}
+
+	let {
+		color = 'currentColor',
+		size = 24,
+		strokeWidth = 2,
+		isHovered = $bindable(false),
+		classes = ''
+	}: Props = $props();
 
 	const keyboardPaths = [
 		{ id: 'key1', d: 'M10 8h.01', delay: 0 },
@@ -29,8 +39,8 @@
 	class={classes}
 	aria-label="keyboard"
 	role="img"
-	on:mouseenter={handleMouseEnter}
-	on:mouseleave={handleMouseLeave}
+	onmouseenter={handleMouseEnter}
+	onmouseleave={handleMouseLeave}
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

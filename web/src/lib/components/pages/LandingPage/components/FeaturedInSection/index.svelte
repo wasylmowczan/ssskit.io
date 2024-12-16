@@ -23,13 +23,14 @@
 <SectionContainer {title} {subtitle} id="seen-in" contentClass="max-w-6xl pb-12">
 	<div class="flex flex-wrap justify-center items-center gap-12 md:gap-16">
 		{#each logos as logo}
+			{@const SvelteComponent = logo?.src}
 			<a
 				href={logo?.url}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="w-32 h-32 flex items-center justify-center relative"
 			>
-				<svelte:component this={logo?.src} customClass="h-16 hover:text-primary" />
+				<SvelteComponent customClass="h-16 hover:text-primary" />
 			</a>
 		{/each}
 	</div>

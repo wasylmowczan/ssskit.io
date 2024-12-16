@@ -104,8 +104,9 @@
 				</div>
 				<div class="flex justify-center gap-4">
 					{#each socialMediaLinks as { platform, url, icon }}
+						{@const SvelteComponent = icon}
 						<a href={url} target="_blank" rel="noopener noreferrer">
-							<svelte:component this={icon} customClass="w-6 h-6" />
+							<SvelteComponent customClass="w-6 h-6" />
 							<span class="sr-only">{platform}</span>
 						</a>
 					{/each}

@@ -16,9 +16,9 @@
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 
-	export let data;
+	let { data } = $props();
 
-	let loading = false;
+	let loading = $state(false);
 
 	const form = superForm(data.form, {
 		validators: zod(UpdateEmailSchema),
@@ -45,16 +45,18 @@
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="email">
-				<FormControl let:attrs>
-					<FormLabel>{m.App_Settings_Email()}</FormLabel>
-					<Input
-						{...attrs}
-						autofocus
-						bind:value={$formData.email}
-						type="email"
-						disabled={loading}
-					/>
-				</FormControl>
+				<FormControl >
+					{#snippet children({ attrs })}
+										<FormLabel>{m.App_Settings_Email()}</FormLabel>
+						<Input
+							{...attrs}
+							autofocus
+							bind:value={$formData.email}
+							type="email"
+							disabled={loading}
+						/>
+														{/snippet}
+								</FormControl>
 				<FormFieldErrors errorClasses={m.App_PB_Email_Error()} />
 			</FormField>
 		</CardContent>

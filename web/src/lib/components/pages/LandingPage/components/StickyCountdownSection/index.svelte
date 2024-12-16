@@ -3,10 +3,10 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Clock, ArrowRight } from 'lucide-svelte';
 	import { config } from '$lib/config-client';
-	let days = 0,
-		hours = 0,
-		minutes = 0,
-		seconds = 0;
+	let days = $state(0),
+		hours = $state(0),
+		minutes = $state(0),
+		seconds = $state(0);
 
 	function updateCountdown() {
 		const launchDate = new Date(config.stickyCountdownDate).getTime();

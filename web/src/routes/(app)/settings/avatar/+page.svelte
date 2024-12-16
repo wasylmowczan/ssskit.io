@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { Card } from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import { FormControl, FormField } from '$lib/components/ui/form';
@@ -16,10 +18,10 @@
 	import { config } from '$lib/config-client.js';
 	import * as m from '$lib/paraglide/messages.js';
 
-	export let data;
+	let { data } = $props();
 
-	let loading = false;
-	let avatarPreview: string | null = null;
+	let loading = $state(false);
+	let avatarPreview: string | null = $state(null);
 
 	const form = superForm(data.form, {
 		dataType: 'json',
@@ -41,9 +43,12 @@
 
 	const { form: formData, enhance } = form;
 
-	$: currentAvatarUrl = data.user?.avatar
-		? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
-		: null;
+	let currentAvatarUrl;
+	run(() => {
+		currentAvatarUrl = data.user?.avatar
+			? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
+			: null;
+	});
 
 	function handleFileChange(event: Event) {
 		const target = event.target as HTMLInputElement;
@@ -101,7 +106,7 @@
 							{m.App_Settings_Change()}
 						</Button>
 						<input
-							on:change={handleFileChange}
+							onchange={handleFileChange}
 							id="upload"
 							hidden
 							type="file"

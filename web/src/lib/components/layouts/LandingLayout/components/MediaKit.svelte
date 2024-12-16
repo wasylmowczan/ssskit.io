@@ -1,6 +1,11 @@
 <script lang="ts">
 	import * as ContextMenu from '$lib/components/ui/context-menu';
 	import { ImageDown, Download } from 'lucide-svelte';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	function downloadSvg(filename: string) {
 		const link = document.createElement('a');
@@ -11,7 +16,7 @@
 </script>
 
 <ContextMenu.Root>
-	<ContextMenu.Trigger><slot /></ContextMenu.Trigger>
+	<ContextMenu.Trigger>{@render children?.()}</ContextMenu.Trigger>
 	<ContextMenu.Content>
 		<ContextMenu.Item on:click={() => downloadSvg('logo.svg')}>
 			<ImageDown class="w-4 h-4 mr-2" /> Download Logo SVG

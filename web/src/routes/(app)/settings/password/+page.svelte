@@ -16,9 +16,9 @@
 	import CardFooter from '$lib/components/ui/card/card-footer.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 
-	export let data;
+	let { data } = $props();
 
-	let loading = false;
+	let loading = $state(false);
 
 	const form = superForm(data.form, {
 		validators: zod(UpdatePasswordSchema),
@@ -46,35 +46,41 @@
 		</CardHeader>
 		<CardContent>
 			<FormField {form} name="oldPassword">
-				<FormControl let:attrs>
-					<FormLabel>{m.App_Settings_OldPassword()}</FormLabel>
-					<Input
-						autofocus
-						{...attrs}
-						bind:value={$formData.oldPassword}
-						type="password"
-						disabled={loading}
-					/>
-				</FormControl>
+				<FormControl >
+					{#snippet children({ attrs })}
+										<FormLabel>{m.App_Settings_OldPassword()}</FormLabel>
+						<Input
+							autofocus
+							{...attrs}
+							bind:value={$formData.oldPassword}
+							type="password"
+							disabled={loading}
+						/>
+														{/snippet}
+								</FormControl>
 				<FormFieldErrors />
 			</FormField>
 			<FormField {form} name="password">
-				<FormControl let:attrs>
-					<FormLabel>{m.App_Settings_NewPassword()}</FormLabel>
-					<Input {...attrs} bind:value={$formData.password} type="password" disabled={loading} />
-				</FormControl>
+				<FormControl >
+					{#snippet children({ attrs })}
+										<FormLabel>{m.App_Settings_NewPassword()}</FormLabel>
+						<Input {...attrs} bind:value={$formData.password} type="password" disabled={loading} />
+														{/snippet}
+								</FormControl>
 				<FormFieldErrors />
 			</FormField>
 			<FormField {form} name="passwordConfirm">
-				<FormControl let:attrs>
-					<FormLabel>{m.App_Settings_ConfirmNewPassword()}</FormLabel>
-					<Input
-						{...attrs}
-						bind:value={$formData.passwordConfirm}
-						type="password"
-						disabled={loading}
-					/>
-				</FormControl>
+				<FormControl >
+					{#snippet children({ attrs })}
+										<FormLabel>{m.App_Settings_ConfirmNewPassword()}</FormLabel>
+						<Input
+							{...attrs}
+							bind:value={$formData.passwordConfirm}
+							type="password"
+							disabled={loading}
+						/>
+														{/snippet}
+								</FormControl>
 				<FormFieldErrors />
 			</FormField>
 		</CardContent>
