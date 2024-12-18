@@ -22,7 +22,7 @@
 </script>
 
 <Sidebar.Group>
-	<!-- <Sidebar.GroupLabel>User</Sidebar.GroupLabel> -->
+	<Sidebar.GroupLabel>User Panel</Sidebar.GroupLabel>
 	<Sidebar.Menu>
 		{#each items as mainItem (mainItem.title)}
 			<Collapsible.Root open={mainItem.isActive}>

@@ -15,7 +15,7 @@ declare global {
 			pb: PocketBase;
 			user: User | null;
 		}
-		// interface PageData {}
+		//interface PageData {}
 		// interface Platform {}
 	}
 }

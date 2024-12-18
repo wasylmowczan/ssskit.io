@@ -1,64 +1,54 @@
 <script lang="ts">
+	import altAvatar from '$lib/assets/alt-avatar.svg';
 	import AppSidebar from '$lib/components/app-sidebar.svelte';
-	import * as Sidebar from '$lib/components/ui/sidebar';
-	import { config } from '$lib/config-client.js';
-	import AltAvatar from '$lib/assets/alt-avatar.svg';
-	import { i18n } from '$lib/i18n';
-	import { languageTag } from '$lib/paraglide/runtime.js';
-	import HomeIcon from '$lib/components/icons/common/home.svelte';
-	import GridIcon from '$lib/components/icons/common/grid.svelte';
+	import { ThemeSwitcher } from '$lib/components/modules';
+	import { Command } from 'lucide-svelte';
+	import { Separator } from '$lib/components/ui/separator/index.js';
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import Frame from 'lucide-svelte/icons/frame';
 	import LifeBuoy from 'lucide-svelte/icons/life-buoy';
 	import Send from 'lucide-svelte/icons/send';
-	import { ChartPie, Frame } from 'lucide-svelte';
-	import { ThemeSwitcher } from '$lib/components/modules';
+	import HomeIcon from '$lib/components/icons/common/home.svelte';
+	import GridIcon from '$lib/components/icons/common/grid.svelte';
+	import { config } from '$lib/config-client';
+	import * as m from '$lib/paraglide/messages.js';
 
-	const { data, children } = $props();
-	let currentAvatarUrl = $derived(
-		data.user?.avatar
-			? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
-			: AltAvatar
-	);
+	let { data, children } = $props();
 
-	let menu = {
+	const currentAvatarUrl = data.user?.avatar
+		? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
+		: altAvatar;
+
+	const menu = {
 		navMain: [
 			{
-				title: 'Dashboard',
-				url: i18n.route(`${languageTag()}/dashboard`),
+				title: m.App_Dashboard(),
+				url: '/dashboard',
 				icon: HomeIcon,
 				isActive: true
 			},
 			{
-				title: 'Gallery',
-				url: i18n.route(`${languageTag()}/gallery`),
+				title: m.App_Gallery(),
+				url: '/gallery',
 				icon: GridIcon
 			}
 		],
 		navAdmin: [
 			{
-				name: 'Design Engineering',
+				name: 'Users',
 				url: '#',
 				icon: Frame
-			},
-			{
-				name: 'Sales & Marketing',
-				url: '#',
-				icon: ChartPie
-			},
-			{
-				name: 'Travel',
-				url: '#',
-				icon: Map
 			}
 		],
 		navSecondary: [
 			{
-				title: 'Support',
-				url: '#',
+				title: m.LP_Footer_Contact(),
+				url: '/contact',
 				icon: LifeBuoy
 			},
 			{
-				title: 'Feedback',
-				url: '#',
+				title: m.LP_Footer_Roadmap(),
+				url: '/roadmap',
 				icon: Send
 			}
 		],
@@ -73,11 +63,18 @@
 <Sidebar.Provider>
 	<AppSidebar {menu} />
 	<Sidebar.Inset>
-		<header class="flex h-16 shrink-0 items-center gap-2">
+		<header class="flex h-16 shrink-0 items-center justify-between gap-2">
 			<div class="flex items-center gap-2 px-4">
 				<Sidebar.Trigger class="-ml-1" />
+				<Separator orientation="vertical" class="mr-2 h-6" />
+				<Command size={16} /> + B
+			</div>
+			<div class="flex h-8 shrink-0 gap-2 px-4">
+				<ThemeSwitcher />
 			</div>
 		</header>
-		{@render children?.()}
+		<div class="px-6">
+			{@render children?.()}
+		</div>
 	</Sidebar.Inset>
 </Sidebar.Provider>

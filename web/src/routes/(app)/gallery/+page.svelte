@@ -34,12 +34,14 @@
 		<a href="/dashboard">Generate some images in the <span class="font-bold">Dashboard</span></a>
 	</div>
 {/if}
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
 	{#each urls as url, index}
 		<div class="flex flex-col p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow">
 			<div class="mb-2 flex flex-col items-center justify-center">
 				<HoverCard.Root>
-					<HoverCard.Trigger class="max-w-full truncate text-muted-foreground">{prompts[index]}</HoverCard.Trigger>
+					<HoverCard.Trigger class="max-w-full truncate text-muted-foreground"
+						>{prompts[index]}</HoverCard.Trigger
+					>
 					<HoverCard.Content>"{prompts[index]}"</HoverCard.Content>
 				</HoverCard.Root>
 			</div>

@@ -14,14 +14,9 @@
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import CardFooter from '$lib/components/ui/card/card-footer.svelte';
-	import type { PageData } from './$types';
 	import * as m from '$lib/paraglide/messages.js';
 
-	interface Props {
-		data: PageData;
-	}
-
-	let { data }: Props = $props();
+	let { data } = $props();
 	let loading = $state(false);
 
 	const form = superForm(data.form, {

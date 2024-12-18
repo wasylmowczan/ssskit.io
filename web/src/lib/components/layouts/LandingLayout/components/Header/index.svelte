@@ -9,9 +9,9 @@
 
 	interface Props {
 		menuItems: {
-		name: string;
-		href: string;
-	}[];
+			name: string;
+			href: string;
+		}[];
 	}
 
 	let { menuItems }: Props = $props();
@@ -22,14 +22,12 @@
 >
 	<div class="flex gap-2 items-center">
 		<Sheet.Root>
-			<Sheet.Trigger asChild >
-				{#snippet children({ builder })}
-								<Button variant="outline" size="icon" class="shrink-0 md:hidden" builders={[builder]}>
-						<Menu class="h-5 w-5" />
-						<span class="sr-only">Toggle navigation menu</span>
-					</Button>
-											{/snippet}
-						</Sheet.Trigger>
+			<Sheet.Trigger>
+				<Button variant="outline" size="icon" class="shrink-0 md:hidden">
+					<Menu class="h-5 w-5" />
+					<span class="sr-only">Toggle navigation menu</span>
+				</Button>
+			</Sheet.Trigger>
 			<Sheet.Content side="left">
 				<nav class="grid gap-6 text-lg font-medium">
 					<Logo />

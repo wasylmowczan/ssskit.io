@@ -21,7 +21,7 @@
 		"lucide": "^0.468.0",
 		"pocketbase": "^0.21.1",
 		"stripe": "^16.8.0",
-		"svelte": "^5.14.0",
+		"svelte": "^5.14.3",
 		"svelte-inview": "^4.0.4",
 		"svelte-motion": "^0.12.2"
 	},
