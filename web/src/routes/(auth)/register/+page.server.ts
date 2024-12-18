@@ -34,6 +34,6 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		redirect(303, i18n.route(`${languageTag()}/login`));
+		redirect(303, '/login');
 	}
 };

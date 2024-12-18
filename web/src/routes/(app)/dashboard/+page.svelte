@@ -11,6 +11,7 @@
 	import { zod } from 'sveltekit-superforms/adapters';
 	import { promptSchema } from '$lib/schemas.js';
 	import { superForm } from 'sveltekit-superforms';
+	import * as m from '$lib/paraglide/messages.js';
 
 	let { data }: Props = $props();
 
@@ -32,10 +33,10 @@
 
 	// Example prompts data
 	const prompts = [
-		{ text: 'Cute Spiderman on a bike', color: 'text-pink-100' },
-		{ text: 'Cute ninja karate', color: 'text-green-500' },
-		{ text: 'Symmetrical Mandala art, diamonds design', color: 'text-yellow-500' },
-		{ text: 'Dinosaur riding a bike', color: 'text-blue-500' }
+		{ text: 'Cute Spiderman on a bike' },
+		{ text: 'Cute ninja karate' },
+		{ text: 'Symmetrical Mandala art, diamonds design' },
+		{ text: 'Dinosaur riding a bike' }
 	];
 
 	const { form: formData, enhance } = form;
@@ -45,8 +46,13 @@
 	<div class="max-w-4xl mx-auto space-y-8">
 		<!-- Header -->
 		<div class="text-center space-y-4">
-			<h1 class="text-3xl md:text-4xl font-bold">Generate AI images</h1>
-			<p class="text-muted-foreground">Try one of these prompts to get started</p>
+			<h1 class="text-3xl md:text-4xl font-bold">{m.App_Dashboard_Title()}</h1>
+			<p class="text-muted-foreground">
+				{m.App_Dashboard_Example_Title()}
+				<Button variant="link" href="/gallery" class="w-full"
+					>{m.App_Dashboard_Example_Link()}</Button
+				>
+			</p>
 		</div>
 
 		<!-- Example Prompts Section -->
@@ -61,13 +67,13 @@
 					<FormField {form} name="prompt">
 						<FormControl>
 							{#snippet children({ props })}
-								<FormLabel>Prompt</FormLabel>
+								<FormLabel>{m.App_Dashboard_Input_Label()}</FormLabel>
 								<Input
 									type="text"
 									autofocus
 									{...props}
 									bind:value={$formData.prompt}
-									placeholder="e.g. Spiderman on a bike"
+									placeholder={m.App_Dashboard_Input_Placeholder()}
 								/>
 							{/snippet}
 						</FormControl>
@@ -77,7 +83,7 @@
 						{#if loading}
 							<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
 						{/if}
-						Generate Image
+						{m.App_Dashboard_Generate()}
 					</Button>
 				</CardContent>
 			</form>

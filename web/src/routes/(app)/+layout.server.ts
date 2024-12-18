@@ -5,7 +5,7 @@ import { languageTag } from '$lib/paraglide/runtime';
 
 export const load: LayoutServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
-		redirect(303, i18n.route(`${languageTag()}/login`));
+		redirect(303, '/login');
 	}
 
 	if (locals.user) {

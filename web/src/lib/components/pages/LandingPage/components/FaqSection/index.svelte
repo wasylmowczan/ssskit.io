@@ -1,13 +1,7 @@
 <script lang="ts">
-	import {
-		Accordion,
-		AccordionContent,
-		AccordionItem,
-		AccordionTrigger
-	} from '$lib/components/ui/accordion/index';
+	import * as Accordion from '$lib/components/ui/accordion/index';
 	import { SectionContainer } from '..';
 	import * as m from '$lib/paraglide/messages.js';
-	import { i18n } from '$lib/i18n';
 
 	const title = m.LP_FAQ_Title();
 	const subtitle = m.LP_FAQ_Subtitle();
@@ -41,20 +35,20 @@
 </script>
 
 <SectionContainer {title} {subtitle} id="faq" contentClass="max-w-3xl">
-	<Accordion class="w-full space-y-2">
+	<Accordion.Root type="single" class="w-full space-y-2">
 		{#each faqs as faq, index}
-			<AccordionItem value={`item-${index}`} class="border rounded-lg">
-				<AccordionTrigger
+			<Accordion.Item value={`item-${index}`} class="border rounded-lg">
+				<Accordion.Trigger
 					class="text-left items-start px-4 hover:no-underline hover:bg-muted/50 transition-colors"
 				>
 					<span>{faq.question}</span>
-				</AccordionTrigger>
-				<AccordionContent>
+				</Accordion.Trigger>
+				<Accordion.Content>
 					<div class="p-4 text-muted-foreground">
 						{faq.answer}
 					</div>
-				</AccordionContent>
-			</AccordionItem>
+				</Accordion.Content>
+			</Accordion.Item>
 		{/each}
-	</Accordion>
+	</Accordion.Root>
 </SectionContainer>

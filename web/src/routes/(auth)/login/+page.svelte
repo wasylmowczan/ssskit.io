@@ -13,7 +13,6 @@
 	import FormLabel from '$lib/components/ui/form/form-label.svelte';
 	import FormFieldErrors from '$lib/components/ui/form/form-field-errors.svelte';
 	import * as m from '$lib/paraglide/messages.js';
-	import { i18n } from '$lib/i18n.js';
 	import { languageTag } from '$lib/paraglide/runtime.js';
 	import { Seo } from '$lib/components/modules';
 	import { config } from '$lib/config-client';
@@ -66,9 +65,9 @@
 			<div class="grid gap-4">
 				<div class="grid gap-2">
 					<FormField {form} name="login">
-						<FormControl >
+						<FormControl>
 							{#snippet children({ props })}
-														<FormLabel>{m.Login_Email()}</FormLabel>
+								<FormLabel>{m.Login_Email()}</FormLabel>
 								<Input {...props} bind:value={$formData.login} />
 							{/snippet}
 						</FormControl>
@@ -84,9 +83,9 @@
 				</div>
 				<div class="grid gap-2">
 					<FormField {form} name="password">
-						<FormControl >
+						<FormControl>
 							{#snippet children({ props })}
-														<FormLabel>{m.Login_Password()}</FormLabel>
+								<FormLabel>{m.Login_Password()}</FormLabel>
 								<div class="relative">
 									<Input
 										{...props}
@@ -110,8 +109,8 @@
 										</span>
 									</Button>
 								</div>
-																				{/snippet}
-												</FormControl>
+							{/snippet}
+						</FormControl>
 						<FormFieldErrors />
 						<div class="flex flex-col">
 							<a href="/forgot-password" class="text-sm text-muted-foreground underline">
@@ -124,7 +123,7 @@
 			</div>
 			<div class="mt-4 text-sm text-center">
 				{m.Login_DontHaveAccount()}
-				<a href={i18n.route('register')} class="underline">{m.Login_Register()}</a>
+				<a href="/register" class="underline">{m.Login_Register()}</a>
 			</div>
 		</form>
 	</CardContent>

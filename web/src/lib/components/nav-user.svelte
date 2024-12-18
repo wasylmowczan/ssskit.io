@@ -1,15 +1,16 @@
 <script lang="ts">
 	import BadgeCheck from 'lucide-svelte/icons/badge-check';
-	import Bell from 'lucide-svelte/icons/bell';
 	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
 	import CreditCard from 'lucide-svelte/icons/credit-card';
 	import LogOut from 'lucide-svelte/icons/log-out';
-	import Sparkles from 'lucide-svelte/icons/sparkles';
 
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
+	import { languageTag } from '$lib/paraglide/runtime';
+	import { goto } from '$app/navigation';
+	import * as m from '$lib/paraglide/messages.js';
 
 	let {
 		user
@@ -66,30 +67,24 @@
 				</DropdownMenu.Label>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Group>
-					<DropdownMenu.Item>
-						<Sparkles />
-						Upgrade to Pro
-					</DropdownMenu.Item>
-				</DropdownMenu.Group>
-				<DropdownMenu.Separator />
-				<DropdownMenu.Group>
-					<DropdownMenu.Item>
+					<DropdownMenu.Item onclick={() => goto(`/${languageTag()}/settings/avatar`)}>
 						<BadgeCheck />
-						Account
+						{m.App_User_Account()}
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
 						<CreditCard />
-						Billing
-					</DropdownMenu.Item>
-					<DropdownMenu.Item>
-						<Bell />
-						Notifications
+						{m.App_User_Billing()}
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
-				<DropdownMenu.Item>
+				<DropdownMenu.Item
+					onclick={async () => {
+						await fetch('/api/logout');
+						goto(`/${languageTag()}`);
+					}}
+				>
 					<LogOut />
-					Log out
+					{m.App_User_Logout()}
 				</DropdownMenu.Item>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>

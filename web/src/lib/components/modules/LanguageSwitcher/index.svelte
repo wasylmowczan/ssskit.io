@@ -20,7 +20,7 @@
 </script>
 
 <Select.Root type="single" name="language" bind:value>
-	<Select.Trigger class="w-24">
+	<Select.Trigger class="w-20">
 		<LanguageIcon />
 		{triggerContent}
 	</Select.Trigger>

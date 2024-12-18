@@ -1,7 +1,7 @@
 <script lang="ts">
 	import altAvatar from '$lib/assets/alt-avatar.svg';
 	import AppSidebar from '$lib/components/app-sidebar.svelte';
-	import { ThemeSwitcher } from '$lib/components/modules';
+	import { LanguageSwitcher, ThemeSwitcher } from '$lib/components/modules';
 	import { Command } from 'lucide-svelte';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
@@ -69,8 +69,9 @@
 				<Separator orientation="vertical" class="mr-2 h-6" />
 				<Command size={16} /> + B
 			</div>
-			<div class="flex h-8 shrink-0 gap-2 px-4">
+			<div class="flex items-center gap-4 px-4">
 				<ThemeSwitcher />
+				<LanguageSwitcher />
 			</div>
 		</header>
 		<div class="px-6">

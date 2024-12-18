@@ -4,7 +4,6 @@
 	// Define props type
 	type Prompt = {
 		text: string;
-		color: string;
 	};
 
 	// Component props using $props rune

@@ -19,7 +19,7 @@
 	<Sidebar.Menu>
 		{#each navAdmin as item (item.name)}
 			<Sidebar.MenuItem>
-				<Sidebar.MenuButton>
+				<Sidebar.MenuButton isActive>
 					{#snippet child({ props })}
 						<a href={item.url} {...props}>
 							<item.icon />

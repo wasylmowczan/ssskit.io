@@ -193,12 +193,15 @@
     "RequestVerification_GoBackTo": "Wróć do:",
     "RequestVerification_Toast_Success": "Jeśli istnieje konto dla podanego emaila i nie zostało jeszcze zweryfikowane, email weryfikacyjny został wysłany. Sprawdź swoją pocztę email i folder spamu.",
     "RequestVerification_Toast_Failed": "Nie udało się wysłać emaila weryfikacyjnego.",
-    "App_Dashboard_Title": "Generuj obrazy z Twojego promptu",
-    "App_Dashboard_Example_Title": "Spróbuj tego promptu, aby zacząć",
-    "App_Dashboard_Example_Prompt": "Forest with many trees and green grass",
-    "App_Dashboard_Example_Button": "Spróbuj teraz 👇",
-    "App_Dashboard_Input_Placeholder": "np. A cat in a hat",
-    "App_Dashboard_Generate": "Generuj",
+    "App_Dashboard_Title": "Generuj AI obrazy",
+    "App_Dashboard_Example_Title": "Spróbuj jednego z tych promptów, aby zacząć",
+    "App_Dashboard_Example_Link": "lub Przejdź do Galerii",
+    "App_Dashboard_Input_Label": "Prompt",
+    "App_Dashboard_Input_Placeholder": "np. Pies na rowerze",
+    "App_Dashboard_Generate": "Generuj Obraz",
     "App_Dashboard_Images_Title": "Ostatnio wygenerowane obrazy:",
-    "App_Gallery": "Galeria"
+    "App_Gallery": "Galeria",
+    "App_User_Account": "Konto",
+    "App_User_Billing": "Płatności",
+    "App_User_Logout": "Wyloguj"
 }

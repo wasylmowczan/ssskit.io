@@ -32,7 +32,7 @@
 				{ text: m.LP_Pricing_Description_PersonalUse(), icon: Signature }
 			],
 			ctaText: 'Get Started',
-			ctaLink: i18n.route('/login')
+			ctaLink: '/login'
 		},
 		{
 			name: 'Pro',
@@ -49,7 +49,7 @@
 			],
 			highlighted: true,
 			ctaText: 'Get Started',
-			ctaLink: i18n.route('/login')
+			ctaLink: '/login'
 		},
 		{
 			name: 'Premium',
@@ -65,7 +65,7 @@
 				{ text: m.LP_Pricing_Description_CommercialUse(), icon: Signature }
 			],
 			ctaText: m.LP_Pricing_Action(),
-			ctaLink: i18n.route('/login')
+			ctaLink: '/login'
 		}
 	]);
 </script>
@@ -73,7 +73,7 @@
 <SectionContainer {title} {subtitle} id="pricing">
 	<p class="font-bold w-full flex justify-center gap-2 items-center">
 		{m.LP_Pricing_Month()}
-		<Switch includeInput bind:checked={isAnnual} />
+		<Switch bind:checked={isAnnual} />
 		{m.LP_Pricing_Year()}
 	</p>
 	<div class="mt-12 space-y-4 sm:space-y-0 sm:grid md:grid-cols-3 sm:gap-6 lg:max-w-7xl lg:mx-auto">
@@ -113,9 +113,7 @@
 					<ul class="mt-6 space-y-4">
 						{#each tier.features as feature}
 							<li class="flex items-start space-x-3">
-								<feature.icon
-									class="flex-shrink-0 h-5 w-5 text-primary mt-0.5"
-								/>
+								<feature.icon class="flex-shrink-0 h-5 w-5 text-primary mt-0.5" />
 								<span class="text-base">{feature.text}</span>
 							</li>
 						{/each}
