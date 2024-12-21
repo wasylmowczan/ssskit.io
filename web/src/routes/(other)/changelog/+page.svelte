@@ -25,6 +25,19 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-21',
+			logs: [
+				{
+					type: LogType.NewFeature,
+					items: [
+						'Added Feedback page to the app.',
+						'Added email handling using Resend.',
+						'Added email template for feedback.'
+					]
+				}
+			]
+		},
+		{
 			date: '2024-12-16',
 			logs: [
 				{

@@ -12,6 +12,7 @@
 	import { promptSchema } from '$lib/schemas.js';
 	import { superForm } from 'sveltekit-superforms';
 	import * as m from '$lib/paraglide/messages.js';
+	import { Confetti } from 'svelte-confetti';
 
 	let { data }: Props = $props();
 
@@ -81,6 +82,7 @@
 					</FormField>
 					<Button type="submit" class="w-full mt-2" disabled={loading}>
 						{#if loading}
+							<Confetti />
 							<LoaderCircle class="mr-2 h-4 w-4 animate-spin" />
 						{/if}
 						{m.App_Dashboard_Generate()}

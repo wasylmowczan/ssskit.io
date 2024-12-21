@@ -42,8 +42,8 @@
 		],
 		navSecondary: [
 			{
-				title: m.LP_Footer_Contact(),
-				url: '/contact',
+				title: m.App_Feedback(),
+				url: '/feedback',
 				icon: LifeBuoy
 			},
 			{

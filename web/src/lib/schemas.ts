@@ -83,3 +83,7 @@ export const emailSchema = z.object({
 export const promptSchema = z.object({
 	prompt: z.string().min(3, { message: 'Prompt must be at least 3 characters' })
 });
+
+export const feedbackSchema = z.object({
+	feedback: z.string().min(3, { message: 'Feedback must be at least 3 characters' })
+});

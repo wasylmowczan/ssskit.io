@@ -11,5 +11,6 @@ export const config = {
 	stickyCountdownDate: '2024-12-31',
 	stickyCountdownText: 'Early-Bird',
 	showComingSoon: false,
-	comingSoonDate: '2026-01-01' // TODO: Configure coming soon date
+	comingSoonDate: '2026-01-01', // TODO: Configure coming soon date
+	adminEmail: env.PUBLIC_ADMIN_EMAILs
 };
