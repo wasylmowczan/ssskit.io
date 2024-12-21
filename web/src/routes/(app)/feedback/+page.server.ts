@@ -4,6 +4,9 @@ import { setError, superValidate } from 'sveltekit-superforms';
 import { error, fail, redirect, type Actions } from '@sveltejs/kit';
 import { feedbackSchema } from '$lib/schemas';
 import { ClientResponseError } from 'pocketbase';
+import FeedbackEmail from '$lib/emails/feedback.svelte';
+import { sendEmail } from '$lib/mailer';
+import { config } from '$lib/config-client';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
@@ -31,6 +34,17 @@ export const actions: Actions = {
 			await locals.pb.collection('feedback').create({
 				name: locals.user?.id,
 				feedback: form.data.feedback
+			});
+			sendEmail({
+				to: config.adminEmail || 'onboarding@resend.dev',
+				subject:
+					'Feedback from ' + (locals.user.name || locals.user.username) + ' on ' + config.appName,
+				from: locals.user.email || 'delivered@resend.dev',
+				template: FeedbackEmail,
+				props: {
+					name: locals.user.name || locals.user.username,
+					feedback: form.data.feedback
+				}
 			});
 			return { form };
 		} catch (err) {
