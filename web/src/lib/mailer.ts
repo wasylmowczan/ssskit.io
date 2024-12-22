@@ -38,3 +38,27 @@ export const sendEmail = async ({
 		console.error('Unexpected error while sending email:', e);
 	}
 };
+
+export const addNewAudienceContact = async ({
+	email,
+	firstName,
+	lastName,
+	unsubscribed = false,
+	audienceId = config.resendAudienceId || ''
+}: {
+	email: string;
+	firstName?: string;
+	lastName?: string;
+	unsubscribed?: boolean;
+	audienceId: string;
+}) => {
+	const resend = new Resend(config.resendApiKey);
+
+	await resend.contacts.create({
+		email,
+		firstName,
+		lastName,
+		unsubscribed,
+		audienceId
+	});
+};

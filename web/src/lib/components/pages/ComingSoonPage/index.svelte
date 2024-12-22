@@ -62,8 +62,8 @@
 			Stay tuned and celebrate with us!
 			<ToggleConfetti toggleOnce relative={false}>
 				{#snippet label()}
-								<button  class="text-lg font-bold pt-6"> Click to Celebrate 🥳 </button>
-							{/snippet}
+					<button class="text-lg font-bold pt-6"> Click to Celebrate 🥳 </button>
+				{/snippet}
 
 				<div
 					style="position: fixed; top: -50px; left: 0; height: 100vh; width: 100vw; display: flex; justify-content: center; overflow: hidden;"
@@ -98,7 +98,7 @@
 				</a>
 			{/each}
 		</div>
-		<div class="mt-8">
+		<div class="mt-8 flex justify-center">
 			<ThemeSwitcher />
 		</div>
 	</div>
