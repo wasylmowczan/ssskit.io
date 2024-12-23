@@ -6,7 +6,8 @@ import { feedbackSchema } from '$lib/schemas';
 import { ClientResponseError } from 'pocketbase';
 import FeedbackEmail from '$lib/emails/feedback.svelte';
 import { sendEmail } from '$lib/mailer';
-import { config } from '$lib/config-client';
+import { config as configServer } from '$lib/config-server';
+import { config as configClient } from '$lib/config-client';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
@@ -36,9 +37,12 @@ export const actions: Actions = {
 				feedback: form.data.feedback
 			});
 			sendEmail({
-				to: config.adminEmail || 'onboarding@resend.dev',
+				to: configServer.adminEmail || 'onboarding@resend.dev',
 				subject:
-					'Feedback from ' + (locals.user.name || locals.user.username) + ' on ' + config.appName,
+					'Feedback from ' +
+					(locals.user.name || locals.user.username) +
+					' on ' +
+					configClient.appName,
 				from: locals.user.email || 'delivered@resend.dev',
 				template: FeedbackEmail,
 				props: {

@@ -8,7 +8,6 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		// adapter-node is better suited for Docker environments
 		adapter: adapter()
 	}
 };
