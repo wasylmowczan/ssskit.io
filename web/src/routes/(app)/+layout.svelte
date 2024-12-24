@@ -1,7 +1,7 @@
 <script lang="ts">
 	import altAvatar from '$lib/assets/alt-avatar.svg';
 	import AppSidebar from '$lib/components/app-sidebar.svelte';
-	import { LanguageSwitcher, ThemeSwitcher } from '$lib/components/modules';
+	import { LanguageSwitcher, Seo, ThemeSwitcher } from '$lib/components/modules';
 	import { Command } from 'lucide-svelte';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
@@ -11,6 +11,7 @@
 	import HomeIcon from '$lib/components/icons/common/home.svelte';
 	import GridIcon from '$lib/components/icons/common/grid.svelte';
 	import { config } from '$lib/config-client';
+	import posthog from 'posthog-js';
 	import * as m from '$lib/paraglide/messages.js';
 
 	let { data, children } = $props();
@@ -58,8 +59,14 @@
 			avatar: currentAvatarUrl
 		}
 	};
+
+	posthog.identify(data.user?.email, {
+		email: data.user?.email,
+		name: data.user?.name
+	});
 </script>
 
+<Seo />
 <Sidebar.Provider>
 	<AppSidebar {menu} />
 	<Sidebar.Inset>

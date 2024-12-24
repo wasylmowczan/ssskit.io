@@ -25,6 +25,15 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-24',
+			logs: [
+				{
+					type: LogType.NewFeature,
+					items: ['Added integration with PostHog for analytics.']
+				}
+			]
+		},
+		{
 			date: '2024-12-21',
 			logs: [
 				{

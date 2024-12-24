@@ -20,10 +20,10 @@
 		"faker": "^6.6.6",
 		"lucide": "^0.468.0",
 		"pocketbase": "^0.21.1",
+		"posthog-js": "^1.203.1",
 		"resend": "^4.0.1",
 		"stripe": "^16.8.0",
 		"svelte": "^5.14.3",
-		"svelte-email": "^0.0.4",
 		"svelte-inview": "^4.0.4",
 		"svelte-motion": "^0.12.2"
 	},

@@ -11,6 +11,7 @@
 	import { languageTag } from '$lib/paraglide/runtime';
 	import { goto } from '$app/navigation';
 	import * as m from '$lib/paraglide/messages.js';
+	import posthog from 'posthog-js';
 
 	let {
 		user
@@ -80,6 +81,7 @@
 				<DropdownMenu.Item
 					onclick={async () => {
 						await fetch('/api/logout');
+						posthog.reset();
 						goto(`/${languageTag()}`);
 					}}
 				>
