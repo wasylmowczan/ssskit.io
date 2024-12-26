@@ -11,7 +11,7 @@
 	import HomeIcon from '$lib/components/icons/common/home.svelte';
 	import GridIcon from '$lib/components/icons/common/grid.svelte';
 	import { config } from '$lib/config-client';
-	import posthog from 'posthog-js';
+	import { posthog } from 'posthog-js';
 	import * as m from '$lib/paraglide/messages.js';
 
 	let { data, children } = $props();
