@@ -25,6 +25,15 @@
 
 	const changelog: ChangelogEntry[] = [
 		{
+			date: '2024-12-27',
+			logs: [
+				{
+					type: LogType.NewFeature,
+					items: ['Added Admin Dashboard with Users table.']
+				}
+			]
+		},
+		{
 			date: '2024-12-24',
 			logs: [
 				{

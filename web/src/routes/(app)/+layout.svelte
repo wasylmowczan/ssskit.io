@@ -5,9 +5,9 @@
 	import { Command } from 'lucide-svelte';
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import Frame from 'lucide-svelte/icons/frame';
 	import LifeBuoy from 'lucide-svelte/icons/life-buoy';
 	import Send from 'lucide-svelte/icons/send';
+	import UsersIcon from '$lib/components/icons/common/users.svelte';
 	import HomeIcon from '$lib/components/icons/common/home.svelte';
 	import GridIcon from '$lib/components/icons/common/grid.svelte';
 	import { config } from '$lib/config-client';
@@ -20,27 +20,35 @@
 		? `${config.pbUrl}/api/files/${data.user.collectionId}/${data.user.id}/${data.user.avatar}`
 		: altAvatar;
 
+	let showNavAdmin = data.user?.username === 'superadmin';
+
 	const menu = {
-		navMain: [
-			{
-				title: m.App_Dashboard(),
-				url: '/dashboard',
-				icon: HomeIcon,
-				isActive: true
-			},
-			{
-				title: m.App_Gallery(),
-				url: '/gallery',
-				icon: GridIcon
-			}
-		],
-		navAdmin: [
-			{
-				name: 'Users',
-				url: '#',
-				icon: Frame
-			}
-		],
+		navMain: {
+			label: m.App_UserPanel(),
+			items: [
+				{
+					title: m.App_Dashboard(),
+					url: '/dashboard',
+					icon: HomeIcon,
+					isActive: true
+				},
+				{
+					title: m.App_Gallery(),
+					url: '/gallery',
+					icon: GridIcon
+				}
+			]
+		},
+		navAdmin: {
+			label: m.App_AdminPanel(),
+			items: [
+				{
+					name: m.App_Users(),
+					url: '/admin/users',
+					icon: UsersIcon
+				}
+			]
+		},
 		navSecondary: [
 			{
 				title: m.App_Feedback(),
@@ -68,7 +76,7 @@
 
 <Seo />
 <Sidebar.Provider>
-	<AppSidebar {menu} />
+	<AppSidebar {menu} {showNavAdmin} />
 	<Sidebar.Inset>
 		<header class="flex h-16 shrink-0 items-center justify-between gap-2">
 			<div class="flex items-center gap-2 px-4">

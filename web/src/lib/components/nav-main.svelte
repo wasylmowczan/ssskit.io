@@ -5,27 +5,30 @@
 	import ChevronRight from 'lucide-svelte/icons/chevron-right';
 
 	let {
-		items
+		navMain
 	}: {
-		items: {
-			title: string;
-			url: string;
-			// This should be `Component` after lucide-svelte updates types
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			icon: any;
-			isActive?: boolean;
-			items?: {
+		navMain: {
+			label: string;
+			items: {
 				title: string;
 				url: string;
+				// This should be `Component` after lucide-svelte updates types
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				icon: any;
+				isActive?: boolean;
+				items?: {
+					title: string;
+					url: string;
+				}[];
 			}[];
-		}[];
+		};
 	} = $props();
 </script>
 
 <Sidebar.Group>
-	<Sidebar.GroupLabel>User Panel</Sidebar.GroupLabel>
+	<Sidebar.GroupLabel>{navMain.label}</Sidebar.GroupLabel>
 	<Sidebar.Menu>
-		{#each items as mainItem (mainItem.title)}
+		{#each navMain.items as mainItem (mainItem.title)}
 			<Collapsible.Root open={mainItem.isActive}>
 				{#snippet child({ props })}
 					<Sidebar.MenuItem {...props}>

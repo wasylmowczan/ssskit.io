@@ -5,23 +5,12 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { PageServerLoad } from './$types';
 
-import PocketBase from 'pocketbase';
-
-const pb = new PocketBase(config.pocketbaseUrl);
-
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/login');
 	}
 
-	const images =
-		(await pb.collection('images').getFullList({
-			filter: `owner = "${locals.user?.id}"`,
-			sort: '-created'
-		})) || [];
-
 	return {
-		images,
 		form: await superValidate(zod(promptSchema))
 	};
 };
@@ -66,7 +55,7 @@ export const actions: Actions = {
 
 		// save the blob to pocketbase
 		try {
-			await pb.collection('images').create({
+			await locals.pb.collection('images').create({
 				image: imageBlob,
 				owner: locals.user?.id,
 				prompt: prompt

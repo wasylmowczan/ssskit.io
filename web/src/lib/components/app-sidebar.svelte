@@ -10,8 +10,9 @@
 	let {
 		menu,
 		ref = $bindable(null),
+		showNavAdmin,
 		...restProps
-	}: ComponentProps<typeof Sidebar.Root> & { menu: any } = $props();
+	}: ComponentProps<typeof Sidebar.Root> & { menu: any; showNavAdmin?: boolean } = $props();
 </script>
 
 <Sidebar.Root bind:ref variant="inset" {...restProps}>
@@ -25,8 +26,10 @@
 		</Sidebar.Menu>
 	</Sidebar.Header>
 	<Sidebar.Content>
-		<NavMain items={menu.navMain} />
-		<!-- <NavAdmin navAdmin={menu.navAdmin} /> -->
+		<NavMain navMain={menu.navMain} />
+		{#if showNavAdmin}
+			<NavAdmin navAdmin={menu.navAdmin} />
+		{/if}
 		<NavSecondary items={menu.navSecondary} class="mt-auto" />
 	</Sidebar.Content>
 	<Sidebar.Footer>
