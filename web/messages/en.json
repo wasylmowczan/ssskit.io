@@ -226,5 +226,17 @@
     "App_Feedback_Toast_Failed": "Failed to submit feedback",
     "App_User_Account": "Account",
     "App_User_Billing": "Billing",
-    "App_User_Logout": "Log out"
+    "App_User_Logout": "Log out",
+    "App_Admin_Users_AllUsers": "All Users",
+    "App_Admin_Users_TotalUsers": "Total Users",
+    "App_Admin_Users_NewUsers": "New Users",
+    "App_Admin_Users_UnverifiedUsers": "Unverified Users",
+    "App_Admin_Users_LastMonth": "from last month",
+    "App_Admin_Users_User": "User",
+    "App_Admin_Users_Id": "Id",
+    "App_Admin_Users_Username": "Username",
+    "App_Admin_Users_Email": "Email",
+    "App_Admin_Users_Status": "Status",
+    "App_Admin_Users_Created": "Created",
+    "App_Admin_Users_Updated": "Updated"
 }

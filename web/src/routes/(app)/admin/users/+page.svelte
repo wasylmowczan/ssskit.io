@@ -4,6 +4,7 @@
 	import { Search } from 'lucide-svelte';
 	import { Input } from '$lib/components/ui/input';
 	import { RotateCw as RefreshIcon } from 'lucide-svelte';
+	import * as m from '$lib/paraglide/messages.js';
 
 	// Search query for filtering users
 	let searchQuery: string = $state('');
@@ -26,7 +27,7 @@
 		<div class="space-y-4">
 			<div class="flex items-center justify-between">
 				<div class="flex items-center gap-2">
-					<h2 class="text-2xl font-bold tracking-tight">All Users</h2>
+					<h2 class="text-2xl font-bold tracking-tight">{m.App_Admin_Users_AllUsers()}</h2>
 					<button onclick={refreshData}>
 						<RefreshIcon class="h-4 w-4 text-muted-foreground" />
 					</button>

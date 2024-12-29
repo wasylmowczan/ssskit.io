@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ArrowUpIcon, ArrowDownIcon, Users, UserPlus, UserMinus } from 'lucide-svelte';
 	import { Card, CardContent } from '$lib/components/ui/card';
+	import * as m from '$lib/paraglide/messages.js';
 
 	let { data } = $props();
 
@@ -30,19 +31,19 @@
 
 	let stats: StatsItem[] = [
 		{
-			title: 'Total Users',
+			title: m.App_Admin_Users_TotalUsers(),
 			value: totalUsers,
 			change: calculateChange(newUsers, totalUsers),
 			icon: Users
 		},
 		{
-			title: 'New Users',
+			title: m.App_Admin_Users_NewUsers(),
 			value: newUsers,
 			change: calculateChange(newUsers, totalUsers),
 			icon: UserPlus
 		},
 		{
-			title: 'Unverified Users',
+			title: m.App_Admin_Users_UnverifiedUsers(),
 			value: unverifiedUsers,
 			change: calculateChange(unverifiedUsers, totalUsers),
 			icon: UserMinus
@@ -73,7 +74,7 @@
 						<ArrowDownIcon class="h-4 w-4 text-red-500" />
 						<span class="text-red-500">{stat.change}%</span>
 					{/if}
-					<span class="text-muted-foreground">from last month</span>
+					<span class="text-muted-foreground">{m.App_Admin_Users_LastMonth()}</span>
 				</div>
 			</CardContent>
 		</Card>

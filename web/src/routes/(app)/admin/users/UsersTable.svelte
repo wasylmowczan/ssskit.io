@@ -8,11 +8,10 @@
 		TableRow
 	} from '$lib/components/ui/table';
 	import { Badge } from '$lib/components/ui/badge';
-	import { Button } from '$lib/components/ui/button';
-	import { MoreHorizontal } from 'lucide-svelte';
 	import { cn } from '$lib/utils';
 	import altAvatar from '$lib/assets/alt-avatar.svg';
 	import { config } from '$lib/config-client';
+	import * as m from '$lib/paraglide/messages.js';
 
 	// Props
 	let { data, searchQuery }: { data: any; searchQuery: string } = $props();
@@ -38,14 +37,13 @@
 	<Table>
 		<TableHeader>
 			<TableRow>
-				<TableHead>User</TableHead>
-				<TableHead>Id</TableHead>
-				<TableHead>Username</TableHead>
-				<TableHead>Email</TableHead>
-				<TableHead>Status</TableHead>
-				<TableHead>Created</TableHead>
-				<TableHead>Updated</TableHead>
-				<TableHead class="w-[50px]"></TableHead>
+				<TableHead>{m.App_Admin_Users_User()}</TableHead>
+				<TableHead>{m.App_Admin_Users_Id()}</TableHead>
+				<TableHead>{m.App_Admin_Users_Username()}</TableHead>
+				<TableHead>{m.App_Admin_Users_Email()}</TableHead>
+				<TableHead>{m.App_Admin_Users_Status()}</TableHead>
+				<TableHead>{m.App_Admin_Users_Created()}</TableHead>
+				<TableHead>{m.App_Admin_Users_Updated()}</TableHead>
 			</TableRow>
 		</TableHeader>
 		<TableBody>

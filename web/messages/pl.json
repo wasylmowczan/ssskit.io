@@ -225,5 +225,17 @@
     "App_Feedback_Toast_Failed": "Nie udało się wysłać opinii",
     "App_User_Account": "Konto",
     "App_User_Billing": "Płatności",
-    "App_User_Logout": "Wyloguj"
+    "App_User_Logout": "Wyloguj",
+    "App_Admin_Users_AllUsers": "Wszystkie Użytkownicy",
+    "App_Admin_Users_TotalUsers": "Wszystkie Użytkownicy",
+    "App_Admin_Users_NewUsers": "Nowe Użytkownicy",
+    "App_Admin_Users_UnverifiedUsers": "Niezweryfikowane Użytkownicy",
+    "App_Admin_Users_LastMonth": "z ostatniego miesiąca",
+    "App_Admin_Users_User": "Użytkownik",
+    "App_Admin_Users_Id": "Id",
+    "App_Admin_Users_Username": "Nazwa Użytkownika",
+    "App_Admin_Users_Email": "Email",
+    "App_Admin_Users_Status": "Status",
+    "App_Admin_Users_Created": "Utworzono",
+    "App_Admin_Users_Updated": "Zaktualizowano"
 }
